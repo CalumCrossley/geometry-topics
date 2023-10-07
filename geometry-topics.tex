@@ -1,0 +1,293 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{mathtools}
+\usepackage{derivative}
+\usepackage{enumitem} % enumeration label options
+\usepackage{amsfonts} % \mathbb, ...
+\usepackage{amssymb} % \subsetneq, \nmid, ...
+\usepackage{stmaryrd} % \mapsfrom
+\usepackage{yhmath} % \widehat
+\usepackage{tikz-cd}
+
+\DeclareMathOperator{\rad}{rad}
+
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\title{Topics in Geometry (LSGNT) - Exercise solutions}
+\author{Calum Crossley}
+\date{2023-2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Spec and Proj}
+
+\subsection{Exercises}
+
+\begin{enumerate}
+
+\item
+\begin{enumerate}[label=(\alph*)]
+
+\item 
+A decomposition $V=V_1\cup V_2$ into subvarieties (Zariski
+closed sets) $V_1$ and $V_2$ is the same thing as a pair of
+disjoint Zariski open sets $V\setminus V_1$ and
+$V\setminus V_2$. The decomposition is non-trivial iff the open
+sets are non-empty.
+
+\item
+If $fg=0$ in $\C[V]$ then $V=V(f)\cup V(g)$, so irreducibility
+implies one of $V(f)$ or $V(g)$ is $V$, meaning one of $f$ or
+$g$ is zero. Hence $\C[V]$ is an integral domain if $V$ is
+irreducible.
+
+If $V=V_1\cup V_2$ and $V_i\ne V$ then some polynomial
+$f_i$ vanishes on $V_i$ but not $V$, otherwise the equations
+defining $V_i$ would include all of $V$. Then $f_1f_2$ vanishes
+on $V_1\cup V_2=V$, so $\C[V]$ has zero-divisors.
+
+\end{enumerate}
+
+\item
+\begin{enumerate}[label=(\alph*)]
+
+\item 
+Let $f$ be a non-constant polynomial with no roots over a non-algebraically
+closed field, such as $x^2+1$ over $\R$. Then $V(f)=\emptyset$ so
+$I_{V(f)}=(1)$, but $1\notin\rad(f)$ as $f$ is non-constant.
+
+\item
+Over $\F_p$ affine space $\A^n$ has finitely many points, so $I_{\A^n}$ consists
+of the polynomials vanishing at these points, including for example
+$\prod_{a_1\in\F_p}(x_1-a_1)=x_1^p-x_1$. We have
+\begin{align*}
+    I_{\A^n(\F_p)}
+        &= \bigcap_{a_1,\ldots,a_n\in\F_p}(x_1-a_1,\ldots,x_n-a_n) \\
+        &= \bigcap_{a_2,\ldots,a_n\in\F_p}(x_1^p-x_1,x_2-a_2,\ldots,x_n-a_n) \\
+        &= (x_1^p-x_1,\ldots,x_n^p-x_n).
+\end{align*}
+
+\end{enumerate}
+
+\item
+Consider the affine variety $X=V(x_{n+1}f-1)\subseteq\A^{n+1}$. We have a
+morphism $X\to\A^n\setminus V(f)$ by projection:
+$(a_1,\ldots,a_{n+1})\mapsto(a_1,\ldots,a_n)$, since
+$a_{n+1}f(a_1,\ldots,a_n)=1$ implies $f(a_1,\ldots,a_n)\ne0$. This has an
+inverse given by $(a_1,\ldots,a_n)\mapsto(a_1,\ldots,a_n,1/f(a_1,\ldots,a_n))$,
+which is also regular.
+
+\item
+Suppose $V\subseteq\A^n$ and $W\subseteq\A^m$, corresponding to quotient maps
+$\C[x_1,\ldots,x_n]\to\C[V]$ and $\C[y_1,\ldots,y_m]\to\C[W]$. Choose a
+lift of $\C[W]\to\C[V]$ and let $f_1,\ldots,f_m\in\C[x_1,\ldots,x_n]$
+be the images of $y_1,\ldots,y_m$, as in the following diagram.
+\begin{equation*}
+\begin{tikzcd}[column sep=huge]
+    &\C[W] \ar[r] &\C[V] \\
+    &\C[y_1,\ldots,y_m] \ar[u,two heads] \ar[r,dashed,"f_1{,}\ldots{,}f_m"]
+    &\C[x_1,\ldots,x_n] \ar[u,two heads]
+\end{tikzcd}
+\end{equation*}
+Then $(x_1,\ldots,x_n)\mapsto(f_1,\ldots,f_m)$ is a morphism $\A^n\to\A^m$, and
+since $I_W$ maps to $I_V$ in the diagram, it restricts to a morphism $V\to W$.
+Moreover the pullback $\C[V]\to\C[W]$ given by composition with this map
+precisely corresponds to substituting $f_1,\ldots,f_m$ for $y_1,\ldots,y_m$, so
+from the diagram we recover the original homomorphism $\C[W]\to\C[V]$.
+
+\item
+If $\varphi:\C[V]\to\C[x]/(x^2)$ we have $\C[V]\to\C[x]/(x^2)\to\C[x]/(x)=\C$,
+and the kernel of this map is a maximal ideal
+$\m_p=\varphi^{-1}((x))\subseteq\C[V]$ corresponding to a point $p\in V$.
+Moreover $\m_p/\m_p^2$ maps to $(x)/(x^2)=\C\cdot x$, giving an element of the
+dual $(\m_p/\m_p^2)^\vee$ of $\m_p/\m_p^2$ considered as a
+$\C[V]/\m_p=\C$-vector space.
+
+\textbf{Claim 1:}
+The data of a maximal ideal $\m_p\subseteq\C[V]$ and a functional
+$v\in(\m_p/\m_p^2)^\vee$ determines a unique homomorphism $\C[V]\to\C[x]/(x^2)$
+respecting the above construction.
+
+\textbf{Proof:}
+Define $\C[V]\to\C[x]/(x^2)$ by $f\mapsto f(p)+v(f-f(p))x$. This is clearly
+$\C$-linear, and respects products since
+\begin{equation*}
+    fg-f(p)g(p) \equiv f(p)(g-g(p)) + g(p)(f-f(p)) \mod \m_p^2;
+\end{equation*}
+the difference being $(f-f(p))(g-g(p))$. By construction the preimage of $(x)$
+is $\m_p$, and the induced map $\m_p/\m_p^2\to(x)/(x^2)=\C\cdot x$ is indeed
+given by $v$.
+
+\textbf{Claim 2:}
+The space $(\m_p/\m_p^2)^\vee$ is canonically identified with the tangent space
+to $V$ at $p$.
+
+\textbf{Proof:}
+Inuitively, elements of $(\m_p/\m_p^2)^\vee$ are functionals insensitive to
+second order vanishing, which are first order differential operators;
+differentiation along tangent vectors. Suppose
+$V=V(f_1,\ldots,f_r)\subseteq\A^n$. Then the tangent space to $V$ at $p$ should
+be given by
+\begin{equation*}
+    T_pV = \left\{(v_1,\ldots,v_n)\in\C^n
+        : v_1\pdv{f_i}{x_1}(p)+\cdots+v_n\pdv{f_i}{x_n}(p)=0
+        \text{ for $i=1,\ldots,r$}\right\}.
+\end{equation*}
+We define $\psi:(\m_p/\m_p^2)^\vee\to T_pV$ by
+$v\mapsto(v(x_1-p_1),\ldots,v(x_n-p_n))$; evaluating the operator on
+coordinates. This is well-defined since
+\begin{equation*}
+    (x_1-p_1)\pdv{f_i}{x_1}(p) + \cdots + (x_n-p_n)\pdv{f_i}{x_n}(p)
+        \equiv f_i \mod \m_p^2,
+\end{equation*}
+and $f_i=0$ in $\C[V]$. It has an inverse given by
+\begin{equation*}
+    (v_1,\ldots,v_n) \mapsto
+        \left(f\mapsto v_1\pdv{f}{x_1}(p)+\cdots+v_n\pdv{f}{x_n}(p)\right),
+\end{equation*}
+which is well-defined since elements of $\m_p^2$ map to zero by the product
+rule, and multiples of $f_1,\ldots,f_r$ map to zero by the product rule and the
+fact that $(v_1,\ldots,v_n)\in T_pV$. That this is indeed an inverse follows
+from the fact that
+\begin{equation*}
+    (x_1-p_1)\pdv{f}{x_1}(p) + \cdots + (x_n-p_n)\pdv{f}{x_n}(p)
+        \equiv f \mod \m_p^2.
+\end{equation*}
+
+\item
+The corresponding homomorphism of coordinate rings $\C[x,y]/(y^2-x^3)\to\C[t]$
+given by $x\mapsto t^2$, $y\mapsto t^3$ is not an isomorphism, since
+$\C[t^2,t^3]\subsetneq\C[t]$.
+
+However we have a set-theoretic inverse:
+\begin{equation*}
+    (x,y)\mapsto\begin{dcases*}
+        x/y & if $y\ne0$ \\
+        0 & otherwise.
+    \end{dcases*}
+\end{equation*}
+Adjoining a point at infinity to both curves we get compact Hausdorff spaces in
+the complex topology, so this inverse is even continuous with respect to the
+complex topology.
+
+\item
+For $U_0\cap U_1$ we have $[1,x_1,x_2]=[1/x_1,1,x_2/x_1]$, giving
+$(x_1,x_2)\mapsto(1/x_1,x_2/x_1)$.
+
+For $U_0\cap U_2$ we have $[1,x_1,x_2]=[1/x_2,x_1/x_2,1]$, giving
+$(x_1,x_2)\mapsto(1/x_2,x_1/x_2)$.
+
+For $U_1\cap U_2$ we have $[x_0,1,x_2]=[x_0/x_2,1/x_2,1]$, giving
+$(x_0,x_2)\mapsto(x_0/x_2,1/x_2)$.
+
+\item
+Suppose $f\in\C[x_1,\ldots,x_n]$ defines a hypersurface $V=V(f)\subseteq\A^n$.
+We obtain a homogeneous polynomial $\hat f\in\C[x_1,\ldots,x_{n+1}]$ by
+\begin{equation*}
+    \hat f = x_{n+1}^{\deg f}\cdot f(x_1/x_{n+1},\ldots,x_n/x_{n+1}),
+\end{equation*}
+giving a projective hypersurface in $\P^n$ whose intersection with the affine
+part $x_{n+1}\ne0$ is $V(f)$. It is in fact the closure of this affine part in
+$\P^n$, since substituting $x_{n+1}=1$ and applying this process to a
+homogeneous polynomial recovers the original polynomial up to a multiple of
+$x_{n+1}$. When the codimension is higher homogenizing the generators of the
+defining ideal like this is insufficient to cut out the projective closure; one
+must homogenize all elements of the vanishing ideal. For example homogenizing
+the generators of $V(x_1-x_2^2,x_1-x_3^3)$ gives
+$V(x_1x_4-x_2^2,x_1x_4^2-x_3^3)$, whose points at infinity are given by
+
+\item
+\begin{enumerate}[label=(\alph*)]
+
+\item 
+Define a map $\P^1\to C$ by $[s:t]\mapsto[s^2:t^2:st]$. Now $xy=z^2$ implies
+$[y:z]=[z:x]$ when both are defined, so $[x:y:z]\mapsto[y:z]$ and
+$[x:y:z]\mapsto[z:x]$ glue to give an inverse $C\to\P^1$.
+
+\item
+Matrices of rank 1 are non-zero, and the rank is preserved by non-zero scalar
+multiplication. Non-zero traceless $2\times2$ matrices are parametrized up to
+scale by $\P^2$ as follows:
+\begin{equation*}
+    [x:y:z] \mapsto \begin{pmatrix}
+        z & -x \\ y & -z
+    \end{pmatrix},
+\end{equation*}
+and the rank is 1 iff the determinant $xy-z^2$ vanishes. Hence $C$ parametrizes
+rank 1 traceless $2\times2$ matrices up to scale. From (a) we also get a
+parametrization by $\P^1$:
+\begin{equation*}
+    [s:t] \mapsto \begin{pmatrix}
+        st & -s^2 \\ t^2 & -st
+    \end{pmatrix}.
+\end{equation*}
+
+\item
+Over $\C$ the quadratic forms are determined up to equivalence by rank, so
+replacing $xy-z^2$ by a non-degenerate quadratic form results in a curve
+isomorphic to $C\cong\P^1$. A quadratic form of rank 2 results in a curve
+isomorphic to $V(xy)$; two lines, and a quadratic form of rank 1 results in a
+curve isomorphic to $V(x^2)$; one line (or a scheme-theoretic double line).
+
+Different quadratic forms correspond to different special matrix forms as in
+(b), for example
+\begin{equation*}
+    x^2 + y^2 = \det\begin{pmatrix}
+        x & -y \\
+        y & x
+    \end{pmatrix}
+\end{equation*}
+and
+\begin{equation*}
+    xw - yz = \det\begin{pmatrix}
+        x & y \\ z & w
+    \end{pmatrix}.
+\end{equation*}
+The latter gives the Segre embedding $\P^1\times\P^1\to\P^3$,
+$(X_1:X_2,Y_1:Y_2)\mapsto(X_1Y_1:X_1Y_2:X_2Y_1:X_2Y_2)$, whose image is
+$V(XW-YZ)$.
+
+\end{enumerate}
+
+\item
+\begin{enumerate}[label=(\alph*)]
+
+\item
+For $\epsilon\ne0$ we have $V_\epsilon\cong\A^1\setminus\{0\}$ via
+$z\mapsto(z,\epsilon/z)$, which is
+$(re^{i\theta},\epsilon r^{-1}e^{-i\theta})$
+in polar coordinates. This forms a cylinder joining up the two real arcs
+$\theta=0$ and $\theta=\pi$, with $(x,y)$ connecting to $(-x,-y)$ on the circle
+$r=|x|$.
+
+% TODO: picture
+
+If we follow the circles $r=c$ for constant $c$ as $\epsilon\to0$ we get the
+circles around the origin of the $x$-plane in $xy=0$. Similarly the circles
+$r=c\epsilon$ converge to the circles around the origin of the $y$-plane.
+Meanwhile the circle $r=\sqrt{|\epsilon|}$ contracts to the origin, so the
+cylinder is pinched into two planes / discs connected at the origin.
+
+\item
+
+\end{enumerate}
+
+\end{enumerate}
+
+\section{Poincar\'e duality}
+
+\subsection{Exercises}
+
+\end{document}
