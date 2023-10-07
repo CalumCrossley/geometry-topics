@@ -10,9 +10,31 @@
 \usepackage{stmaryrd} % \mapsfrom
 \usepackage{yhmath} % \widehat
 \usepackage{tikz-cd}
+\usepackage{amsthm}
+\usepackage{dynkin-diagrams}
 
+\setlength{\parindent}{0pt}
+
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{corollary}{Corollary}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
+\newtheorem*{exercise}{Exercise}
+
+\DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\rank}{rank}
 
+\newcommand{\dR}{\text{dR}}
+\newcommand{\U}{\mathcal{U}}
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\F}{\mathbb{F}}
@@ -33,7 +55,7 @@
 
 \section{Spec and Proj}
 
-\subsection{Exercises}
+\subsection*{Exercises}
 
 \begin{enumerate}
 
@@ -288,6 +310,323 @@ cylinder is pinched into two planes / discs connected at the origin.
 
 \section{Poincar\'e duality}
 
-\subsection{Exercises}
+\subsection*{Notes}
+
+Recommended source: Bott \& Tu, Differential Forms in Algebraic Topology.
+
+\subsubsection*{Rough idea}
+
+Take a (smooth oriented) manifold $M^n$. Compact (smooth oriented) submanifolds
+$X^k,Y^{n-k}\subseteq M$ intersect \emph{transversely} at $p\in X\cap Y$ if we
+have
+\begin{equation*}
+    T_pX\oplus T_pY = \pm T_pM,
+\end{equation*}
+where the sign matches the orientation on the LHS induced from $X$ and $Y$ with
+the orientation of $M$. Write $\sgn(p)$ for this sign, and define the
+\emph{intersection multiplicity}
+\begin{equation*}
+    i(X,Y) = \sum_{p\in X\cap Y}\sgn(p).
+\end{equation*}
+
+\begin{claim}
+    This only depends on $[X]\in H_k(M)$, $[Y]\in H_{n-k}(M)$. Hence we get a
+    bilinear form
+    \begin{equation*}
+        i:\frac{H_k(M)}{\text{torsion}}
+            \otimes\frac{H_{n-k}(M)}{\text{torsion}}\to\Z.
+    \end{equation*}
+    (We can mod out by torsion since $\Z$ is torsion-free.)
+\end{claim}
+
+\begin{theorem}[Poincar\'e duality]
+    This form is non-degenerate; if $i(X,Y)=0$ for all $Y$ then $X=0$.
+\end{theorem}
+
+\begin{corollary}
+    We have $\rank H_k(M)=\rank H_{n-k}(M)$ for each $k$.
+\end{corollary}
+
+Suppose $\dim M=2m$. We get a pairing on $H_m(M)/\text{tor}$, and this is
+symmetric or anti-symmetric if $m$ is even or odd respectively (think about the
+orientation of $T_pX\oplus T_pY$ vs. $T_pY\oplus T_pX$). Then Poincar\'e duality
+says that this pairing is \emph{uni-modular}; the matrix representing it in an
+integral basis has determinant $\pm1$.
+
+The algebraic structure $(H_m(M),i)$ is an invariant of $M$. When $\dim M=4$ we
+define the \emph{signature} $\sigma(M)$ to be the signature of this bilinear
+form.
+
+\begin{theorem}
+    $\sigma(M)$ is a complete bordism invariant of oriented 4-manifolds.
+\end{theorem}
+
+\begin{theorem}[Donaldson]
+    If $M^4$ is smooth, and $i_M$ is negative-definite, then $i_M$ is
+    diagonalizable over $\Z$; given by $-I$ in some integral basis for $H_2(M)$.
+\end{theorem}
+
+\begin{theorem}[Freedman]
+    There exists a topological manifold $M^4$ with $i_M=E_8$, which is
+    negative-definite but not diagonalizable over $\Z$. Hence $M$ has no smooth
+    structure.
+\end{theorem}
+
+(The form $E_8$ is defined on $\Z^8$ by the adjacency matrix for the Dynkin
+diagram \dynkin{E}{8}.)
+
+\subsubsection*{de Rham cohomology}
+
+\begin{definition}
+    A \emph{$k$-form} on $M$ is a section of $\Lambda^kT^*M$. That is, at every
+    point a multi-linear alternating form
+    $\alpha_p:\overbrace{T_pM\otimes\cdots\otimes T_pM}^{\text{$k$ times}}\to\R$.
+\end{definition}
+
+The space $\Omega^k(M)$ of $k$-forms has extra structure:
+\begin{itemize}
+    \item Wedge product: $\Omega^k(M)\otimes\Omega^l(M)\to\Omega^{k+l}(M)$.
+    \item Exterior derivative: $\Omega^k(M)\to\Omega^{k+1}(M)$.
+\end{itemize}
+satisfying
+\begin{itemize}
+    \item $\alpha\wedge\beta=(-1)^{|\alpha|\cdot|\beta|}\beta\wedge\alpha$
+    \item $d(\alpha\wedge\beta)
+        = d\alpha\wedge\beta+(-1)^{|\alpha|}\alpha\wedge d\beta$ (Leibniz rule)
+    \item $d^2=0$.
+\end{itemize}
+This is the structure of a differential graded algebra, which is nice.
+
+On $\R^n$, these operations are defined as follows:
+\begin{itemize}
+    \item $\Omega^k(\R^n)=\R\cdot\{fdx_{i_1}\wedge\cdots\wedge dx_{i_k}\}$,
+        where $dx_i(\pdv{}{x_j})=\delta_{ij}$.
+
+    \item $(fdx_{i_1}\wedge\cdots\wedge dx_{i_k})
+                \wedge(gdx_{j_1}\wedge\cdots\wedge dx_{j_l})
+            = fgdx_{i_1}\wedge\cdots\wedge dx_{i_k}
+                \wedge dx_{j_1}\wedge\cdots\wedge dx_{j_l}$.
+
+    \item $d(fdx_{i_1}\wedge\cdots\wedge dx_{i_k})
+        = (\sum_i\pdv{f}{x_i}dx_i)\wedge dx_{i_1}\wedge\cdots\wedge dx_{i_k}$.
+\end{itemize}
+
+\begin{definition}
+    A $k$-form $\alpha$ is \emph{closed} if $d\alpha=0$, and \emph{exact} if
+    $\alpha=d\beta$ for some $(k-1)$-form $\beta$.
+
+    The \emph{de Rham cohomology} is then
+    \begin{equation*}
+        H^k_\dR(M)
+            = \{\text{closed $k$-forms}\}/\{\text{exact $k$-forms}\}
+            = \ker d/\im d.
+    \end{equation*}
+\end{definition}
+
+\begin{example}
+    $\alpha\in\Omega^0(M)$ is a function, and locally
+    $d\alpha=\sum_i\pdv{\alpha}{x_i}dx_i$, so $d\alpha=0$ iff $\alpha$ is
+    locally constant. Hence $H^0_\dR(M)=\R$ if $M$ is connected.
+\end{example}
+
+\begin{example}
+    If $k>\dim M$ then $\Omega^k(M)=0$ since $\Lambda^kT_pM=0$. Hence
+    $H^k_\dR(M)=0$.
+\end{example}
+
+\begin{example}
+    What is $H^1_\dR(\R)$? $\Omega^1(\R)=\{fdx:f:\R\to\R\}$ all are closed from
+    above. Exact 1-forms are given by $dF=F'(x)dx$ for $F:\R\to\R$. Such an $F$
+    always exists by the FTC, with
+    \begin{equation*}
+        F(x) = \int_0^xf(t)dt.
+    \end{equation*}
+    Hence $H^1_\dR(\R)=0$.
+\end{example}
+
+\begin{remark}
+    By the Leibniz rule, the wedge product descends to cohomology, making
+    $H^*_\dR(M)$ a graded-commutative $\R$-algebra.
+\end{remark}
+
+\begin{theorem}[Stokes' theorem]
+    If $X^k\subseteq M^n$ is a compact submanifold with boundary, and
+    $\alpha\in\Omega^{k-1}(M)$, we have
+    \begin{equation*}
+        \int_Xd\alpha = \int_{\partial X}\alpha.
+    \end{equation*}
+\end{theorem}
+
+(Integration of forms is extended from $\R^n$ by patching.)
+
+\begin{exercise}
+    Show that there is a bilinear pairing
+    \begin{equation*}
+        H_k(M;\R)\otimes H^k_\dR(M)\to\R
+    \end{equation*}
+    given by
+    \begin{equation*}
+        [X^k]\otimes[\alpha]\mapsto\int_X\alpha.
+    \end{equation*}
+    (You may use a theorem of Thom, which states that up to integer multiples
+    singular homology classes of a manifold may be represented by compact
+    submanifolds.)
+\end{exercise}
+
+\begin{lemma}[Poincar\'e lemma]
+    \begin{equation*}
+        H^k_\dR(\R^n) = \begin{dcases*}
+            \R & $k=0$ \\
+            0 & otherwise.
+        \end{dcases*}
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    We induct on $n$. Assume $k>0$, and that all closed $k$-forms on $\R^n$ are
+    exact. Consider a closed form $\omega\in\Omega^k(\R^{n+1})$. Taking
+    coordinates $(x,t)$ on $\R^{n+1}=\R^n_x\times\R_t$, we may write
+    $\omega=\alpha_t+dt\wedge\beta_t$ where $\alpha_t\in\Omega^k(\R^n)$ and
+    $\beta_t\in\Omega^{k-1}(\R^n)$ for each $t$. Define
+    $\eta_t=\int_0^t\beta_sds$, so that $\odv{}{t}\eta_t=\beta_t$. We have
+    \begin{align*}
+        d\eta_t
+            &= d_x\eta_t + dt\wedge\odv{}{t}\eta_t \\
+            &= d_x\eta_t + dt\wedge\beta_t,
+    \end{align*}
+    so $\omega-d\eta_t=\alpha_t-d_x\eta_t$. The LHS is closed, so
+    $\alpha_t-d_x\eta_t$ is a closed form on $\R^n\times\R$, and in particular
+    must be constant in $t$, given by some form in $\Omega^k(\R^n)$ which is
+    exact by induction. Say $\alpha_t-d_x\eta_t=d_x\xi$, where
+    $\xi\in\Omega^{k-1}(\R^n)$. Then $\omega=d\eta_t+d\xi$ is exact, where we
+    pull back $\xi$ to $\R^n\times\R$ as a constant in $t$.
+\end{proof}
+
+There is an important variant of de Rham cohomology:
+\begin{equation*}
+    \Omega^k_c(M) = \{\text{compactly supported $k$-forms}\}
+\end{equation*}
+retains the differential graded algebra structure, and gives rise to compactly
+supported (de Rham) cohomology
+\begin{equation*}
+    H^k_c(M) = \frac{\ker(d:\Omega^k_c(M)\to\Omega^{k+1}_c(M))}
+        {\im(\Omega^{k-1}_c(M)\to\Omega^k_c(M))}.
+\end{equation*}
+
+\begin{remark}
+    If $M$ is compact, then $\Omega^k_c(M)=\Omega^k(M)$ and
+    $H^k_\dR(M)=H^k_c(M)$.
+\end{remark}
+
+\begin{example}
+    $\ker(d:\Omega^0_c(\R^n)\to\Omega^1_c(\R^n))
+    =\{\text{constant compactly supported functions}\}=0$, so $H^0_c(\R^n)=0$.
+\end{example}
+
+\begin{exercise}
+    Prove $\alpha\in\Omega^1_c(\R)$ is exact iff $\int_\R\alpha=0$. Conclude
+    that $H^1_c(\R)=\R$.
+\end{exercise}
+
+\begin{lemma}[Poincar\'e lemma, pt 2]
+    \begin{equation*}
+        H^k_c(\R^n) = \begin{dcases*}
+            \R & $k=n$ \\
+            0 & otherwise.
+        \end{dcases*}
+    \end{equation*}
+\end{lemma}
+
+\subsubsection*{Poincar\'e duality}
+
+\begin{theorem}[Poincar\'e duality]
+    There is a perfect pairing
+    \begin{align*}
+        H^k_\dR(M)&\otimes H^{n-k}_c(M) \to \R \\
+        [\alpha]&\otimes[\beta] \mapsto \int_M\alpha\wedge\beta.
+    \end{align*}
+    Equivalently, we have an isomorphism
+    \begin{align*}
+        H^k_\dR(M) &\to H^{n-k}_c(M)^* \\
+        [\alpha] &\mapsto \int_M\alpha\wedge(-).
+    \end{align*}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+    Take a good cover of $M$; an open cover $\U=\{U_i\}$ such that
+    finite intersections of the $U_i$ are contractible (or just discs). Induct
+    on $|\U|$.
+    \begin{itemize}
+        \item $|\U|=1$: $M=\R^n$ so we use the Poincar\'e lemma; it is easy to
+            check that the pairing is non-zero.
+
+        \item Inductive step: Write $U=U_1\cup\cdots\cup U_{n-1}$, $V=U_n$, and
+            look at the Mayer-Vietoris sequences for $M=U\cup V$ in both
+            cohomologies. There are natural comparison maps, which are
+            isomorphisms by induction on all terms but the $M$ terms. By the
+            five lemma they must also be isomorphisms on $M$.
+    \end{itemize}
+\end{proof}
+
+There is a version of Poincar\'e duality for homology as well. Composing
+\begin{equation*}
+    \int : H_k(M;\R) \to H^k_\dR(M)^*
+\end{equation*}
+with the isomorphism $H^k_\dR(M)^*\cong H^{n-k}_c(M)$ gives
+\begin{align*}
+    \eta : H_k(M;\R) &\to H^{n-k}_c(M) \\
+    [X] &\mapsto [\eta_X]
+\end{align*}
+satisfying $\int_X\alpha=\int_M\alpha\wedge\eta_X$. The class $[\eta_X]$ is
+called the Poincar\'e dual of the submanifold $X$.
+
+\begin{theorem}[Poincar\'e duality]
+    $\eta:H_k(M;\R)\to H^{n-k}_c(M)$ is an isomorphism.
+\end{theorem}
+
+When $k=n-1$, we have an explicit construction for $\eta_X$ as follows:
+$X^k\subseteq M^n$ has a tubular neighbourhood $N(X)\cong X\times[-1,1]_t$. (The
+normal bundle is trivial since the codimension is 1 and everything is
+orientable.) Define $\eta_X\in\Omega^1_c(M)$ by
+\begin{equation*}
+    (\eta_X)_p = \begin{dcases*}
+        \phi(t)dt & $p=(x,t)\in N(X)$ \\
+        0 & otherwise
+    \end{dcases*}
+\end{equation*}
+where $\phi(t)$ is a bump function supported on $[-1,1]$ with total integral 1.
+Then
+\begin{itemize}
+    \item $d\eta_X=0$ since $d(\phi(t)dt)=\phi'(t)d^2t=0$, so
+        $[\eta_X]\in H^1_c(X)$ is well-defined.
+
+    \item $\int_X\alpha=\int_{X\times[-1,1]}\alpha\wedge\phi(t)dt$ by Fubini,
+        and this latter integral is just $\int_M\alpha\wedge\eta_X$.
+\end{itemize}
+Hence $[\eta_X]$ is the Poincar\'e dual for $X$.
+
+The same idea works whenever the submanifold has a trivial normal bundle, but
+there are complications for the general case.
+
+\begin{exercise}
+    Show that if $Y^1$ is transverse to $X^{n-1}$ in $M^n$, then
+    \begin{equation*}
+        \int_Y\eta_X = i(X,Y)
+    \end{equation*}
+    computes the intersection number.
+
+    Hint: Work in explicit coordinates near $p\in X\cap Y$, and use the above
+    construction of $\eta_X$.
+\end{exercise}
+
+Since $\int_Y\eta_X=\int_M\eta_X\wedge\eta_Y$, we get
+\begin{equation*}
+    i(X,Y) = \int_M\eta_X\wedge\eta_Y.
+\end{equation*}
+Hence the Poincar\'e duality isomorphism $H_k(M;\R)\to H^{n-k}_c(M)$ identifies
+the intersection form (cap product) on $H_*(M;\R)$ with the wedge product on
+$H^*_c(M)$. It is an isomorphism of graded-commutative $\R$-algebras.
+
+\subsection*{Exercises}
 
 \end{document}
