@@ -316,7 +316,7 @@ Recommended source: Bott \& Tu, Differential Forms in Algebraic Topology.
 
 \subsubsection*{Rough idea}
 
-Take a (smooth oriented) manifold $M^n$. Compact (smooth oriented) submanifolds
+Take a (smooth, oriented) manifold $M^n$. Compact (smooth, oriented) submanifolds
 $X^k,Y^{n-k}\subseteq M$ intersect \emph{transversely} at $p\in X\cap Y$ if we
 have
 \begin{equation*}
@@ -324,7 +324,7 @@ have
 \end{equation*}
 where the sign matches the orientation on the LHS induced from $X$ and $Y$ with
 the orientation of $M$. Write $\sgn(p)$ for this sign, and define the
-\emph{intersection multiplicity}
+\emph{intersection number}
 \begin{equation*}
     i(X,Y) = \sum_{p\in X\cap Y}\sgn(p).
 \end{equation*}
@@ -347,7 +347,7 @@ the orientation of $M$. Write $\sgn(p)$ for this sign, and define the
     We have $\rank H_k(M)=\rank H_{n-k}(M)$ for each $k$.
 \end{corollary}
 
-Suppose $\dim M=2m$. We get a pairing on $H_m(M)/\text{tor}$, and this is
+Suppose $\dim M=2m$. We get a pairing on $H_m(M)/\text{torsion}$, and this is
 symmetric or anti-symmetric if $m$ is even or odd respectively (think about the
 orientation of $T_pX\oplus T_pY$ vs. $T_pY\oplus T_pX$). Then Poincar\'e duality
 says that this pairing is \emph{uni-modular}; the matrix representing it in an
@@ -379,14 +379,14 @@ diagram \dynkin{E}{8}.)
 
 \begin{definition}
     A \emph{$k$-form} on $M$ is a section of $\Lambda^kT^*M$. That is, at every
-    point a multi-linear alternating form
-    $\alpha_p:\overbrace{T_pM\otimes\cdots\otimes T_pM}^{\text{$k$ times}}\to\R$.
+    point a multilinear alternating form
+    $\alpha_p:\underbrace{T_pM\otimes\cdots\otimes T_pM}_{\text{$k$ times}}\to\R$.
 \end{definition}
 
 The space $\Omega^k(M)$ of $k$-forms has extra structure:
 \begin{itemize}
-    \item Wedge product: $\Omega^k(M)\otimes\Omega^l(M)\to\Omega^{k+l}(M)$.
-    \item Exterior derivative: $\Omega^k(M)\to\Omega^{k+1}(M)$.
+    \item Wedge product $\wedge:\Omega^k(M)\otimes\Omega^l(M)\to\Omega^{k+l}(M)$
+    \item Exterior derivative $d:\Omega^k(M)\to\Omega^{k+1}(M)$
 \end{itemize}
 satisfying
 \begin{itemize}
@@ -410,6 +410,8 @@ On $\R^n$, these operations are defined as follows:
     \item $d(fdx_{i_1}\wedge\cdots\wedge dx_{i_k})
         = (\sum_i\pdv{f}{x_i}dx_i)\wedge dx_{i_1}\wedge\cdots\wedge dx_{i_k}$.
 \end{itemize}
+The general case is defined by patching these together from local coordinate
+charts.
 
 \begin{definition}
     A $k$-form $\alpha$ is \emph{closed} if $d\alpha=0$, and \emph{exact} if
@@ -435,9 +437,9 @@ On $\R^n$, these operations are defined as follows:
 \end{example}
 
 \begin{example}
-    What is $H^1_\dR(\R)$? $\Omega^1(\R)=\{fdx:f:\R\to\R\}$ all are closed from
+    What is $H^1_\dR(\R)$? $\Omega^1(\R)=\{fdx:f:\R\to\R\}$ are all closed from
     above. Exact 1-forms are given by $dF=F'(x)dx$ for $F:\R\to\R$. Such an $F$
-    always exists by the FTC, with
+    with $dF=fdx$ always exists by the FTC, via
     \begin{equation*}
         F(x) = \int_0^xf(t)dt.
     \end{equation*}
@@ -468,9 +470,9 @@ On $\R^n$, these operations are defined as follows:
     \begin{equation*}
         [X^k]\otimes[\alpha]\mapsto\int_X\alpha.
     \end{equation*}
-    (You may use a theorem of Thom, which states that up to integer multiples
-    singular homology classes of a manifold may be represented by compact
-    submanifolds.)
+    (You may use a theorem of Thom, which states that after multiplying by a
+    positive integer, any singular homology class of a manifold may be
+    represented by a compact submanifold.)
 \end{exercise}
 
 \begin{lemma}[Poincar\'e lemma]
