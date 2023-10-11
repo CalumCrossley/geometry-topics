@@ -475,6 +475,23 @@ charts.
     represented by a compact submanifold.)
 \end{exercise}
 
+\begin{proof}[Solution]
+    For a homology class of the form $\frac{1}{n}[X^k]$ we define the image as
+    \begin{equation*}
+        \frac{1}{n}\int_X\alpha.
+    \end{equation*}
+    By the theorem of Thom on representability of multiples of homology classes
+    this gives an output for all elementary tensors. It is well-defined, for if
+    $\frac{1}{n}[X^k]=\frac{1}{m}[Y^k]$ then their difference is the boundary of
+    some $(k+1)$-chain $c$, so
+    \begin{equation*}
+        \frac{1}{n}\int_X\alpha - \frac{1}{m}\int_Y\alpha
+            = \int_{\partial c}\alpha
+            = \int_cd\alpha
+    \end{equation*}
+    by Stokes' theorem, which is zero since $d\alpha=0$.
+\end{proof}
+
 \begin{lemma}[Poincar\'e lemma]
     \begin{equation*}
         H^k_\dR(\R^n) = \begin{dcases*}
@@ -529,6 +546,17 @@ supported (de Rham) cohomology
     Prove $\alpha\in\Omega^1_c(\R)$ is exact iff $\int_\R\alpha=0$. Conclude
     that $H^1_c(\R)=\R$.
 \end{exercise}
+
+\begin{proof}[Solution]
+    If $\alpha=df$ then $\int_\R\alpha=\int_\R df=0$ by Stokes' theorem.
+    Conversely, if $\int_\R\alpha=0$ then the function
+    \begin{equation*}
+        f(t)=\int_{(-\infty,t)}\alpha
+    \end{equation*}
+    is zero for $t$ past the support of $\alpha$, as well as for $t$ preceding
+    the support of $\alpha$, so $f\in\Omega^0_c(\R)$. By construction
+    $\alpha=df$.
+\end{proof}
 
 \begin{lemma}[Poincar\'e lemma, pt 2]
     \begin{equation*}
@@ -620,6 +648,8 @@ there are complications for the general case.
     Hint: Work in explicit coordinates near $p\in X\cap Y$, and use the above
     construction of $\eta_X$.
 \end{exercise}
+
+% TODO: solution
 
 Since $\int_Y\eta_X=\int_M\eta_X\wedge\eta_Y$, we get
 \begin{equation*}
