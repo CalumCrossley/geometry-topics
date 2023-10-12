@@ -649,7 +649,23 @@ there are complications for the general case.
     construction of $\eta_X$.
 \end{exercise}
 
-% TODO: solution
+\begin{proof}[Solution]
+    The intersection $X\cap Y$ is a discrete and hence finite subset of $Y$.
+    We can therefore take a small enough tubular neighbourhood of $X$ such that
+    near each $p\in X\cap Y$, the component of $Y$ in this neighbourhood is parametrised as
+    $(x(t),t)\in X\times[-1,1]\cong N(X)$. The integral $\int_Y\eta_X$ splits
+    up as a sum over these components, and the integral for the component is
+    \begin{equation*}
+        \int_{\mp1}^{\pm1}\phi(t)dt = \pm1
+    \end{equation*}
+    depending on whether the orientation of $Y$ agrees with the positive
+    direction in $t$ or not, since the pullback of $\eta_X=\phi(t)dt$ along
+    $t\mapsto(y(t),t)$ is again $\phi(t)dt$. This is precisely the definition
+    of $\sgn(p)$, so summing up gives
+    \begin{equation*}
+        \int_Y\eta_X = i(X,Y).
+    \end{equation*}
+\end{proof}
 
 Since $\int_Y\eta_X=\int_M\eta_X\wedge\eta_Y$, we get
 \begin{equation*}
