@@ -17,35 +17,48 @@
 
 \newtheorem*{theorem}{Theorem}
 \newtheorem*{lemma}{Lemma}
+\newtheorem*{proposition}{Proposition}
 \newtheorem*{corollary}{Corollary}
 \newtheorem*{claim}{Claim}
 
 \theoremstyle{definition}
 \newtheorem*{definition}{Definition}
+\newtheorem*{fact}{Fact}
 
 \theoremstyle{remark}
 \newtheorem*{example}{Example}
 \newtheorem*{remark}{Remark}
 \newtheorem*{exercise}{Exercise}
 
+\DeclareMathOperator{\Hol}{Hol}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\rad}{rad}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\rank}{rank}
 
 \newcommand{\dR}{\text{dR}}
+\newcommand{\FS}{\text{FS}}
+\newcommand{\E}{\mathcal{E}}
 \newcommand{\U}{\mathcal{U}}
+\renewcommand{\u}{\mathfrak{u}}
 \newcommand{\m}{\mathfrak{m}}
-\newcommand{\N}{\mathbb{N}}
+\newcommand{\CP}{\mathbb{CP}}
 \newcommand{\F}{\mathbb{F}}
+\renewcommand{\H}{\mathbb{H}}
+\renewcommand{\O}{\mathbb{O}}
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\A}{\mathbb{A}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 
-\title{Topics in Geometry (LSGNT) - Notes and Exercise solutions}
+\title{Topics in Geometry (LSGNT) - Notes and Exercises}
 \author{Calum Crossley}
 \date{2023-2024}
 
@@ -55,7 +68,7 @@
 
 \section{Spec and Proj}
 
-\subsection*{Exercises}
+\subsection*{Exercise solutions}
 
 \begin{enumerate}
 
@@ -302,7 +315,7 @@ $r=c\epsilon$ converge to the circles around the origin of the $y$-plane.
 Meanwhile the circle $r=\sqrt{|\epsilon|}$ contracts to the origin, so the
 cylinder is pinched into two planes / discs connected at the origin.
 
-\item
+\item % TODO
 
 \end{enumerate}
 
@@ -676,5 +689,320 @@ Since $\int_Y\eta_X=\int_M\eta_X\wedge\eta_Y$, we get
 Hence the Poincar\'e duality isomorphism $H_k(M;\R)\to H^{n-k}_c(M)$ identifies
 the intersection form (cap product) on $H_*(M;\R)$ with the wedge product on
 $H^*_c(M)$. It is an isomorphism of graded-commutative $\R$-algebras.
+
+\section{Complex manifolds and the K\"ahler condition}
+
+\subsection*{Notes}
+
+\subsubsection*{Almost-Hermitian geometry}
+
+We have three geometric subgroups of $\GL(2n,\R)$;
+\begin{itemize}
+    \item $\GL(n,\C)$, which is the subgroup preserving the map
+        $J_0:\R^{2n}\to\R^{2n}$ given by multiplication by $i$ under the
+        identification $\R^{2n}\cong\C^n$, satisfying $J_0^2=-1$.
+
+    \item $\Sp(2n,\R)$, which is the subgroup preserving the non-degenerate
+        2-form $\omega_0=dx_1\wedge dy_1+\cdots+dx_n\wedge dy_n$ in coordinates
+        $(x_1,y_1,\ldots,x_n,y_n)$.
+
+    \item $\SO(2n)$, which is the subgroup preserving the Riemannian metric
+        $g_0=dx_1^2+\cdots+dx_{2n}^2$, and the corresponding volume form
+        $d\text{vol}_0$.
+\end{itemize}
+It turns out that the pairwise intersections coincide:
+\begin{equation*}
+    \GL(n,\C)\cap\Sp(2n,\R)
+        = \GL(n,\C)\cap\SO(2n)
+        = \Sp(2n,\R)\cap\SO(2n),
+\end{equation*}
+all being the unitary group $U(n)=\{A:AA^*=1\}$. Moreover, any two of the three
+structural objects $J_0,\omega_0,g_0$ determine the third via the equation
+$g_0(\cdot,\cdot)=\omega_0(\cdot,J_0(\cdot))$.
+
+\begin{definition}
+    Let $M^{2n}$ be any smooth manifold.
+    \begin{itemize}
+        \item An \emph{almost-complex} structure $J$ on $M$ is a bundle map
+            $J:TM\to TM$ such that $J^2=-1$. Equivalently, for every $x\in M$ an
+            identification $(T_xM,J_x)\cong(\R^{2n},J_0)$.
+
+        \item An \emph{almost-symplectic} form $\omega$ on $M$ is a
+            non-degenerate 2-form $\omega\in\Omega^2(M)$. Equivalently, for
+            every $x\in M$ an identification
+            $(T_xM,\omega_x)\cong(\R^{2n},\omega_0)$.
+
+        \item A \emph{Riemannian metric} on $M$ is a positive-definite symmetric
+            bilinear form $g\in C^\infty(M,S^2(T^*M))$. Equivalently, for every
+            $x\in M$ an identification $(T_xM,g_x)\cong(\R^{2n},g_0)$.
+    \end{itemize}
+    An \emph{almost-Hermitian} structure on $M$ is a tuple of the above
+    structures $(J,\omega,g)$ which are compatible in the sense that
+    $g(\cdot,\cdot)=\omega(\cdot,J(\cdot))$ holds.
+\end{definition}
+
+\subsubsection*{Integrable almost-complex structures}
+
+If $M^{2n}$ is a complex manifold, i.e. has a holomorphic atlas, then we get an
+almost-complex structure $J$ from multiplication by $i$ in holomorphic
+coordinates. Which almost-complex structures arise in this way?
+
+\begin{definition}
+    If $(M,J)$ is an almost-complex manifold, then we write
+    \begin{equation*}
+        TM\otimes\C = T^{1,0}M\oplus T^{0,1}M
+    \end{equation*}
+    for the decomposition of $TM\otimes\C$ into the $i$-eigenspace $T^{1,0}M$
+    and the $(-i)$-eigenspace $T^{0,1}M$ of $J$. Similarly, we write
+    \begin{equation*}
+        T^*M\otimes\C = \Lambda^{1,0}T^*M\oplus\Lambda^{0,1}T^*M,
+    \end{equation*}
+    and for $u\in\Omega^0(M,\C)$ a complex-valued smooth function we write
+    \begin{equation*}
+        du = \partial u\oplus\bar\partial u
+    \end{equation*}
+    for the decomposition of $du$ in this decomposition of $T^*M\otimes\C$. Such
+    a function is \emph{$J$-holomorphic} if $\bar\partial u=0$. From plugging
+    this decomposition into $\Lambda^2T^*M\otimes\C$ we get
+    \begin{equation*}
+        \Lambda^2T^*M\otimes\C
+            = \Lambda^{2,0}T^*M\oplus\Lambda^{1,1}T^*M\oplus\Lambda^{0,2}T^*M,
+    \end{equation*}
+    and for $\alpha\in\Omega^{0,1}(M)$ we write
+    \begin{equation*}
+        d\alpha = d^{2,-1}\alpha\oplus\partial\alpha\oplus\bar\partial\alpha
+    \end{equation*}
+    for this decomposition of $d\alpha$.
+\end{definition}
+
+\begin{fact}
+    We have that $d^{2,-1}\alpha=-N_J(\alpha)$ is ``tensorial in $\alpha$'';
+    here $N_J$ is the Nijenhuis tensor of $J$, which is a bundle map on $M$.
+    This means $d^{2,-1}\alpha$ does not involve differentiation of the
+    functions defining $\alpha$ in coordinates.
+\end{fact}
+
+\begin{remark}
+    If $J$ comes from a complex structure then $N_J=0$, since
+    \begin{equation*}
+        d(f(z,\bar z)d\bar z_i)
+            = \partial f\wedge d\bar z_i + \bar\partial f\wedge d\bar z_i.
+    \end{equation*}
+\end{remark}
+
+\begin{theorem}[Newlander--Nirenberg, 1957]
+    An almost-complex structure $J$ comes from a complex structure iff $N_J=0$.
+    In this case we say that it is \emph{integrable}.
+\end{theorem}
+
+\begin{example}
+    ~
+    \begin{itemize}
+        \item For $S^2\subseteq\R^3$, we can identify
+            \begin{equation*}
+                T_uS^2 \cong \langle u\rangle^\perp\subseteq\R^3
+                    \cong \Im(\H) = \{\text{purely imaginary quaternions}\}.
+            \end{equation*}
+            Then let
+            \begin{equation*}
+                J_u(v) = u\times v = u\cdot v
+            \end{equation*}
+            with the latter product as quaternions. This defines an
+            almost-complex structure, and $N_J=0$ for dimension reasons, so it
+            is integrable. It is the almost-complex structure induced by the
+            standard complex structure of the Riemann sphere.
+
+        \item Similarly, identifying $\R^7$ with the purely imaginary octonions
+            $\Im(\O)$ we get an almomst complex-structure $J_u(v)=u\cdot v$ on
+            $S^6\subseteq\R^7$. This is \emph{not} integrable, due to
+            non-associativity of the octonion product.
+    \end{itemize}
+\end{example}
+
+\begin{definition}
+    An almost-symplectic form $\omega$ on $M^{2n}$ is \emph{symplectic} if
+    $d\omega=0$. Then we have a cohomology class $[\omega]\in H^2_\dR(M)$, and
+    if $M$ is compact then $[\omega]\ne0$, since $\omega^n$ is a volume form.
+\end{definition}
+
+\begin{theorem}[Darboux theorem]
+    If $\omega$ is a symplectic form, then near every point we have a coordinate
+    chart $\varphi$ such that $\omega=\varphi^*\omega_0$.
+\end{theorem}
+
+\begin{theorem}[Moser stability theorem]
+    If $M$ is compact and $\omega_t$ is a smooth 1-parameter family of
+    symplectic forms on $M$ satisfying $[\omega_t]=[\omega_0]$ for all $t$, then
+    there exists a smooth 1-parameter family of diffeomorphisms
+    $\varphi_t:M\to M$ such that $\varphi_t^*\omega_t=\omega_0$.
+\end{theorem}
+
+\begin{proof}[Proof Idea]
+    We have $\omega_t=\omega_0+d\gamma_t$ for a family of 1-forms $\gamma_t$.
+    Now $\omega_t$ gives an isomorphism $TM\to T^*M$,
+    $v\mapsto i_v\omega_t=\omega_t(v,\cdot)$. Applying this isomorphism to
+    $\gamma_t$ gives a family of vector fields $X_t$, and we obtain $\varphi_t$
+    from the flows of these vector fields.
+\end{proof}
+
+\begin{definition}
+    An almost-Hermitian manifold $(M,J,\omega,g)$ is \emph{K\"ahler} if $J$ is
+    integrable and $\omega$ is symplectic. In this case we might call $\omega$ a
+    \emph{K\"ahler form} on $M$.
+\end{definition}
+
+\begin{remark}
+    Where does $g$ come in to this definition? If $\nabla^g$ is its Levi-Civita
+    connection, we get a holonomy group $\Hol(g)\le O(2n)$, and the K\"ahler
+    condition is equivalent to $\Hol(g)\le U(n)$.
+\end{remark}
+
+\begin{example}
+    ~
+    \begin{itemize}
+        \item $\CP^n$ with the standard Complex structure has the Fubini-Study
+            K\"ahler form $\omega_\FS$ (or the Fubini-Study metric $g_\FS$)
+            induced from the standard structure on $\C^n\setminus\{0\}$ by the
+            quotient map.
+
+        \item Any holomorphic submanifold $X\subseteq\CP^n$ by restriction also
+            has a K\"ahler form. (Non-degeneracy of the restricted form is
+            non-obvious, although using the equivalent condition on the
+            Riemannian metric this is clear.)
+
+        \item Complex tori $\C^n/\Lambda$ are K\"ahler as induced from $\C^n$,
+            but are not complex projective manifolds.
+
+        \item The Hopf surface: for $s\in\R\setminus\{0\}$ we have an action of
+            $\Z$ on $\C^2\setminus\{0\}$ where $n\in\Z$ acts as multiplication
+            by $e^{ns}$. The quotient is a complex manifold which does not admit
+            a symplectic form, since it is diffeomorphic to $S^1\times S^3$
+            which is compact but has zero cohomology in degree 2.
+
+        \item The Kodaira--Thurston manifold: we have an action of $\Z^2$ on
+            $\R^2\times T^2$ where $T^2$ is the 2-torus, where $(n,m)$ acts by
+            translation on $\R^2$ and by
+            \begin{equation*}
+                \begin{pmatrix}
+                    1 & n \\ 0 & 1
+                \end{pmatrix} \in \SL(2,\Z)
+            \end{equation*}
+            on $T^2$. The quotient is a symplectic manifold, since the group
+            action preserves the sypmplectic structure, but it does not admit a
+            compatible and integrable almost-complex structure.
+
+            \paragraph{Rough reason why.} If $M$ is K\"ahler, then we get
+            $\bar\partial^2=0$ because $N_J=0$, which gives a cochain complex to
+            compute Dolbeault cohomology $H^{p,q}_{\bar\partial}(M)$. If $M$ is
+            closed, then
+            \begin{equation*}
+                H^{p,q}_{\bar\partial}(M)
+                    = \overline{H^{q,p}_{\bar\partial}(M)}
+            \end{equation*}
+            and
+            \begin{equation*}
+                H^k_\dR(M,\C) = \bigoplus_{p+q=k}H^{p,q}_{\bar\partial}(M),
+            \end{equation*}
+            proved via harmonic representatives of cohomology classes. This is
+            Hodge theory for compact K\"ahler manifolds. As a result, we get
+            that $b_1(M)$ is even, but for the above manifold in fact $b_1=3$.
+    \end{itemize}
+\end{example}
+
+\begin{definition}
+    Suppose $(M,J)$ is a complex manifold, and $E\to M$ is a complex vector
+    bundle (i.e. a smooth finite-rank $\C$-linear bundle). A \emph{connection}
+    on $E$ is a $\C$-linear map
+    $\nabla:C^\infty(M,E)\to C^\infty(M,T^*M\otimes E)$ satisfying the Leibniz
+    rule
+    \begin{equation*}
+        \nabla(f\cdot s) = df\otimes s + f\nabla s
+    \end{equation*}
+    for $f\in C^\infty(M,\C)$ and $s\in C^\infty(M,E)$.
+\end{definition}
+
+\begin{remark}
+    In a local trivialization $E|_U\cong U\times\C^r$ we have
+    \begin{equation*}
+        \nabla s = ds + As
+    \end{equation*}
+    for a matrix $A\in C^\infty(U,M_n(T^*M))$ of 1-forms.
+\end{remark}
+
+\begin{definition}
+    If $E$ has a Hermitian metric $h$, then $\nabla$ is \emph{unitary} if
+    $\nabla h=0$, where we have extended $\nabla$ to the tensor powers of $E$.
+    In a local trivialization, this is equivalent to having $\nabla=d+A$ where
+    $A\in\Omega^1(U,\u(r))$ is a skew-Hermitian matrix of 1-forms ($\u(r)$ is
+    the Lie algebra of $U(r)$).
+\end{definition}
+
+\begin{definition}
+    A \emph{Dolbeault operator} (or \emph{Cauchy--Riemann operator}) is a
+    $\C$-linear map
+    $\bar\partial_\E:C^\infty(M,E)\to C^\infty(M,\Lambda^{0,1}T^*M\otimes E)$
+    satisfying the Leibniz rule
+    \begin{equation*}
+        \bar\partial_\E(f\cdot s) = df\otimes s + f\bar\partial_\E s
+    \end{equation*}
+    for $f\in C^\infty(M,\C)$ and $s\in C^\infty(M,E)$. In a local
+    trivialization this is given by $\bar\partial_\E=\bar\partial+A$ for a
+    matrix of 1-forms $A$. We can then define \emph{holomorphic sections} of $E$
+    to be those in the kernel of $\bar\partial_\E$.
+\end{definition}
+
+\begin{proposition}
+    In the above setup with a Hermitian metric $h$ and a Dolbeault operator
+    $\bar\partial_\E$, there is a unique unitary connection $\nabla$ such that
+    $\nabla^{0,1}=\bar\partial_\E$, where $\nabla^{0,1}$ comes from the
+    projection $T^*M\to\Lambda^{0,1}T^*M$.
+\end{proposition}
+
+\begin{proof}
+    Locally $\bar\partial_\E=\bar\partial+A$, so we must define $\nabla=d+A+A^*$,
+    where $A^*$ denotes the matrix obtained by conjugating $(0,1)$-forms to get
+    $(1,0)$-forms and then transposing.
+\end{proof}
+
+\begin{theorem}
+    In the above setup with a Dolbeault operator $\bar\partial_\E$, we have that
+    $\bar\partial_\E$ comes from a holomorphic structure on $E$ iff
+    $\bar\partial_\E^2=0$.
+\end{theorem}
+
+\subsection*{References}
+
+\begin{itemize}
+    \item J.-P. Demailly, Complex Analytic and Differential Geometry, Sections
+        V.1-7, VIII.8
+
+    \item A. Cannas da Silva, Lectures on symplectic geometry, Chapters 6-8 and
+        12-17
+
+    \item S. Donaldson and P. Kronheimer, The geometry of 4-manifolds, Sections
+        2.1.5 and 2.2
+\end{itemize}
+
+\subsection*{Exercises}
+
+\paragraph{Exercise 5.1 {\normalfont(More linear algebra)}.}
+
+\paragraph{Exercise 5.2 {\normalfont(The Nijenhuis tensor)}.} 
+
+\paragraph{Exercise 5.3 {\normalfont(The Newlander--Nirenberg Theorem)}.} 
+
+\paragraph{Exercise 5.4 {\normalfont(Almost-complex structures on spheres)}.} 
+
+\paragraph{Exercise 5.5 {\normalfont(Moser's trick)}.} 
+
+\paragraph{Exercise 5.6 {\normalfont(Projective manifolds)}.} 
+
+\paragraph{Exercise 5.7 {\normalfont(Hopf surface)}.} 
+
+\paragraph{Exercise 5.8 {\normalfont(Kodaira--Thurston manifold)}.} 
+
+\paragraph{Exercise 5.9 {\normalfont(Hyperk\"ahler 4-manifolds)}.} 
+
+\paragraph{Exercise 5.10 {\normalfont(Bundles and connections)}.} 
 
 \end{document}
