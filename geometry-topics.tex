@@ -544,7 +544,7 @@ supported (de Rham) cohomology
 
 \begin{exercise}
     Prove $\alpha\in\Omega^1_c(\R)$ is exact iff $\int_\R\alpha=0$. Conclude
-    that $H^1_c(\R)=\R$.
+    that $H^1_c(\R)\cong\R$.
 \end{exercise}
 
 \begin{proof}[Solution]
@@ -555,7 +555,9 @@ supported (de Rham) cohomology
     \end{equation*}
     is zero for $t$ past the support of $\alpha$, as well as for $t$ preceding
     the support of $\alpha$, so $f\in\Omega^0_c(\R)$. By construction
-    $\alpha=df$.
+    $\alpha=df$. This shows that integration gives an injection
+    $H^1_c(\R)\to\R$, which is non-zero by the existence of bump functions, and
+    therefore gives an isomorphism $H^1_c(\R)\cong\R$.
 \end{proof}
 
 \begin{lemma}[Poincar\'e lemma, pt 2]
