@@ -4,6 +4,7 @@
 
 \usepackage{mathtools}
 \usepackage{derivative}
+\usepackage{graphicx}
 \usepackage{enumitem} % enumeration label options
 \usepackage{amsfonts} % \mathbb, ...
 \usepackage{amssymb} % \subsetneq, \nmid, ...
@@ -40,8 +41,10 @@
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\rank}{rank}
 
-\newcommand{\dR}{\text{dR}}
-\newcommand{\FS}{\text{FS}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\dR}{\mathrm{dR}}
+\newcommand{\FS}{\mathrm{FS}}
+
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\U}{\mathcal{U}}
 \renewcommand{\u}{\mathfrak{u}}
@@ -1012,5 +1015,125 @@ coordinates. Which almost-complex structures arise in this way?
 \paragraph{Exercise 10 {\normalfont(Bundles and connections)}.} 
 
 \section{Chern classes and classifying spaces - Richard Thomas}
+
+\paragraph{Characteristic classes.} These measure how ``twisted'' a vector
+bundle is. For real vector bundles we have the \emph{Stiefel--Whitney} and
+\emph{Pontryagin} classes; for complex vector bundles the \emph{Chern} classes.
+They have versions in topology, differential geometry, algebraic geometry, sheaf
+theory, number theory, e.t.c. and it is important to understand the links
+between the different versions.
+
+\paragraph{Vector bundles.} A rank $r$ complex vector bundle $E\to X$ over a
+topological space $X$ is a family of vector spaces $\cong\C^r$ ``continuously
+varying'' over $X$. This is the data of:
+\begin{itemize}
+    \item A topological space $E$ with a continuous map $\pi:E\to X$.
+
+    \item (Local triviality) For each $x\in X$ an open neighbourhood
+        $U\subseteq X$ over which $E$ is isomorphic to the ``trivial'' or
+        product bundle:
+        \begin{equation*}
+            \begin{tikzcd}[column sep=huge]
+                &E|_U = \pi^{-1}(U) \ar[dr,"\pi"'] \ar[r,"g_U","\sim"']
+                    &U\times\C^r \ar[d,"{(x,v)\mapsto x}"] \\
+                & &X
+            \end{tikzcd}
+        \end{equation*}
+        Here $g_U$ is a homeomorphism making the diagram commute, called a
+        \emph{local trivialization}.
+
+    \item (Compatibility on overlaps) Any pair of local trivializations $g_U$,
+        $g_V$ give a transition function
+        \begin{equation*}
+            g_{UV} = g_U|_{U\cap V}\circ g_V|_{U\cap V}^{-1},
+        \end{equation*}
+        which associates to each point in $U\cap V$ a homeomorphism
+        $\C^r\to\C^r$. We require this to be given by linear isomorphisms in a
+        continuous way, i.e. $g_{UV}$ is given by a continuous map
+        $U\cap V\to\GL(r,\C)$.
+\end{itemize}
+
+\paragraph{M\"obius band.} This is an example of a real bundle over the circle
+$S^1$. Take $[0,1]\times R/\sim$ where we identify $(0,e)\sim(1,-e)$, as in the
+following figure.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.4]{chern_mobius1}
+\end{figure}
+\begin{exercise}
+    Check that this defines a vector bundle, by seeing that on an actual open
+    cover of $S^1$ we have local trivializations and transition maps, as in the
+    following figure.
+\end{exercise}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.3]{chern_mobius2}
+\end{figure}
+\begin{exercise}
+    If instead of one twist we include two twists, show that the resulting
+    bundle is trivial. Further, show that it can be untwisted to the standard
+    band if embedded in $\R^4$.
+\end{exercise}
+
+\paragraph{Exercises.} So we may think of $E$ as $\coprod_U(U\times\C^r)/\sim$,
+where we glue by the transition functions $g_{UV}$; for $x\in U\cap V$ we
+identify
+\begin{equation*}
+    V\times\C^r\ni(x,e) \sim (x,g_{UV}(x)e)\in U\times\C^r.
+\end{equation*}
+\begin{exercise}
+    Check that this defines an equivalence relation, and that the quotient is
+    $E$.
+\end{exercise}
+\begin{exercise}
+    Show that the fibres of $\pi$ are naturally vector spaces: if $x_1=(x,e_1)$
+    and $x_2=(x,e_2)$ are points of the same fibre $E_x=\pi^{-1}(x)$ and
+    $\alpha,\beta\in\C$ we can define $\alpha x_1+\beta x_2\in E_x$ such that...
+\end{exercise}
+\begin{exercise}
+    Define smooth vector bundles over a smooth manifold, algebraic vector
+    bundles over algebraic varieties, real vector bundles, e.t.c.
+\end{exercise}
+
+\paragraph{Sections.} A section of $\pi:E\to X$ is a continuous map $s:X\to E$
+such that $\pi\circ s=\id_X$. They form a vector space $\Gamma(E)$ by the
+fibre-wise vector space operations.
+\begin{exercise}
+    A trivialization of the bundle, i.e. an isomorphism
+    \begin{equation*}
+        \begin{tikzcd}
+            &E \ar[d,"\pi"] \ar[r,"\sim"]
+                &X\times\C^r \ar[d,"{(x,v)\mapsto x}"] \\
+            &X \ar[r,equals] &X
+        \end{tikzcd}
+    \end{equation*}
+    is the same thing as a choice of $r$ sections $s_1,\ldots,s_r$ which form a
+    basis at every point, i.e. $s_1(x),\ldots,s_r(x)$ is a basis of $E_x$ for
+    every $x\in X$. Hence a trivialization of a line bundle is the same thing as
+    a nowhere-vanishing section.
+\end{exercise}
+
+\paragraph{Homotopy invariance.} We have
+\begin{itemize}
+    \item \textbf{Fact 1:} Homotopic bundles are isomorphic. Given
+        $E\to X\times[0,1]$, writing $E_t=E|_{X\times\{t\}}$ we have
+        $E_0\cong E_1$.
+
+    \item \textbf{Fact 2:} Bundles on contractible spaces $X$ are trivial. If
+        $X\simeq\{*\}$ then any bundle $E\to X$ is isomorphic to $X\times\C^r$.
+\end{itemize}
+For proofs using the Tietze extension theorem see Atiyah's \emph{$K$-Theory}.
+
+So given a rank $r$ bundle $E\to S^n$, we know that restricted to either
+hemisphere it is trivial,
+\begin{equation*}
+    S^n = B^n_1\cup B^n_2, \qquad E|_{B^n_i}\cong B^n_i\times\C^r.
+\end{equation*}
+These restrictions are glued over the boundary $\partial B^n_i\cong S^{n-1}$ by
+a map $S^{n-1}\to\GL(r,\C)$. (Strictly speaking we should take slightly larger
+open hemispheres, intersecting in an open annulus which contracts to this
+boundary.)
+
+\paragraph{Clutching construction.}
 
 \end{document}
