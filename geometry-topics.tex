@@ -32,23 +32,27 @@
 \newtheorem*{exercise}{Exercise}
 
 \DeclareMathOperator{\Hol}{Hol}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Gr}{Gr}
 \DeclareMathOperator{\Sp}{Sp}
 \DeclareMathOperator{\SO}{SO}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\GL}{GL}
-\DeclareMathOperator{\BGL}{BGL}
 \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\rad}{rad}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Vect}{Vect}
 
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\ev}{\mathrm{ev}}
 \newcommand{\dR}{\mathrm{dR}}
 \newcommand{\FS}{\mathrm{FS}}
 
-\newcommand{\calO}{\mathcal{O}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\O}{\mathcal{O}}
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\U}{\mathcal{U}}
 \renewcommand{\u}{\mathfrak{u}}
@@ -57,7 +61,7 @@
 \newcommand{\CP}{\mathbb{CP}}
 \newcommand{\F}{\mathbb{F}}
 \renewcommand{\H}{\mathbb{H}}
-\renewcommand{\O}{\mathbb{O}}
+\newcommand{\bbO}{\mathbb{O}}
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\A}{\mathbb{A}}
 \newcommand{\N}{\mathbb{N}}
@@ -821,7 +825,7 @@ coordinates. Which almost-complex structures arise in this way?
             standard complex structure of the Riemann sphere.
 
         \item Similarly, identifying $\R^7$ with the purely imaginary octonions
-            $\Im(\O)$ we get an almomst complex-structure $J_u(v)=u\cdot v$ on
+            $\Im(\bbO)$ we get an almomst complex-structure $J_u(v)=u\cdot v$ on
             $S^6\subseteq\R^7$. This is \emph{not} integrable, due to
             non-associativity of the octonion product.
     \end{itemize}
@@ -1173,28 +1177,37 @@ line bundles $\C_x\times\C$ and $\C_y\times\C$ by
 \begin{equation*}
     (x,t) \mapsto \biggl(\frac{1}{x},x^{-n}t\biggr) = (y,y^nt).
 \end{equation*}
-We call the resulting line bundle $\calO(n)$ with $c_1=n$.
+We call the resulting line bundle $\O(n)$ with $c_1=n$.
 
 \paragraph{Tautological bundle.}
-When $n=-1$ we get the \emph{tautological bundle} $\calO(-1)\to\P^1$. Over $\R$
+When $n=-1$ we get the \emph{tautological bundle} $\O(-1)\to\P^1$. Over $\R$
 this is the M\"obius bundle on $\RP^1\cong S^1$:
-% TODO: diagram
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.5]{chern_taut1}
+\end{figure}
 
 \paragraph{Tautological bundle over $\C$.}
-Over $\C$ we also see that $\calO(-1)$ (defined as above with transition
-function $\frac{1}{x}$) is the tautological bundle $\calO(-1)$ over $\P^1$.
-% TODO: diagram
+Over $\C$ we also see that $\O(-1)$ (defined as above with transition
+function $\frac{1}{x}$) is the tautological bundle $\O(-1)$ over $\P^1$.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.5]{chern_taut2}
+\end{figure}
+We can check that the section $s_x$ when viewed over $\C_y$ does not extend
+continuously over the origin, so it doesn't give a trivialization of the whole
+bundle.
 
 \paragraph{Zeros of sections.}
-The $\calO(n)$ line bundle over $\P^1$ was defined with transition function
+The $\O(n)$ line bundle over $\P^1$ was defined with transition function
 $x^{-n}$, gluing the section 1 over $\C_x$ to $x^{-n}=y^n$ over $\C_y$. This
-therefore defines a \emph{global} holomorphic section of $\calO(n)$ when
+therefore defines a \emph{global} holomorphic section of $\O(n)$ when
 $n\ge0$, with a degree $n$ zero at $y=0$. (If $n<0$ we get a meromorphic section
 with a degree $n$ pole at $y=0$.)
 
 Similarly $p(x)$ over $\C_x$ is glued to $y^np(y^{-1})$ over $\C_y$, so if
 $\deg p=n$ we get another algebraic/regular section over $\P^1$. (This gives all
-the sections since $\Gamma(\calO(n))=\Sym^n(\C^2)^*$.) Again these all have $n$
+the sections since $\Gamma(\O(n))=\Sym^n(\C^2)^*$.) Again these all have $n$
 zeros.
 \begin{exercise}
     When $n<0$ we get a meromorphic section with $n$ poles. Instead glue 1 to an
@@ -1204,21 +1217,27 @@ zeros.
 
 \paragraph{Intersection with the zero section.}
 Indeed $c_1=n$ is the number of zeros (counted with orientation and
-multiplicity) of \emph{any} section of $\calO(n)$. In other words, $c_1(L)$ is
+multiplicity) of \emph{any} section of $\O(n)$. In other words, $c_1(L)$ is
 the \emph{intersection of the zeta section of $L$} with itself (or equivalently
 with the graph of any other section).
-% TODO: diagram
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.6]{chern_section}
+\end{figure}
 
 \paragraph{Clutching construction on arbitrary Riemann surfaces.}
 Again line bundles are trivial bundles glued across circles / annuli.
-% TODO: diagram
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.6]{chern_clutch}
+\end{figure}
 \begin{align*}
     c_1(L)
         &= \text{total winding number of transition functions} \\
         &= \text{number of zeros of a section}.
 \end{align*}
 (So under the line bundle $\leftrightarrow$ divisor correspondence,
-$c_1(\calO(D))=\deg D$.)
+$c_1(\O(D))=\deg D$.)
 
 \paragraph{First Chern class on manifolds.}
 More generally for any complex line bundle $L$ on a manifold $M$ we define
@@ -1257,7 +1276,7 @@ So $c_r(E)=e(E)$ while $c_1(E)=c_1(\Lambda^rE)$ and $c_i(E)=0$ for $i>r$.
 degree, and $s_1\wedge\cdots\wedge s_{r-k+1}$ is \emph{not} a generic section of
 $\Lambda^{r-k+1}E$.)
 
-\paragraph{Whitney sum formula I.}
+\paragraph{Whitney sum formula.}
 Given two generic sections $s_1\in\Gamma(E_1)$, $s_2\in\Gamma(E_2)$ where $E_i$
 has rank $r_i$, we get a section $s_1\oplus s_2\in\Gamma(E_1\oplus E_2)$, with
 \begin{equation*}
@@ -1281,8 +1300,6 @@ We can write this as $c(L_1\oplus L_2)=c(L_1)\cup c(L_2)$ where the
 \begin{equation*}
     c(E)=1+c_1(E)+c_2(E)+\cdots\in H^*(X).
 \end{equation*}
-
-\paragraph{Whitney sum formula II.}
 More generally, for bundles $E,F$ of rank $r,s$ use the decomposition
 \begin{equation*}
     \Lambda^k(E\oplus F) = \bigoplus_{i=0}^k\Lambda^i(E)\otimes\Lambda^{k-i}(F)
@@ -1309,9 +1326,9 @@ $f_1,\ldots,f_k\in\Gamma(F)$ to compute
 
 \paragraph{Axiomatic approach.}
 
-Knowing (or defining!) $c_1(\O_{\P^n}(1))=[\P^{n-1}]$, the Whitney sum formula
-and functoriality is then enough to completely determine all Chern classes on
-all topological spaces.
+Knowing (or defining!) $c_1(\O_{\P^n}(1))=[\P^{n-1}]$, the Whitney sum
+formula and functoriality is then enough to completely determine all Chern
+classes on all topological spaces.
 
 Functoriality: $c(f^*E)=f^*c(E)$.
 
@@ -1323,8 +1340,8 @@ Functoriality: $c(f^*E)=f^*c(E)$.
 There are two steps to proving this:
 \begin{itemize}
     \item All rank $r$ bundles on $X$ are pullbacks $f^*Q$ of the
-        \emph{universal bundle on the classifying space} $Q\to\BGL(r,\C)$ by a
-        map $f:X\to\BGL(r,\C)$. (So we only need to define $c_i$ on one
+        \emph{universal bundle on the classifying space} $Q\to B\GL(r,\C)$ by a
+        map $f:X\to B\GL(r,\C)$. (So we only need to define $c_i$ on one
         classifying space.)
 
     \item Splitting principle: We may assume $E$ is a direct sum of line bundles
@@ -1333,17 +1350,260 @@ There are two steps to proving this:
 
 \paragraph{Classifying space.}
 Any bundle $E$ is a quotient of an infinite rank trivial bundle
-$\underline{\Gamma(E)}$:
+$\underline{\Gamma(E)}$ (here $\underline V$ denotes the trivial bundle with
+fibre $V$):
 \begin{equation*}
-    \underline{\Gamma(E)} \xrightarrow{\ev} E\to 0.
+    \underline{\Gamma(E)} \xrightarrow{\ev} E\to 0. \tag{$*$}
 \end{equation*}
 (Or take a sufficiently large subbundle
-$\underline{\C^N}\subseteq\underline{\C^\infty}=\underline{\Gamma(E)}$,
-$N\gg0$.)
-
-Therefore it defines a map to the Grassmannian
+$\underline\C^N\subseteq\underline\C^\infty=\underline{\Gamma(E)}$, $N\gg0$.)
+Therefore it defines a map from $X$ to the Grassmannian
+\begin{align*}
+    f:X&\to\Gr(\C^\infty,r), \\
+    x &\mapsto (*)_x.
+\end{align*}
+There is a tautological universal quotient bundle $Q\to\Gr(\C^\infty,r)$
 \begin{equation*}
-    f
+    \underline\C^\infty \to Q \to 0 \qquad \text{over $\Gr(\C^\infty,r)$,}
 \end{equation*}
+and from ($*$) we get that $f$ pulls this back to give $E$; $f^*Q\cong E$. Thus
+$\Vect_r(X)=[X,\Gr(\C^\infty,r)]$. We call $\Gr(\C^\infty,r)$ the
+\emph{classifying space} $B\GL(r,\C)$. For example, if $r=1$ we have
+$B\C^\times=\CP^\infty$, so any line bundle $\L\to X$ is $f^*\O(1)$ for some
+(homotopy class of) map $f:X\to\CP^\infty$ (or $f:X\to\CP^N$ for $N\gg0$ if $X$
+is finite dimensional). Then
+\begin{equation*}
+    c_1(\L) = f^*c_1(\O(1)) = f^*h
+\end{equation*}
+where $h\in H^2(\CP^\infty)$ is the generator (the limit as $N\to\infty$ of the
+Poincar\'e duals of $\CP^{N-1}\subseteq\CP^N$, or the standard K\"ahler form).
+
+\paragraph{Splitting principle.}
+Given $E\to X$ (e.g. $Q\to\Gr(\C^\infty,r)$) there is a space dominating $X$ on
+which $E$ splits as a sum of line bundles:
+\begin{equation*}
+    \pi:Y\to X \quad \text{such that} \quad \pi^*E=\L_1\oplus\cdots\oplus\L_r,
+\end{equation*}
+with fibres $Y_x=\pi^{-1}(x)$ given by the flag manifolds
+\begin{equation*}
+    Y_x = \{\text{linearly independent complex line bundles
+        $L_1,\ldots,L_r\subseteq E_x$}\}.
+\end{equation*}
+There are universal / tautological bundles $\L_i$ on $Y$, and it is then
+tautological that $\pi^*E\cong\oplus_{i=1}^r\L_i$.
+
+\textbf{Fact:} $\pi^*:H^*(X)\to H^*(Y)$ is an injection, so pulling back $c(E)$
+loses no information, and
+\begin{equation*}
+    \pi^*c(E) = c(\pi^*E) = c(\L_1\oplus\cdots\oplus\L_r)
+        = c(\L_1)\cdots c(\L_r).
+\end{equation*}
+Hence for $E\to X$ we get a diagram
+\begin{equation*}
+    \begin{tikzcd}
+        &Y \ar[r,"f"] \ar[d,"\pi"] &B(\C^\times)^r = (\CP^\infty)^r \\
+        &X
+    \end{tikzcd}
+\end{equation*}
+such that $\pi^*:H^*(X)\to H^*(Y)$ is an injection, and $c(E)\in H^*(X)$ is the
+unique class such that
+\begin{equation*}
+    \pi^*c(E) = f^*[(1+h_1)\cdots(1+h_r)].
+\end{equation*}
+So the splitting principle, the Whitney sum formula, and $c_1(\O(1))=h$
+determine all Chern classes uniquely. (Existence takes a little bit more work,
+e.g. computing $H^*(\Gr(\C^\infty,r))$.)
+\begin{exercise}
+    Prove the following corollary: If $E$ has rank $r$, then $c_i(E)=0$ for
+    $i>r$.
+\end{exercise}
+
+\paragraph{Grothendieck's definition.}
+On the projective bundle $\pi:\P(E)\to X$ we have the tautological inclusion
+\begin{equation*}
+    \O_{\P(E)}(-1) \hookrightarrow \pi^*E.
+\end{equation*}
+Since the quotient bundle is of rank $r-1$,
+\begin{equation*}
+    c_r(\pi^*E/\O_{\P(E)}(-1)) = 0.
+\end{equation*}
+By the Whitney sum formula, this is the degree $r$ part of
+\begin{equation*}
+    \pi^*c(E)/c(\O_{\P(E)}(-1)) = \pi^*c(E)/(1-h),
+\end{equation*}
+where $h=c_1(\O_{\P(E)}(-1))$. Thus
+\begin{equation*}
+    h^r + \pi^*c_1(E)h^{r-1} + \cdots + \pi^*c_{r-1}(E)h + \pi^*c_r(E) = 0.
+        \tag{$*$}
+\end{equation*}
+\textbf{Fact:} $H*(\P(E))=H^*(X)\oplus H^*(X)h\oplus\cdots\oplus H^*(X)h^{r-1}$
+as a vector space. So $h^r$ can be uniquely written in this basis as a linear
+combination of $1,h,\ldots,h^{r-1}$, and we can define $c_i(E)$ via ($*$).
+
+\paragraph{Chern--Weil for line bundles.}
+If $X$ is a manifold we can pick a connection $A$ on $\L\to X$. Its curvature
+$F_A$ is a closed 2-form; $dF_A=0$. Changing $a\mapsto A+a$ gives
+$F_A\mapsto F_A+da$, so $[F_A]\in H^2(X;\R)$ is independent of $A$. In fact it
+is given by
+\begin{equation*}
+    \frac{[F_A]}{2\pi i} = [c_1(\L)] \in H^2(X;\Z)/\text{torsion}.
+\end{equation*}
+Let's prove this for $X$ a Riemann surface and $\L$ described by the clutching
+construction. Write $X=U\cup_{S^1}D^2$ where $D^2$ is a disc and $S^1$ is an
+annulus thickening its boundary. Write $\L$ as
+$\underline\C_U\cup_\phi\underline\C_{D^2}$ for a transition function
+$\phi:S^1\to\C^\times$ of winding number $n=c_1(\L)$. Put the trivial connection
+$d$ on $\underline\C_U$. In the trivialization $\underline\C_D$ restricted to
+the annulus this is the connection
+\begin{equation*}
+    d+\phi^{-1}d\phi
+\end{equation*}
+since this annhilates $\phi$ (which is glued to 1 on $U$). Extend this to any
+connection $d+a$ over $D^2$ and compute
+\begin{align*}
+    \int_XF_A = \int_{D^2}F_A = \int_{D^2}da = \int_{S^1}da
+              = \int_{S^1}\frac{d\phi}{\phi} = \int_{S^1}d\log\phi
+              = 2\pi in.
+\end{align*}
+
+\paragraph{Chern--Weil theory.}
+Suppose $X$ is a manifold with a rank $r$ bundle $E\to X$ and a connection $A$
+on $E$. Form
+\begin{equation*}
+    p\biggl(\frac{F_A}{2\pi i}\biggr) \in H^{2k}(X;\R)
+\end{equation*}
+for any ad-invariant ($p(N^{-1}MN)=p(M)$) polynomial function $p$ on
+$\End(\C^r)$. For example $p$ could be $\tr$ (giving $c_1(E)$), or $\det$
+(giving $c_r(E)$), or any other symmetric polynomial in the eigenvalues. (In
+fact $H^*(B\GL(r,\C))=\text{Ad-invariant polynomials}$.) If $p$ is integral, the
+result is an integral characteristic class.
+\begin{exercise}
+    Show that $p(F_A)$ is closed, and changes by an exact form under
+    $A\mapsto A+a$.
+\end{exercise}
+\begin{theorem}
+    We have $c(E)=\det(\id+\frac{F_A}{2\pi i})$ in $H^*(X)/\text{torsion}$, i.e.
+    \begin{equation*}
+        1 + c_1(E) + c_2(E) + \cdots
+            = 1 + \frac{\tr F_A}{2\pi i} - \frac{\tr(F_A\wedge F_A)}{4\pi^2}
+                + \cdots.
+    \end{equation*}
+\end{theorem}
+
+\paragraph{Tangent bundle to projective space.}
+Let $V=\C^{n+1}$ so that $\P(V)=\P^n$. Then
+\begin{equation*}
+    T_{\P^n} = \O(-1)^*\otimes\frac{\underline V}{\O(-1)}.
+\end{equation*}
+\begin{proof}[Sketch]
+    A point of $\P(V)$ is a complex line $L\le V$. Pick any complement to write
+    $V=L\oplus V/L$. Then nearby lines in $V$ are graphs of linear maps
+    $L\to V/L$. So the tangent space is $L^*\otimes V/L$.
+\end{proof}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.5]{chern_tangent}
+\end{figure}
+
+\paragraph{Chern classes of projective space.}
+Applying the Whitney sum formula to $T_{\P^n}=\underline V(1)/\O(-1)$ gives
+\begin{equation*}
+    c(T_{\P^n})
+        = c(\underline V(1))/c(\O(-1))
+        = c(\O(1)^{\oplus(n+1)})
+        = (1+h)^{n+1},
+\end{equation*}
+where $h=c_1(\O(1))$ is the hyperplane class Poincar\'e dual to
+$\P^{n-1}\subseteq\P^n$. (So for example $c_n(T_{\P^n})=(n+1)h^n$, and
+integrating gives $e(\P^n)=n+1$.)
+
+\paragraph{Hypersurfaces in projective space.}
+\begin{exercise}
+    ``Adjunction'': If $s\in\Gamma(E)$ is transverse to the zero section, show
+    its zero locus $Z=s^{-1}(0)$ has normal bundle $N_{Z/X}=E|_Z.$
+\end{exercise}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.5]{chern_normal}
+\end{figure}
+\begin{exercise}
+    Hence work out the total Chern class $c(T_{X_d})$ of a degree $d$
+    hypersurface $X_d\subseteq\P^n$ (the zero locus of a section of $\O(d)$).
+    Apply to $n=3$, $d=4$ to find $c_1(T_S)$ and $e(S)$ for $S$ a ``K3
+    surface''.
+\end{exercise}
+
+\paragraph{Exercises.}
+\begin{exercise}
+    Compute $c_i(\End(E))$ in terms of $c_i(E)$ for $E$ a rank 2 bundle. (Hint:
+    Splitting principle.) Why did you find $c_1=0=c_3=c_4$?
+\end{exercise}
+\begin{exercise}
+    ~
+    \begin{enumerate}[label=(\arabic*)]
+        \item Compute $c_4(\Sym^3(E))$ in terms of $c_i(E)$ for $E$ a rank 2
+            bundle. (Hint: Splitting principle.)
+
+        \item The Grassmannian $\Gr(2,\C^4)$ of 2-planes in $\C^4$ has a
+            universal subbundle $\U\hookrightarrow\underline\C^4$. Describe a
+            cycle Poincar\'e dual to $c_2(\U^*)$. (Hint: Use
+            $(\underline\C^4)\twoheadrightarrow\U^*$ to pick a section of
+            $\U^*$.)
+
+        \item Describe a cycle Poincar\'e dual to $c_1(\U^*)$. (Hint: Pick two
+            sections of $\U^*$ and see where they're linearly dependent.)
+    \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+    Using (1,2,3) above, show that $\int_{\Gr(2,\C^4)}c_4(\Sym^3\U^*)=27$.
+\end{exercise}
+
+\begin{exercise}
+    Identify $\Gr(2,\C^4)$ with $\{\text{lines $\P^1\subseteq\P^3$}\}$. Let
+    $s\in\Gamma(\O_{\P^3}(3))$ cut out a cubic surface $S\subseteq\P^3$. Show
+    $s$ defines a section of $\Sym^3\U^*\to\Gr(2,\C^4)$ cutting out the (27)
+    lines in $\P^3$ which lie in $S$.
+\end{exercise}
+
+\paragraph{Segre classes.}
+We defined $c_i(E)$ as (Poincar\'e dual to) the locus where $r-i+1$ generic
+sections fail to be linearly independent, i.e. the $x\in X$ s.t.
+\begin{equation*}
+    \C^{r-i+1} \xrightarrow{s_1(x),\ldots,s_{r-i+1}(x)}E_x
+\end{equation*}
+fails to be injective. Similarly, we can define the $i$th \emph{Segre class}
+$s_i(E)\in H^{2i}(X)$ to be ($(-1)^i$ times the Poincar\'e dual of) the locus
+where $r+i-1$ generic sections fail to generate $E$, i.e. the $x\in X$ s.t.
+\begin{equation*}
+    \C^{r+i-1}\xrightarrow{s_1(x),\ldots,s_{r+i-1}(x)}E_x
+\end{equation*}
+fails to be surjective.
+\begin{exercise}
+    Show that for line bundles $s_i(\L)=(-1)^ic_i(\L)^i$.
+\end{exercise}
+In fact $s(E)=c(E)^{-1}$, where $s(E)=1+s_1(E)+s_2(E)+\cdots\in H^*(X)$.
+
+\paragraph{\v{C}ech cohomology formulation.}
+Let $\O$ denote the sheaf of (holomorphic, algebraic, $C^\infty$, or ...)
+functions, and $\O^\times$ the (multiplicative) sheaf of invertible functions.
+Then the exact sequence (in Euclidean topology)
+\begin{equation*}
+    0\to\underline\Z\to\O\xrightarrow\exp\O^\times\to1
+\end{equation*}
+induces the long exact sequence of \v{C}ech cohomology groups
+\begin{equation*}
+    H^1(X,\O^\times) \xrightarrow\delta H^2(X,\Z) \to H^2(X,\O).
+\end{equation*}
+Consider an element $e\in H^1(X,\O^\times)$ (i.e. invertible $e_{UV}$ on each
+overlap $U\cap V$ satisfying $e_{UV}e_{VW}e_{UW}=1$ on $U\cap V\cap W$) to be
+the transition functions for a line bundle $\L$.
+\begin{exercise}
+    Identify $\delta(e)\in H^2(X,\Z)$ with $c_1(\L)$ for $X$ a Riemann surface.
+    (Hint: Use the clutching construction. Lift all
+    $e_{UV}\in\O^\times_{U\cap V}$ to $\log(e_{UV})\in\O_{U\cap V}$ compatibly
+    \emph{except} for the winding number of $e_{UV}$, which gives
+    $\Z$-ambiguity.)
+\end{exercise}
 
 \end{document}
