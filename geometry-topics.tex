@@ -36,19 +36,24 @@
 \DeclareMathOperator{\SO}{SO}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\BGL}{BGL}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\rad}{rad}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Sym}{Sym}
 
 \newcommand{\id}{\mathrm{id}}
+\newcommand{\ev}{\mathrm{ev}}
 \newcommand{\dR}{\mathrm{dR}}
 \newcommand{\FS}{\mathrm{FS}}
 
+\newcommand{\calO}{\mathcal{O}}
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\U}{\mathcal{U}}
 \renewcommand{\u}{\mathfrak{u}}
 \newcommand{\m}{\mathfrak{m}}
+\newcommand{\RP}{\mathbb{RP}}
 \newcommand{\CP}{\mathbb{CP}}
 \newcommand{\F}{\mathbb{F}}
 \renewcommand{\H}{\mathbb{H}}
@@ -1135,5 +1140,210 @@ open hemispheres, intersecting in an open annulus which contracts to this
 boundary.)
 
 \paragraph{Clutching construction.}
+
+So rank $r$ complex bundles on $S^n$ are in 1-1 correspondence with homotopy
+classes of maps $S^{n-1}\to\GL(r,\C)$, i.e. with
+\begin{equation*}
+    \pi_{n-1}(\GL(r,\C)).
+\end{equation*}
+E.g. real version with $r=1$ gives
+\begin{equation*}
+    \{\text{line bundles on $S^1$}\}
+        \leftrightarrow \pi_0(\GL(1,\R))
+        = \pi_0(\R^\times)
+        = \Z/2.
+\end{equation*}
+(Note that this isn't exactly an example of the previous discussion, since here
+the group is disconnected.) This mod 2 integer is the Stiefel--Whitney class of
+the bundle.
+
+\paragraph{First Chern class.}
+E.g. complex version with $r=1$ gives
+\begin{equation*}
+    \{\text{line bundles on $S^2$}\}
+        \leftrightarrow \pi_1(\GL(1,\C)) = \pi_1(\C^\times) = \Z.
+\end{equation*}
+This integer classifying the bundle is called its \emph{first Chern class},
+$c_1$. For an algebraic version, write
+\begin{equation*}
+    S^2 \cong \P^1 = \C_x\cup_{\C^\times}\C_y
+\end{equation*}
+glued over $\C^\times=\{x\ne0\}=\{y\ne0\}$ by $x=\frac{1}{y}$. Then glue trivial
+line bundles $\C_x\times\C$ and $\C_y\times\C$ by
+\begin{equation*}
+    (x,t) \mapsto \biggl(\frac{1}{x},x^{-n}t\biggr) = (y,y^nt).
+\end{equation*}
+We call the resulting line bundle $\calO(n)$ with $c_1=n$.
+
+\paragraph{Tautological bundle.}
+When $n=-1$ we get the \emph{tautological bundle} $\calO(-1)\to\P^1$. Over $\R$
+this is the M\"obius bundle on $\RP^1\cong S^1$:
+% TODO: diagram
+
+\paragraph{Tautological bundle over $\C$.}
+Over $\C$ we also see that $\calO(-1)$ (defined as above with transition
+function $\frac{1}{x}$) is the tautological bundle $\calO(-1)$ over $\P^1$.
+% TODO: diagram
+
+\paragraph{Zeros of sections.}
+The $\calO(n)$ line bundle over $\P^1$ was defined with transition function
+$x^{-n}$, gluing the section 1 over $\C_x$ to $x^{-n}=y^n$ over $\C_y$. This
+therefore defines a \emph{global} holomorphic section of $\calO(n)$ when
+$n\ge0$, with a degree $n$ zero at $y=0$. (If $n<0$ we get a meromorphic section
+with a degree $n$ pole at $y=0$.)
+
+Similarly $p(x)$ over $\C_x$ is glued to $y^np(y^{-1})$ over $\C_y$, so if
+$\deg p=n$ we get another algebraic/regular section over $\P^1$. (This gives all
+the sections since $\Gamma(\calO(n))=\Sym^n(\C^2)^*$.) Again these all have $n$
+zeros.
+\begin{exercise}
+    When $n<0$ we get a meromorphic section with $n$ poles. Instead glue 1 to an
+    anti-holomorphic function across the circle $|x|=1$ to give a
+    (non-holomorphic) section with $n$ zeros.
+\end{exercise}
+
+\paragraph{Intersection with the zero section.}
+Indeed $c_1=n$ is the number of zeros (counted with orientation and
+multiplicity) of \emph{any} section of $\calO(n)$. In other words, $c_1(L)$ is
+the \emph{intersection of the zeta section of $L$} with itself (or equivalently
+with the graph of any other section).
+% TODO: diagram
+
+\paragraph{Clutching construction on arbitrary Riemann surfaces.}
+Again line bundles are trivial bundles glued across circles / annuli.
+% TODO: diagram
+\begin{align*}
+    c_1(L)
+        &= \text{total winding number of transition functions} \\
+        &= \text{number of zeros of a section}.
+\end{align*}
+(So under the line bundle $\leftrightarrow$ divisor correspondence,
+$c_1(\calO(D))=\deg D$.)
+
+\paragraph{First Chern class on manifolds.}
+More generally for any complex line bundle $L$ on a manifold $M$ we define
+\begin{equation*}
+    c_1(L) = [s^{-1}(0)]\in H_{\dim X-2}(X)
+\end{equation*}
+where $s$ is any section \emph{transverse to the zero section}. (If $s'$ is
+another choice then we have a homotopy $s_t=(1-t)s+ts'$ so that $s_t^{-1}(0)$ is
+a chain interpolating from $s$ to $s'$.)
+
+In fact we can define $c_1(L)$ to be the Poincar\'e dual of $[s^{-1}(0)]$, as
+this cohomology class will generalize to arbitrary topological spaces $X$. For
+general $X$ we can understand $c_1(L)\in H^2(X)$ by evaluating it on
+$[\Sigma]\in H_2(X)$ for Riemann surfaces $\Sigma\hookrightarrow X$, by
+\begin{equation*}
+    \langle c_1(L),[\Sigma]\rangle = c_1(L|_\Sigma).
+\end{equation*}
+
+\paragraph{Higher Chern classes on manifolds.}
+For any rank $r$ complex vector bundle $E\to X$ pick a transverse
+$C^\infty$-section $s$ and define the \emph{Euler class} or top Chern class
+\begin{equation*}
+    e(E) = c_r(E) = [s^{-1}(0)] \in H_{\dim X-2r}(X) \cong H^{2r}(X).
+\end{equation*}
+Analogously define
+\begin{equation*}
+    c_k(E) \in H^{2k}(X)
+\end{equation*}
+to be Poincar\'e dual to the locus where $r-k+1$ generic sections fail to be
+linearly independent:
+\begin{equation*}
+    [(s_1\wedge\cdots\wedge s_{r-k+1})^{-1}(0)] \in H_{\dim X-2}(X).
+\end{equation*}
+So $c_r(E)=e(E)$ while $c_1(E)=c_1(\Lambda^rE)$ and $c_i(E)=0$ for $i>r$.
+(When $k\ne1,r$ note that $c_k(E)\ne e(\Lambda^{r-k+1}E)$---this has the wrong
+degree, and $s_1\wedge\cdots\wedge s_{r-k+1}$ is \emph{not} a generic section of
+$\Lambda^{r-k+1}E$.)
+
+\paragraph{Whitney sum formula I.}
+Given two generic sections $s_1\in\Gamma(E_1)$, $s_2\in\Gamma(E_2)$ where $E_i$
+has rank $r_i$, we get a section $s_1\oplus s_2\in\Gamma(E_1\oplus E_2)$, with
+\begin{equation*}
+    e(E_1\oplus E_2)
+        = [(s_1\oplus s_2)^{-1}(0)]
+        = [s_1^{-1}(0)\cap s_2^{-1}(0)]
+        = e(E_1)\cup e(E_2) \in H^{2r_1+2r_2}.
+\end{equation*}
+In particular, for line bundles we get
+$c_1(L_1\oplus L_2)=c_1(L_1)\cup c_1(L_2)$, and
+\begin{align*}
+    c_1(L_1\oplus L_2)
+        &= c_1(\Lambda^2(L_1\oplus L_2))
+        = c_1(L_1\otimes L_2)
+        = [(s_1\otimes s_2)^{-1}(0)] \\
+        &= [s_1^{-1}(0)\cap s_2^{-1}(0)]
+        = c_1(L) + c_1(L_2).
+\end{align*}
+We can write this as $c(L_1\oplus L_2)=c(L_1)\cup c(L_2)$ where the
+\emph{total Chern class} is defined as
+\begin{equation*}
+    c(E)=1+c_1(E)+c_2(E)+\cdots\in H^*(X).
+\end{equation*}
+
+\paragraph{Whitney sum formula II.}
+More generally, for bundles $E,F$ of rank $r,s$ use the decomposition
+\begin{equation*}
+    \Lambda^k(E\oplus F) = \bigoplus_{i=0}^k\Lambda^i(E)\otimes\Lambda^{k-i}(F)
+\end{equation*}
+and generic sections $e_1,\ldots,e_k\in\Gamma(E)$ and
+$f_1,\ldots,f_k\in\Gamma(F)$ to compute
+\begin{align*}
+    \bigl[\bigl(&(e_1\wedge\cdots\wedge e_r)
+        \oplus(e_1\wedge\cdots\wedge e_{k-1}\otimes f_k)
+        \oplus\cdots \\
+           &\qquad\oplus(e_1\otimes f_2\wedge\cdots\wedge f_k)
+           \oplus(f_1\wedge\cdots\wedge f_k)
+       \bigr)^{-1}(0)\bigr].
+\end{align*}
+
+\begin{exercise}
+    Work it out and take Poincar\'e duals to give
+    \begin{equation*}
+        c_{r+s-k+1}(E\oplus F)
+            = c_r(E)c_{s-k+1}(F) + \cdots + c_{r-k+1}(E)c_s(F).
+    \end{equation*}
+    Deduce the \emph{Whitney sum formula} $c(E\oplus F)=c(E)c(F)$.
+\end{exercise}
+
+\paragraph{Axiomatic approach.}
+
+Knowing (or defining!) $c_1(\O_{\P^n}(1))=[\P^{n-1}]$, the Whitney sum formula
+and functoriality is then enough to completely determine all Chern classes on
+all topological spaces.
+
+Functoriality: $c(f^*E)=f^*c(E)$.
+
+\begin{exercise}
+    Define $f^*E$ and prove this using zero loci of sections when $f:X\to Y$ is
+    a map of manifolds.
+\end{exercise}
+
+There are two steps to proving this:
+\begin{itemize}
+    \item All rank $r$ bundles on $X$ are pullbacks $f^*Q$ of the
+        \emph{universal bundle on the classifying space} $Q\to\BGL(r,\C)$ by a
+        map $f:X\to\BGL(r,\C)$. (So we only need to define $c_i$ on one
+        classifying space.)
+
+    \item Splitting principle: We may assume $E$ is a direct sum of line bundles
+        without loss of generality.
+\end{itemize}
+
+\paragraph{Classifying space.}
+Any bundle $E$ is a quotient of an infinite rank trivial bundle
+$\underline{\Gamma(E)}$:
+\begin{equation*}
+    \underline{\Gamma(E)} \xrightarrow{\ev} E\to 0.
+\end{equation*}
+(Or take a sufficiently large subbundle
+$\underline{\C^N}\subseteq\underline{\C^\infty}=\underline{\Gamma(E)}$,
+$N\gg0$.)
+
+Therefore it defines a map to the Grassmannian
+\begin{equation*}
+    f
+\end{equation*}
 
 \end{document}
