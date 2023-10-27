@@ -1292,7 +1292,7 @@ $c_2(L_1\oplus L_2)=c_1(L_1)\cup c_1(L_2)$ and
         &= c_1(\Lambda^2(L_1\oplus L_2)) \\
         &= c_1(L_1\otimes L_2) \\
         &= [(s_1\otimes s_2)^{-1}(0)] \\
-        &= [s_1^{-1}(0)\cup s_2^{-1}(0)]
+        &= [s_1^{-1}(0)\cup s_2^{-1}(0)] \\
         &= c_1(L_1) + c_1(L_2).
 \end{align*}
 We can write this as $c(L_1\oplus L_2)=c(L_1)\cup c(L_2)$ where the
@@ -1325,7 +1325,36 @@ $f_1,\ldots,f_k\in\Gamma(F)$ to compute
 \end{exercise}
 
 \begin{proof}[Solution]
-    We get
+    For the given definition of $c_{r+s-k+1}(E\oplus F)$, we take generic
+    sections $e_1\oplus f_1,\ldots,e_k\oplus f_k$ of $E\oplus F$, and consider
+    their wedge product. Under the decomposition
+    $\Lambda^k(E\oplus F)=\bigoplus_{i=0}^k\Lambda^i(E)\otimes\Lambda^{k-i}(F)$
+    this is given by
+    \begin{align*}
+        (e_1\oplus f_1)\wedge\cdots\wedge(e_k\oplus f_k)
+            &= (e_1\wedge\cdots\wedge e_k)
+                \oplus(e_1\wedge\cdots e_{k-1}\otimes f_k)
+                \oplus\cdots \\
+            &\qquad\oplus(e_1\otimes f_2\wedge\cdots\wedge f_k)
+                \oplus(f_1\wedge\cdots\wedge f_k),
+    \end{align*}
+    and $c_{r+s-k+1}(E\oplus F)$ is represented by the Poincar\'e dual of the
+    vanishing locus of this section.
+
+    \textbf{Set-theoretical Claim:} Given a set $S$ with chains of subsets
+    \begin{equation*}
+        A_0\subseteq A_1\subseteq\cdots\subseteq A_k=S
+        \quad\text{and}\quad
+        S=B_0\supseteq B_1\supseteq\cdots\supseteq B_k,
+    \end{equation*}
+    we have
+    \begin{equation*}
+        \bigcap_{i=0}^k(A_i\cup B_i)
+            = \bigcup_{j=1}^k(A_j\cap B_{j-1}).
+    \end{equation*}
+
+    Applying this to the subsets $A_i=(e_1\wedge\cdots\wedge e_i)^{-1}(0)$,
+    $B_i=(f_{i+1}\wedge\cdots\wedge f_k)^{-1}(0)$ of $X$, we get
     \begin{align*}
         &\bigl[(e_1\wedge\cdots\wedge e_k)^{-1}(0)
             \cap(e_1\wedge\cdots\wedge e_{k-1}\otimes f_k)^{-1}(0)
@@ -1336,7 +1365,15 @@ $f_1,\ldots,f_k\in\Gamma(F)$ to compute
         &\qquad=\biggl[\bigcap_{i=0}^k
             \bigl((e_1\wedge\cdots\wedge e_i)^{-1}(0)
         \cup(f_{i+1}\wedge\cdots\wedge f_k)^{-1}(0)\bigr)\biggr] \\
-        &\qquad=\biggl[\biggr]
+        &\qquad=\biggl[\bigcup_{j=1}^k
+            \bigl((e_1\wedge\cdots\wedge e_j)^{-1}(0)
+            \cap(f_j\wedge\cdots\wedge f_k)^{-1}(0)\bigr)\biggr], \\
+    \end{align*}
+    and hence
+    \begin{align*}
+        c_{r+s-k+1}(E\oplus F)
+            &= \sum_{j=1}^kc_{r-j+1}(E)c_{s-k+j}(F) \\
+            &= c_r(E)c_{s-k+1}(F) + \cdots + c_{r-k+1}(E)c_s(F).
     \end{align*}
 \end{proof}
 
