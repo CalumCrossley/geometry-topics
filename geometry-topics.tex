@@ -31,6 +31,7 @@
 \newtheorem*{remark}{Remark}
 \newtheorem*{exercise}{Exercise}
 
+\DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Hol}{Hol}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Gr}{Gr}
@@ -46,9 +47,14 @@
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Vect}{Vect}
 
+\newcommand{\conj}[1]{\overline{#1}}
+
 \newcommand{\id}{\mathrm{id}}
+\newcommand{\an}{\mathrm{an}}
+\newcommand{\sing}{\mathrm{sing}}
 \newcommand{\ev}{\mathrm{ev}}
 \newcommand{\dR}{\mathrm{dR}}
+\newcommand{\Hdg}{\mathrm{Hdg}}
 \newcommand{\FS}{\mathrm{FS}}
 
 \renewcommand{\L}{\mathcal{L}}
@@ -1658,5 +1664,194 @@ the transition functions for a line bundle $\L$.
     \emph{except} for the winding number of $e_{UV}$, which gives
     $\Z$-ambiguity.)
 \end{exercise}
+
+\section{Hodge Theory - Peter Jossen}
+
+\subsection*{Hodge structures}
+
+\begin{definition}
+    Let $n\in\Z$. A \emph{pure Hodge structure of weight $n$} is a $\Q$-vector
+    space $V$ of finite dimension together with a decomposition of $\C$-vector
+    spaces
+    \begin{equation*}
+        V_\C \coloneq V\otimes_\Q\C = \bigoplus_{p+q=n}V^{p,q}
+    \end{equation*}
+    call the \emph{Hodge decomposition}, satisfying $V^{q,p}=\conj{V^{p,q}}$.
+    Alternatively, it is given by a filtration
+    \begin{equation*}
+        V_\C\supseteq\cdots
+        \supseteq F^{-1}V_\C\supseteq F^0V_\C\supseteq F^1V_\C\supseteq\cdots
+        \supseteq\{0\}
+    \end{equation*}
+    called the \emph{Hodge filtration}, satisfying
+    \begin{equation*}
+        V_\C = \bigoplus_{p+q=n}(F^pV_\C\cap\conj{F^qV_\C}).
+    \end{equation*}
+    These are related by the construction
+    \begin{equation*}
+        F^{p_0}V_\C = \bigoplus_{\substack{p\ge p_0 \\ p+q=n}}V^{p,q}.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    Let $V$ be a Hodge structure. A \emph{polarization} on $V$ is an alternating
+    $\Q$-bilinear form
+    \begin{equation*}
+        Q:V\otimes_\Q V\to\C
+    \end{equation*}
+    such that $Q_\C:V_\C\otimes_\C V_\C\to\C$ satisfies
+    \begin{itemize}
+        \item $Q_\C(v,\conj w)=0$ if $v\in V^{p,q}$ and $w\in V^{p',q'}$ with
+            $(p,q)\ne(p',q')$, and
+        \item $i^{p-q}\cdot Q_\C(v,\conj v)>0$ for $v\in V^{p,q}\setminus\{0\}$.
+    \end{itemize}
+    We then say that $V$ is \emph{polarizable}.
+\end{definition}
+
+\begin{proposition}
+    Polarizable pure Hodge structures form a semi-simple abelian $\Q$-linear
+    category. (Semi-simple means all subobjects are summands.)
+
+    The category of semi-pure Hodge structures (direct sums of pure Hodge
+    structures of different weights) has a natural ``tensor product'', making it
+    a Tannakian category. (With a notion of dual, e.t.c.)
+\end{proposition}
+
+\begin{definition}
+    Let $V$ be a pure Hodge structure of weight $n$. We define the space
+    \begin{equation*}
+        V^\Hdg \coloneq V\cap V^{0,0} \subseteq V_\C
+    \end{equation*}
+    of \emph{Hodge cycles}. Note that this is zero if $n\ne0$.
+\end{definition}
+
+\begin{remark}
+    If $V_1,V_2$ are Hodge structures of weights $n_1,n_2$ then the space
+    $\underline\Hom(V_1,V_2)$ has a natural Hodge structure of weight $n_1+n_2$
+    as the tensor product $V_1^*\otimes V_2$, which satisfies
+    \begin{equation*}
+        \underline\Hom(V_1,V_2)^\Hdg = \Hom_\Hdg(V_1,V_2);
+    \end{equation*}
+    the Hodge cycles in $\underline\Hom(V_1,V_2)$ are the morphisms of Hodge
+    structures $V_1\to V_2$. Both sides are zero if $n_1-n_2\ne0$, i.e.
+    $n_1\ne n_2$.
+\end{remark}
+
+\begin{example}
+    Let $\Lambda\subseteq\C^g$ be a lattice, and consider $V=\Lambda_\Q$. We
+    have a map
+    \begin{align*}
+        V_\C = \Lambda_\C &\xrightarrow\alpha \C^g \\
+        \lambda\otimes z &\mapsto \lambda z,
+    \end{align*}
+    giving a Hodge filtration $V_\C\supseteq\ker\alpha\supseteq\{0\}$. Note that
+    $\ker\alpha$ is $g$-dimensional, as $\Lambda_\C\cong\C^{2g}$. So we get a
+    Hodge structure on $V$:
+    \begin{equation*}
+        V_\C = \ker\alpha \oplus \conj{\ker\alpha}.
+    \end{equation*}
+\end{example}
+
+\begin{exercise}
+    Show that this Hodge structure is polarizable iff $\Lambda\subseteq\C^g$
+    satisfies the Riemann bilinear relations, i.e. $\C^g/\Lambda$ is a complex
+    abelian variety. (See the reference on complex abelian varieties.)
+
+    This shows that there is a polarizable Hodge structure on the homology group
+    $H_1(\C^g/\Lambda)=\Lambda$.
+\end{exercise}
+
+\subsection*{de Rham cohomology}
+
+Let $X/\C$ be a smooth projective algebraic variety. We have the cohomology
+\begin{equation*}
+    H^*(X;\Q) \coloneq H^*_\sing(X(\C);\Q)
+\end{equation*}
+which is dual to
+\begin{equation*}
+    H_*(X;\Q) \coloneq H_*^\sing(X(\C);\Q).
+\end{equation*}
+To comparewith de Rham cohomology, let $\omega$ be a $C^\infty$ differential
+$n$-form on $X$, satisfying $d\omega=0$. We get a $\C$-linear map
+\begin{equation*}
+    H_n(X;\Q)_\C \to \C;\quad
+    [\sigma] \mapsto \int_\sigma\omega \coloneq \int_{\Delta^n}\sigma^*\omega.
+\end{equation*}
+\begin{theorem}[de Rham]
+    This induces a $\C$-linear isomorphism
+    \begin{equation*}
+        H_\dR^*(X;\C) \to H^*_\sing(X;\Q)_\C.
+    \end{equation*}
+\end{theorem}
+Taking local complex coordinates $z_1,\ldots,z_d$, we get a real system of
+coordinates $z_1,\ldots,z_d,\conj z_1,\ldots,\conj z_d$. With these we
+can express a real analytic differential $n$-form $\omega$ as a sum of forms
+\begin{equation*}
+    fdz_{i_1}\wedge\cdots\wedge dz_{i_p}
+        \wedge d\conj z_{j_1}\wedge\cdots\wedge d\conj z_{j_q}
+\end{equation*}
+where $f$ is real analytic and $p+q=n$, known as a form of type $(p,q)$. We can
+then hope to get a Hodge decomposition via
+\begin{equation*}
+    H^{p,q}_\dR(X;\C)
+        = \{\text{forms of type $(p,q)$}\}
+        \subseteq H^n_\dR(X;\C).
+\end{equation*}
+\begin{theorem}[Hodge]
+    If $X$ is a smooth projective algebraic variety, then
+    \begin{equation*}
+        H_\dR^n(X;\C) = \bigoplus_{p+q=n}H^{p,q}_\dR(X;\C).
+    \end{equation*}
+    (This part only requires $X$ have a K\"ahler structure.) Moreover, the
+    induced Hodge structure on $H^n(X;\Q)$ is polarizable, depends functorially
+    on $X$, and is compatible with cup products and Poincar\'e duality. So for
+    example the cup product
+    \begin{equation*}
+        H^n(X;\Q)\otimes H^{n'}(X;\Q) \to H^{n+n'}(X;\Q)
+    \end{equation*}
+    is a morphism of Hodge structures. (This part requires the projective
+    algebraic structure on $X$.)
+\end{theorem}
+This was the original source for the concept of Hodge decomposition.
+
+\subsection*{Sheaf cohomology}
+
+Here is an alternative approach to constructing a Hodge decomposition of
+cohomology. We start with the perspective of sheaf cohomology
+\begin{equation*}
+    H^n(X,\underline\C).
+\end{equation*}
+The various de Rham complexes give resolutions of the sheaf $\underline\C$.
+\begin{itemize}
+    \item $C^\infty$ differential forms give flabby sheaves because of the
+        existence of bump functions.
+    \item Holomorphic differntial forms give non-flabby sheaves.
+\end{itemize}
+Using holomorphic (complex analytic) differential forms we have a resolution
+$\Omega_X^{\bullet,\an}\to\underline\C$ (but this is \emph{not} an acyclic
+resolution). Then we get a spectral sequence, the Hodge-to-de Rham spectral
+sequence
+\begin{equation*}
+    E_2^{p,q} = H^p(X,\Omega^{q,\an}_X)
+        \Rightarrow H^n(X,\underline\C) = H^n(X;\C)_\C
+\end{equation*}
+which in fact degenerates on the 2nd page, so that
+\begin{equation*}
+    H^n(X;\Q)_\C = \bigoplus_{p+q=n}H^p(X,\Omega^{q,\an}_X).
+\end{equation*}
+Hence this also gives a Hodge structure on $H^n(X;\Q)$. The $(0,n)$ part is the
+space of holomorphic $n$-forms, and the other parts give alternative
+descriptions of the forms of type $(p,q)$.
+
+\subsection*{The cycle class map}
+
+\subsection*{Mixed Hodge structures}
+
+\subsection*{References}
+
+\begin{itemize}
+    \item C. Voisin ``Hodge Theory and Complex Algebraic Geometry''
+    \item Ch. Berkenhake, H. Lange ``Complex Abelian Varieties''
+\end{itemize}
 
 \end{document}
