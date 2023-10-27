@@ -1285,15 +1285,15 @@ has rank $r_i$, we get a section $s_1\oplus s_2\in\Gamma(E_1\oplus E_2)$, with
         = [s_1^{-1}(0)\cap s_2^{-1}(0)]
         = e(E_1)\cup e(E_2) \in H^{2r_1+2r_2}.
 \end{equation*}
-In particular, for line bundles we get
-$c_1(L_1\oplus L_2)=c_1(L_1)\cup c_1(L_2)$, and
+In particular, for line bundles
+$c_2(L_1\oplus L_2)=c_1(L_1)\cup c_1(L_2)$ and
 \begin{align*}
     c_1(L_1\oplus L_2)
-        &= c_1(\Lambda^2(L_1\oplus L_2))
-        = c_1(L_1\otimes L_2)
-        = [(s_1\otimes s_2)^{-1}(0)] \\
-        &= [s_1^{-1}(0)\cap s_2^{-1}(0)]
-        = c_1(L) + c_1(L_2).
+        &= c_1(\Lambda^2(L_1\oplus L_2)) \\
+        &= c_1(L_1\otimes L_2) \\
+        &= [(s_1\otimes s_2)^{-1}(0)] \\
+        &= [s_1^{-1}(0)\cup s_2^{-1}(0)]
+        &= c_1(L_1) + c_1(L_2).
 \end{align*}
 We can write this as $c(L_1\oplus L_2)=c(L_1)\cup c(L_2)$ where the
 \emph{total Chern class} is defined as
@@ -1307,7 +1307,7 @@ More generally, for bundles $E,F$ of rank $r,s$ use the decomposition
 and generic sections $e_1,\ldots,e_k\in\Gamma(E)$ and
 $f_1,\ldots,f_k\in\Gamma(F)$ to compute
 \begin{align*}
-    \bigl[\bigl(&(e_1\wedge\cdots\wedge e_r)
+    \bigl[\bigl(&(e_1\wedge\cdots\wedge e_k)
         \oplus(e_1\wedge\cdots\wedge e_{k-1}\otimes f_k)
         \oplus\cdots \\
            &\qquad\oplus(e_1\otimes f_2\wedge\cdots\wedge f_k)
@@ -1323,6 +1323,22 @@ $f_1,\ldots,f_k\in\Gamma(F)$ to compute
     \end{equation*}
     Deduce the \emph{Whitney sum formula} $c(E\oplus F)=c(E)c(F)$.
 \end{exercise}
+
+\begin{proof}[Solution]
+    We get
+    \begin{align*}
+        &\bigl[(e_1\wedge\cdots\wedge e_k)^{-1}(0)
+            \cap(e_1\wedge\cdots\wedge e_{k-1}\otimes f_k)^{-1}(0)
+            \cap\cdots \\
+        &\qquad\qquad\cap(e_1\otimes f_2\wedge\cdots\wedge f_k)^{-1}(0)
+            \cap(f_1\wedge\cdots\wedge f_k)^{-1}(0)
+        \bigr] \\
+        &\qquad=\biggl[\bigcap_{i=0}^k
+            \bigl((e_1\wedge\cdots\wedge e_i)^{-1}(0)
+        \cup(f_{i+1}\wedge\cdots\wedge f_k)^{-1}(0)\bigr)\biggr] \\
+        &\qquad=\biggl[\biggr]
+    \end{align*}
+\end{proof}
 
 \paragraph{Axiomatic approach.}
 
