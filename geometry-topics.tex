@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass{article}
 
 \usepackage[paper=a4paper,margin=0.9in]{geometry}
 
@@ -89,9 +89,9 @@
 
 \section{Spec and Proj - Ed Segal}
 
-% TODO: Add notes for this maybe?
-
 \subsection*{Exercise solutions}
+
+% TODO: Include question statements
 
 \begin{enumerate}
 
@@ -1079,9 +1079,11 @@ varying'' over $X$. This is the data of:
 \paragraph{M\"obius band.} This is an example of a real bundle over the circle
 $S^1$. Take $[0,1]\times R/\sim$ where we identify $(0,e)\sim(1,-e)$, as in the
 following figure.
+
 \begin{center}
     \includegraphics[scale=0.4]{chern_mobius1}
 \end{center}
+
 \begin{exercise}
     Check that this defines a vector bundle, by seeing that on an actual open
     cover of $S^1$ we have local trivializations and transition maps, as in the
@@ -1090,34 +1092,105 @@ following figure.
         \includegraphics[scale=0.3]{chern_mobius2}
     \end{center}
 \end{exercise}
+
+\begin{proof}[Solution]
+    With the indicated open cover $S^1=U\cup V$ the intersection $U\cap V$ is a
+    disjoint union of two intervals. We glue by $\id$ on one interval and $-\id$
+    on the other. This is a locally constant association $U\cap V\to\GL(1,\C)$,
+    which is hence continuous.
+\end{proof}
+
 \begin{exercise}
     If instead of one twist we include two twists, show that the resulting
     bundle is trivial. Further, show that it can be untwisted to the standard
     band if embedded in $\R^4$.
 \end{exercise}
 
-So we may think of $E$ as $\coprod_U(U\times\C^r)/\sim$, where we glue by the
+\begin{proof}[Solution]
+    If we take two trivializations, where the two twists are contained in one of
+    them, then on the two components of the overlap we glue by $\id$ and
+    $-(-\id)=\id$, so the trivializations glue to a global trivialization. In
+    fact triviality is a consequence of the second part. For the second part,
+    note that if we replace one twist of the double-twisted band by the reverse
+    oriented twist, then the band can be untwisted to the standard band inside
+    $\R^3$:
+    \begin{center}
+        \includegraphics[scale=0.3]{chern_isotopy1}
+    \end{center}
+    Hence it suffices to show that in $\R^4$ a twist can be reversed. Given a
+    twist embedded in $\R^3\times\{0\}\subseteq\R^4$ as pictured below, we can
+    achieve this by:
+    \begin{itemize}
+        \item Perform a straight line isotopy so that the 4th coordinate $x_4$
+            is equal to the 2nd coordinate $x_2$.
+        \item Perform a straight line isotopy to replace $x_2$ by $-x_2$. This
+            leads to no self-intersections since the original coordinates
+            can be recovered as $(x_1,x_4,x_3)$.
+        \item Perform a straight line isotopy returning $x_4$ to zero. This
+            leads to no self-intersections since the original coordinates can
+            be recovered as $(x_1,-x_2,x_3)$.
+    \end{itemize}
+    \begin{center}
+        \includegraphics[scale=0.5]{chern_isotopy2}
+    \end{center}
+\end{proof}
+
+Now we may think of $E$ as $\coprod_U(U\times\C^r)/\sim$, where we glue by the
 transition functions $g_{UV}$; for $x\in U\cap V$ we identify
 \begin{equation*}
     V\times\C^r\ni(x,e) \sim (x,g_{UV}(x)e)\in U\times\C^r.
 \end{equation*}
+
 \begin{exercise}
     Check that this defines an equivalence relation, and that the quotient is
     $E$.
 \end{exercise}
+
+\begin{proof}[Solution]
+    It is an equivalence relation:
+    \begin{itemize}
+        \item Reflexive: $(x,e)\sim(x,g_{UU}(x)e)=(x,e)$ as
+            $g_{UU}(x)=\id$.
+        \item Symmetric: $(x,g_{UV}(x)e)\sim(x,g_{VU}(x)g_{UV}(x)e)=(x,e)$ as
+            $g_{VU}(x)\circ g_{UV}(x)=\id$.
+        \item Transitive: $(x,e)\sim(x,g_{WV}(x)e)=(x,g_{WU}(x)g_{UV}(x)e)$ as
+            $g_{WV}=g_{WU}\circ g_{UV}$.
+    \end{itemize}
+    We then have a natural map $\coprod_U(U\times\C^r)/\sim\to E$ by the
+    universal property of the quotient, which is a homeomorphism over each $U$,
+    and a bijection, and therefore a global homeomorphism.
+\end{proof}
+
 \begin{exercise}
     Show that the fibres of $\pi$ are naturally vector spaces: if $x_1=(x,e_1)$
     and $x_2=(x,e_2)$ are points of the same fibre $E_x=\pi^{-1}(x)$ and
     $\alpha,\beta\in\C$ we can define $\alpha x_1+\beta x_2\in E_x$ such that...
 \end{exercise}
+
+\begin{proof}[Solution]
+    In a local trivialization we can take these vector space operations to be
+    the natural ones on $\C^r$ under the canonical identification
+    $\{x\}\times\C^r\cong\C^r$. This is independent of the choice of local
+    trivialization since the vector space operations are preserved by the
+    transition maps in $\GL(r,\C)$.
+\end{proof}
+
 \begin{exercise}
     Define smooth vector bundles over a smooth manifold, algebraic vector
     bundles over algebraic varieties, real vector bundles, e.t.c.
 \end{exercise}
 
+\begin{proof}[Solution]
+    For a smooth vector bundle we require the map $U\cap V\to\GL(r,\C)$ to be
+    smooth. For an algebraic vector bundle we take local trivializations of the
+    form $\pi^{-1}(U)\cong U\times\A^r$, and require $U\cap V\to\GL(r,\C)$ to be
+    a regular morphism. For real vector bundles we replace $\C$ by $\R$.
+\end{proof}
+
 \paragraph{Sections.} A section of $\pi:E\to X$ is a continuous map $s:X\to E$
 such that $\pi\circ s=\id_X$. They form a vector space $\Gamma(E)$ by the
 fibre-wise vector space operations.
+
 \begin{exercise}
     A trivialization of the bundle, i.e. an isomorphism
     \begin{equation*}
@@ -1132,6 +1205,16 @@ fibre-wise vector space operations.
     every $x\in X$. Hence a trivialization of a line bundle is the same thing as
     a nowhere-vanishing section.
 \end{exercise}
+
+\begin{proof}[Solution]
+    On a trivial vector bundle $X\times\C^r$ we have a canonical choice of $r$
+    sections forming a basis of each fibre given by the basis vectors in $\C^r$;
+    every fibre is canonically identified. We can then transport this along the
+    isomorphism $E\cong X\times\C^r$ to get such sections for $E$. Conversely,
+    given such sections for $E$ we can define an isomorphism
+    $E\cong X\times\C^r$ by taking coordinates in $\C^r$ using the basis on each
+    fibre.
+\end{proof}
 
 \paragraph{Homotopy invariance.} We have
 \begin{itemize}
@@ -1218,11 +1301,17 @@ Similarly $p(x)$ over $\C_x$ is glued to $y^np(y^{-1})$ over $\C_y$, so if
 $\deg p=n$ we get another algebraic/regular section over $\P^1$. (This gives all
 the sections since $\Gamma(\O(n))=\Sym^n(\C^2)^*$.) Again these all have $n$
 zeros.
+
 \begin{exercise}
     When $n<0$ we get a meromorphic section with $n$ poles. Instead glue 1 to an
     anti-holomorphic function across the circle $|x|=1$ to give a
     (non-holomorphic) section with $n$ zeros.
 \end{exercise}
+
+\begin{proof}[Solution]
+    We can glue $1/z^n$ outside the unit circle to $\conj z^n$ inside the unit
+    circle, since they agree on the boundary. (If $|z|=1$ then $1/z=\conj z$.)
+\end{proof}
 
 \paragraph{Intersection with the zero section.}
 Indeed $c_1=n$ is the number of zeros (counted with orientation and
@@ -1386,9 +1475,11 @@ $f_1,\ldots,f_k\in\Gamma(F)$ to compute
 
 \paragraph{Axiomatic approach.}
 
-Knowing (or defining!) $c_1(\O_{\P^n}(1))=[\P^{n-1}]$, the Whitney sum
-formula and functoriality is then enough to completely determine all Chern
-classes on all topological spaces.
+\begin{fact}
+    Knowing (or defining!) $c_1(\O_{\P^n}(1))=[\P^{n-1}]$, the Whitney sum
+    formula and functoriality is then enough to completely determine all Chern
+    classes on all topological spaces.
+\end{fact}
 
 Functoriality: $c(f^*E)=f^*c(E)$.
 
@@ -1397,7 +1488,24 @@ Functoriality: $c(f^*E)=f^*c(E)$.
     a map of manifolds.
 \end{exercise}
 
-There are two steps to proving this:
+\begin{proof}[Solution]
+    Given local trivializations $E|_U\cong U\times\C^r$, we define a local
+    trivialization $f^*E|_{f^{-1}(U)}\cong f^{-1}(U)\times\C^r$ by associating
+    $(x,v)\in f^{-1}(U)\times\C^r$ with $(f(x),v)\in U\times\C^r$. The
+    transition functions are given by the transition functions for $E$ composed
+    with $f$, and hence remain continuous, so this defines a vector bundle. Then
+    if $s_1,\ldots,s_k$ are generic sections of $E$, we get that
+    $f^*s_1,\ldots,f^*s_k$ are generic sections of $f^*E$ since all sections of
+    $f^*E$ are pullbacks of sections of $E$. (Assuming $X$ and $Y$ are compact,
+    so $f$ is closed.) Moreover the vanishing locus of
+    $f^*s_1\wedge\cdots\wedge f^*s_k=f^*(s_1\wedge\cdots\wedge s_k)$ is the
+    preimage under $f$ of the vanishing locus of $s_1\wedge\cdots\wedge s_k$.
+    Since the cohomology class of the preimage gives the pullback of the
+    cohomology class (for suitably general representatives missing critical
+    values of $f$) this shows naturality of the Chern class.
+\end{proof}
+
+There are two steps to proving this fact:
 \begin{itemize}
     \item All rank $r$ bundles on $X$ are pullbacks $f^*Q$ of the
         \emph{universal bundle on the classifying space} $Q\to B\GL(r,\C)$ by a
@@ -1473,10 +1581,20 @@ unique class such that
 So the splitting principle, the Whitney sum formula, and $c_1(\O(1))=h$
 determine all Chern classes uniquely. (Existence takes a little bit more work,
 e.g. computing $H^*(\Gr(\C^\infty,r))$.)
+
 \begin{exercise}
     Prove the following corollary: If $E$ has rank $r$, then $c_i(E)=0$ for
     $i>r$.
 \end{exercise}
+
+\begin{proof}[Solution]
+    From above we have
+    \begin{equation*}
+        \pi^*c(E) = (1+f^*h_1)\cdots(1+f^*h_r)
+    \end{equation*}
+    where $h_1,\ldots,h_r$ have degree 1, so the RHS has no terms in degree
+    $i>r$. Hence $\pi^*c_i(E)=0$, and since $\pi^*$ is injective $c_i(E)=0$.
+\end{proof}
 
 \paragraph{Grothendieck's definition.}
 On the projective bundle $\pi:\P(E)\to X$ we have the tautological inclusion
@@ -1496,9 +1614,10 @@ where $h=c_1(\O_{\P(E)}(-1))$. Thus
     h^r + \pi^*c_1(E)h^{r-1} + \cdots + \pi^*c_{r-1}(E)h + \pi^*c_r(E) = 0.
         \tag{$*$}
 \end{equation*}
-\textbf{Fact:} $H*(\P(E))=H^*(X)\oplus H^*(X)h\oplus\cdots\oplus H^*(X)h^{r-1}$
-as a vector space. So $h^r$ can be uniquely written in this basis as a linear
-combination of $1,h,\ldots,h^{r-1}$, and we can define $c_i(E)$ via ($*$).
+\textbf{Fact:} $H^*(\P(E))
+=H^*(X)\oplus H^*(X)h\oplus\cdots\oplus H^*(X)h^{r-1}$, so $h^r$ can be uniquely
+written as a linear combination of $1,h,\ldots,h^{r-1}$ and we can define
+$c_i(E)$ via ($*$).
 
 \paragraph{Chern--Weil for line bundles.}
 If $X$ is a manifold we can pick a connection $A$ on $\L\to X$. Its curvature
@@ -1532,15 +1651,17 @@ on $E$. Form
 \begin{equation*}
     p\biggl(\frac{F_A}{2\pi i}\biggr) \in H^{2k}(X;\R)
 \end{equation*}
-for any ad-invariant ($p(N^{-1}MN)=p(M)$) polynomial function $p$ on
+for any ad-invariant ($p(N^{-1}MN)=p(M)$) polynomial function $p$ of
 $\End(\C^r)$. For example $p$ could be $\tr$ (giving $c_1(E)$), or $\det$
 (giving $c_r(E)$), or any other symmetric polynomial in the eigenvalues. (In
 fact $H^*(B\GL(r,\C))=\text{Ad-invariant polynomials}$.) If $p$ is integral, the
 result is an integral characteristic class.
+
 \begin{exercise}
     Show that $p(F_A)$ is closed, and changes by an exact form under
-    $A\mapsto A+a$.
+    $A\mapsto A+a$. % TODO
 \end{exercise}
+
 \begin{theorem}
     We have $c(E)=\det(\id+\frac{F_A}{2\pi i})$ in $H^*(X)/\text{torsion}$, i.e.
     \begin{equation*}
@@ -1584,6 +1705,22 @@ integrating gives $e(\P^n)=n+1$.)
         \includegraphics[scale=0.5]{chern_normal}
     \end{center}
 \end{exercise}
+
+\begin{proof}[Solution]
+    Note that $TE=\pi^*(TX\oplus E)$, and so the derivative of $s$ gives a map
+    \begin{equation*}
+        TX\to s^*TE = s^*\pi^*(TX\oplus E) = TX\oplus E
+    \end{equation*}
+    whose projection to $TX$ is the identity. The condition of being transverse
+    to the zero section means that the projection to $E$ is non-zero over $Z$.
+    Furthermore, note that $TX|_Z=TZ\oplus N_{Z/X}$, and the derivative of $s$
+    vanishes on $TZ$ since $s|_Z=0$. Therefore the composite
+    \begin{equation*}
+        TZ\oplus N_{Z/X} = TX|_Z \to TX|_Z\oplus E|_Z \to E|_Z
+    \end{equation*}
+    vanishes on $TZ$, but is non-zero and hence induces an isomorphism
+    $N_{Z/X}\to E|_Z$ of line bundles.
+\end{proof}
 
 \begin{exercise}
     Hence work out the total Chern class $c(T_{X_d})$ of a degree $d$
