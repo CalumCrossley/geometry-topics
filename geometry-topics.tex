@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\usepackage[margin=1in]{geometry}
+\usepackage[paper=a4paper,margin=0.9in]{geometry}
 
 \usepackage{mathtools}
 \usepackage{derivative}
@@ -16,6 +16,7 @@
 
 \setlength{\parindent}{0pt}
 
+\newtheorem*{conjecture}{Conjecture}
 \newtheorem*{theorem}{Theorem}
 \newtheorem*{lemma}{Lemma}
 \newtheorem*{proposition}{Proposition}
@@ -25,9 +26,8 @@
 \theoremstyle{definition}
 \newtheorem*{definition}{Definition}
 \newtheorem*{fact}{Fact}
-
-\theoremstyle{remark}
 \newtheorem*{example}{Example}
+\newtheorem*{nonexample}{Non-Example}
 \newtheorem*{remark}{Remark}
 \newtheorem*{exercise}{Exercise}
 
@@ -41,6 +41,7 @@
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\gr}{gr}
 \DeclareMathOperator{\rad}{rad}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\rank}{rank}
@@ -50,10 +51,12 @@
 \newcommand{\conj}[1]{\overline{#1}}
 
 \newcommand{\id}{\mathrm{id}}
+\newcommand{\cl}{\mathrm{cl}}
 \newcommand{\an}{\mathrm{an}}
 \newcommand{\sing}{\mathrm{sing}}
 \newcommand{\ev}{\mathrm{ev}}
 \newcommand{\dR}{\mathrm{dR}}
+\newcommand{\CH}{\mathrm{CH}}
 \newcommand{\Hdg}{\mathrm{Hdg}}
 \newcommand{\FS}{\mathrm{FS}}
 
@@ -145,7 +148,7 @@ inverse given by $(a_1,\ldots,a_n)\mapsto(a_1,\ldots,a_n,1/f(a_1,\ldots,a_n))$,
 which is also regular.
 
 \item
-Suppose $V\subseteq\A^n$ and $W\subseteq\A^m$, corresponding to quotient maps
+Suppose $V\subseteq\A^n$ and $W\subseteq\A^m$ correspond to quotient maps
 $\C[x_1,\ldots,x_n]\to\C[V]$ and $\C[y_1,\ldots,y_m]\to\C[W]$. Choose a
 lift of $\C[W]\to\C[V]$ and let $f_1,\ldots,f_m\in\C[x_1,\ldots,x_n]$
 be the images of $y_1,\ldots,y_m$, as in the following diagram.
@@ -192,9 +195,8 @@ to $V$ at $p$.
 \textbf{Proof:}
 Inuitively, elements of $(\m_p/\m_p^2)^\vee$ are functionals insensitive to
 second order vanishing, which are first order differential operators;
-differentiation along tangent vectors. Suppose
-$V=V(f_1,\ldots,f_r)\subseteq\A^n$. Then the tangent space to $V$ at $p$ should
-be given by
+differentiation along tangent vectors. Suppose $V=V(f_1,\ldots,f_r)$ in $\A^n$.
+Then the tangent space to $V$ at $p$ should be given by
 \begin{equation*}
     T_pV = \left\{(v_1,\ldots,v_n)\in\C^n
         : v_1\pdv{f_i}{x_1}(p)+\cdots+v_n\pdv{f_i}{x_n}(p)=0
@@ -340,6 +342,8 @@ cylinder is pinched into two planes / discs connected at the origin.
 \end{enumerate}
 
 \end{enumerate}
+
+\newpage
 
 \section{Poincar\'e duality - Steven Sivek}
 
@@ -624,7 +628,7 @@ supported (de Rham) cohomology
             check that the pairing is non-zero.
 
         \item Inductive step: Write $U=U_1\cup\cdots\cup U_{n-1}$, $V=U_n$, and
-            look at the Mayer-Vietoris sequences for $M=U\cup V$ in both
+            look at the Mayer--Vietoris sequences for $M=U\cup V$ in both
             cohomologies. There are natural comparison maps, which are
             isomorphisms by induction on all terms but the $M$ terms. By the
             five lemma they must also be isomorphisms on $M$.
@@ -707,6 +711,8 @@ Since $\int_Y\eta_X=\int_M\eta_X\wedge\eta_Y$, we get
 Hence the Poincar\'e duality isomorphism $H_k(M;\R)\to H^{n-k}_c(M)$ identifies
 the intersection form (cap product) on $H_*(M;\R)$ with the wedge product on
 $H^*_c(M)$. It is an isomorphism of graded-commutative $\R$-algebras.
+
+\newpage
 
 \section{Complex manifolds and the K\"ahler condition \\ - Lorenzo Foscolo}
 
@@ -1029,6 +1035,8 @@ coordinates. Which almost-complex structures arise in this way?
 
 \paragraph{Exercise 10 {\normalfont(Bundles and connections)}.} 
 
+\newpage
+
 \section{Chern classes and classifying spaces - Richard Thomas}
 
 \paragraph{Characteristic classes.} These measure how ``twisted'' a vector
@@ -1071,28 +1079,25 @@ varying'' over $X$. This is the data of:
 \paragraph{M\"obius band.} This is an example of a real bundle over the circle
 $S^1$. Take $[0,1]\times R/\sim$ where we identify $(0,e)\sim(1,-e)$, as in the
 following figure.
-\begin{figure}[htb]
-    \centering
+\begin{center}
     \includegraphics[scale=0.4]{chern_mobius1}
-\end{figure}
+\end{center}
 \begin{exercise}
     Check that this defines a vector bundle, by seeing that on an actual open
     cover of $S^1$ we have local trivializations and transition maps, as in the
     following figure.
+    \begin{center}
+        \includegraphics[scale=0.3]{chern_mobius2}
+    \end{center}
 \end{exercise}
-\begin{figure}[htb]
-    \centering
-    \includegraphics[scale=0.3]{chern_mobius2}
-\end{figure}
 \begin{exercise}
     If instead of one twist we include two twists, show that the resulting
     bundle is trivial. Further, show that it can be untwisted to the standard
     band if embedded in $\R^4$.
 \end{exercise}
 
-\paragraph{Exercises.} So we may think of $E$ as $\coprod_U(U\times\C^r)/\sim$,
-where we glue by the transition functions $g_{UV}$; for $x\in U\cap V$ we
-identify
+So we may think of $E$ as $\coprod_U(U\times\C^r)/\sim$, where we glue by the
+transition functions $g_{UV}$; for $x\in U\cap V$ we identify
 \begin{equation*}
     V\times\C^r\ni(x,e) \sim (x,g_{UV}(x)e)\in U\times\C^r.
 \end{equation*}
@@ -1188,18 +1193,16 @@ We call the resulting line bundle $\O(n)$ with $c_1=n$.
 \paragraph{Tautological bundle.}
 When $n=-1$ we get the \emph{tautological bundle} $\O(-1)\to\P^1$. Over $\R$
 this is the M\"obius bundle on $\RP^1\cong S^1$:
-\begin{figure}[htb]
-    \centering
+\begin{center}
     \includegraphics[scale=0.5]{chern_taut1}
-\end{figure}
+\end{center}
 
 \paragraph{Tautological bundle over $\C$.}
 Over $\C$ we also see that $\O(-1)$ (defined as above with transition
 function $\frac{1}{x}$) is the tautological bundle $\O(-1)$ over $\P^1$.
-\begin{figure}[htb]
-    \centering
+\begin{center}
     \includegraphics[scale=0.5]{chern_taut2}
-\end{figure}
+\end{center}
 We can check that the section $s_x$ when viewed over $\C_y$ does not extend
 continuously over the origin, so it doesn't give a trivialization of the whole
 bundle.
@@ -1226,17 +1229,15 @@ Indeed $c_1=n$ is the number of zeros (counted with orientation and
 multiplicity) of \emph{any} section of $\O(n)$. In other words, $c_1(L)$ is
 the \emph{intersection of the zeta section of $L$} with itself (or equivalently
 with the graph of any other section).
-\begin{figure}[htb]
-    \centering
+\begin{center}
     \includegraphics[scale=0.6]{chern_section}
-\end{figure}
+\end{center}
 
 \paragraph{Clutching construction on arbitrary Riemann surfaces.}
 Again line bundles are trivial bundles glued across circles / annuli.
-\begin{figure}[htb]
-    \centering
+\begin{center}
     \includegraphics[scale=0.6]{chern_clutch}
-\end{figure}
+\end{center}
 \begin{align*}
     c_1(L)
         &= \text{total winding number of transition functions} \\
@@ -1559,10 +1560,9 @@ Let $V=\C^{n+1}$ so that $\P(V)=\P^n$. Then
     $V=L\oplus V/L$. Then nearby lines in $V$ are graphs of linear maps
     $L\to V/L$. So the tangent space is $L^*\otimes V/L$.
 \end{proof}
-\begin{figure}[htb]
-    \centering
-    \includegraphics[scale=0.5]{chern_tangent}
-\end{figure}
+\begin{center}
+    \includegraphics[scale=0.4]{chern_tangent}
+\end{center}
 
 \paragraph{Chern classes of projective space.}
 Applying the Whitney sum formula to $T_{\P^n}=\underline V(1)/\O(-1)$ gives
@@ -1580,11 +1580,11 @@ integrating gives $e(\P^n)=n+1$.)
 \begin{exercise}
     ``Adjunction'': If $s\in\Gamma(E)$ is transverse to the zero section, show
     its zero locus $Z=s^{-1}(0)$ has normal bundle $N_{Z/X}=E|_Z.$
+    \begin{center}
+        \includegraphics[scale=0.5]{chern_normal}
+    \end{center}
 \end{exercise}
-\begin{figure}[htb]
-    \centering
-    \includegraphics[scale=0.5]{chern_normal}
-\end{figure}
+
 \begin{exercise}
     Hence work out the total Chern class $c(T_{X_d})$ of a degree $d$
     hypersurface $X_d\subseteq\P^n$ (the zero locus of a section of $\O(d)$).
@@ -1592,7 +1592,6 @@ integrating gives $e(\P^n)=n+1$.)
     surface''.
 \end{exercise}
 
-\paragraph{Exercises.}
 \begin{exercise}
     Compute $c_i(\End(E))$ in terms of $c_i(E)$ for $E$ a rank 2 bundle. (Hint:
     Splitting principle.) Why did you find $c_1=0=c_3=c_4$?
@@ -1665,6 +1664,8 @@ the transition functions for a line bundle $\L$.
     $\Z$-ambiguity.)
 \end{exercise}
 
+\newpage
+
 \section{Hodge Theory - Peter Jossen}
 
 \subsection*{Hodge structures}
@@ -1710,11 +1711,10 @@ the transition functions for a line bundle $\L$.
 
 \begin{proposition}
     Polarizable pure Hodge structures form a semi-simple abelian $\Q$-linear
-    category. (Semi-simple means all subobjects are summands.)
-
-    The category of semi-pure Hodge structures (direct sums of pure Hodge
-    structures of different weights) has a natural ``tensor product'', making it
-    a Tannakian category. (With a notion of dual, e.t.c.)
+    category. (Semi-simple means all subobjects are summands.) The category of
+    semi-pure Hodge structures (direct sums of pure Hodge structures of
+    different weights) has a natural ``tensor product'', making it a Tannakian
+    category. (With a notion of dual, e.t.c.)
 \end{proposition}
 
 \begin{definition}
@@ -1746,7 +1746,7 @@ the transition functions for a line bundle $\L$.
     \end{align*}
     giving a Hodge filtration $V_\C\supseteq\ker\alpha\supseteq\{0\}$. Note that
     $\ker\alpha$ is $g$-dimensional, as $\Lambda_\C\cong\C^{2g}$. So we get a
-    Hodge structure on $V$:
+    Hodge structure on $V$: % TODO
     \begin{equation*}
         V_\C = \ker\alpha \oplus \conj{\ker\alpha}.
     \end{equation*}
@@ -1771,7 +1771,7 @@ which is dual to
 \begin{equation*}
     H_*(X;\Q) \coloneq H_*^\sing(X(\C);\Q).
 \end{equation*}
-To comparewith de Rham cohomology, let $\omega$ be a $C^\infty$ differential
+To compare with de Rham cohomology, let $\omega$ be a $C^\infty$ differential
 $n$-form on $X$, satisfying $d\omega=0$. We get a $\C$-linear map
 \begin{equation*}
     H_n(X;\Q)_\C \to \C;\quad
@@ -1833,7 +1833,7 @@ resolution). Then we get a spectral sequence, the Hodge-to-de Rham spectral
 sequence
 \begin{equation*}
     E_2^{p,q} = H^p(X,\Omega^{q,\an}_X)
-        \Rightarrow H^n(X,\underline\C) = H^n(X;\C)_\C
+        \Rightarrow H^n(X,\underline\C) = H^n(X;\Q)_\C
 \end{equation*}
 which in fact degenerates on the 2nd page, so that
 \begin{equation*}
@@ -1845,7 +1845,158 @@ descriptions of the forms of type $(p,q)$.
 
 \subsection*{The cycle class map}
 
+Let $X/\C$ be a smooth projective connected variety of dimension $d$, and let
+$Y\subseteq X$ be a smooth projective connected subvariety of dimension $d-c$.
+We have the map
+\begin{equation*}
+    H^{2d-2c}(X;\Q) \to H^{2d-2c}(Y;\Q) = \Q(-d+c)
+\end{equation*}
+where $\Q(-d+c)$ is the 1-dimensional Hodge structure of weight
+$-2(-d+c)=2d-2c$. Moreover Poincar\'e duality gives a perfect pairing
+\begin{equation*}
+    H^{2d-2c}(X;\Q)\otimes H^{2c}(X;\Q) \to \Q(-d).
+\end{equation*}
+Hence the linear functional $H^{2d-2c}(X;\Q)\to\Q(-d+c)$ induced from $Y$ gives
+an element
+\begin{equation*}
+    \cl(y)\in H^{2c}(X;\Q)(c) \coloneq H^{2c}(X;\Q)\otimes\Q(c),
+\end{equation*}
+which is in fact a Hodge cycle. (Note that $H^{2c}(X;\Q)(c)$ has weight
+$2c-2c=0$.)
+
+This can be extended to a map
+\begin{equation*}
+    \cl:\CH^c(X)_\Q \to \bigl(H^{2c}(X;\Q)(c)\bigr)^\Hdg
+\end{equation*}
+where $\CH^c(X)$ is the Chow group, known as the \emph{cycle class map}. (Here
+$\CH^c(X)_\Q$ consists of ``formal $\Q$-linear combinations of smooth
+codimension $c$ subvarieties in $X$''.)
+
+\begin{conjecture}[The Hodge Conjecture]
+    This map is surjective.
+\end{conjecture}
+
+\begin{remark}
+    Certainly it is not injective, since the Chow group is large and
+    infinite-dimensional, while the Hodge cycles in $H^{2c}(X;\Q)(c)$ are a
+    small finite-dimensional space.
+\end{remark}
+
+\begin{exercise}
+    One case that is known is the case $c=1$. This is done by relating the
+    problem to the first Chern class, using the Lefschetz $(1,1)$ theorem.
+    Explore this for yourself.
+\end{exercise}
+
+\begin{theorem}[Mattuck]
+    The Hodge conjecture holds for general abelian varieties.
+\end{theorem}
+This is proved by showing the lack of existence of Hodge cycles in general,
+rather than by constructing subvarieties to represent them, so it is somewhat
+unsatisfying.
+
+\begin{remark}
+    A number field can act on an abelian variety $X$ if it is contained in the
+    ring $\End(X)\otimes\Q$.
+\end{remark}
+
+\begin{theorem}[van Geemen]
+    The Hodge conjecture holds for abelian varieties with $\Q(i)$- or
+    $\Q(\zeta_3)$-actions.
+\end{theorem}
+
+One area where the status of the Hodge conjecture is unknown is in the case of
+abelian 4-folds, due to Weil's construction of what are called \emph{Weil
+cycles}. These are concrete examples of Hodge cycles where it is unknown whether
+they can be expressed in terms of subvarieties or not.
+
+\begin{nonexample}
+    Complex tori do not satisfy the Hodge conjecture, by work of C. Voisin.
+    However they are not projective varieties.
+\end{nonexample}
+
 \subsection*{Mixed Hodge structures}
+
+\begin{definition}
+    A \emph{mixed Hodge structure} is a $\Q$-vector space $V$ with two
+    filtrations
+    \begin{equation*}
+        \{0\}\subseteq\cdots\subseteq
+            W_{-1}V\subseteq W_0V\subseteq W_1V
+            \subseteq\cdots\subseteq V,
+    \end{equation*}
+    the \emph{weight filtration}, and
+    \begin{equation*}
+        V_\C\supseteq\cdots\supseteq
+            F^{-1}V_\C\supseteq F^0V_\C\supseteq F^1V_\C
+            \supseteq\cdots\supseteq\{0\},
+    \end{equation*}
+    the \emph{Hodge filtration}, such that on each space
+    $\gr_n^WV\coloneq W_nV/W_{n-1}V$ the Hodge filtration induces a pure Hodge
+    structure of weight $n$. We say it is \emph{graded polarizable} if each pure
+    Hodge structure $\gr_n^WV$ is polarizable.
+\end{definition}
+
+\begin{theorem}[Deligne]
+    If $X$ is any complex algebraic variety, then $H^n(X;\Q)$ carries a mixed
+    Hodge structure which is functorial, and compatible with various long exact
+    sequences (Mayer--Vietoris, Gysine, sequence of a triple, excision, ...).
+    When $X$ is smooth and projective the weight filtration is trivial, and the
+    Hodge filtration gives the standard pure Hodge structure.
+\end{theorem}
+
+\begin{example}
+    Suppose $E/\C$ is an elliptic curve, and $P,Q\in E(\C)$ are distinct. The
+    map $E\setminus\{P\}\to E$ induces isomorphisms on $H^0$ and $H^1$. Now
+    consider the Mayer--Vietoris sequence:
+    \begin{equation*}
+        \begin{tikzcd}
+            &0 \ar[r] &H^0(E) \ar[r]
+            &H^0(E\setminus\{P\})\oplus H^0(E\setminus\{Q\}) \ar[r]
+            &H^0(E\setminus\{P,Q\})
+                \ar[sloped,rounded corners,dll,"\partial",to path={
+                    -| ([yshift=-.6cm,xshift=.6cm]\tikztostart.east)
+                    -- ([yshift=.6cm,xshift=-.6cm]\tikztotarget.west)
+                    \tikztonodes
+                    |- (\tikztotarget)
+                }] \\
+            & &H^1(E) \ar[r]
+            &H^1(E\setminus\{P\})\oplus H^1(E\setminus\{Q\}) \ar[r]
+            &H^1(E\setminus\{P,Q\})
+                \ar[sloped,rounded corners,dll,to path={
+                    -| ([yshift=-.6cm,xshift=.6cm]\tikztostart.east)
+                    -- ([yshift=.6cm,xshift=-.6cm]\tikztotarget.west)
+                    \tikztonodes
+                    |- (\tikztotarget)
+                }] \\
+            & &H^2(E) \ar[r] &0.
+        \end{tikzcd}
+    \end{equation*}
+    The later $H^2$ groups vanish as the varieties are not closed in projective
+    space. In degree 0 we have the split short exact sequence
+    $\Q(0)\xrightarrow\Delta\Q(0)\oplus\Q(0)\to\Q(0)$, so $\partial=0$. Letting
+    $V=H^1(E)$ we then have $V\xrightarrow\Delta V\oplus V$ in degree 1, with
+    cokernel $V$, giving a short exact sequence
+    \begin{equation*}
+        0 \to V \to H^1(E\setminus\{P,Q\}) \to H^2(E) \to 0.
+    \end{equation*}
+    Now $V=H^1(E)$ is a pure Hodge structure of weight 1, and $H^2(E)=\Q(-1)$
+    is a pure Hodge structure of weight 2, so we see that
+    $H^1(E\setminus\{P,Q\})$ is a mixed Hodge structure with weights 1 and 2.
+    This short exact sequence computes
+    $\gr^W_2H^1(E\setminus\{P,Q\})=H^2(E)=\Q(-1)$.
+\end{example}
+
+\begin{exercise}
+    Note that due to the symmetry of the Hodge structure, a smooth projective
+    complex variety $X$ must have $H^1(X;\Q)$ of even dimension.
+    \begin{itemize}
+        \item Find an example of a smooth curve $X$ with $\pi_1(X(\C))=\Z$.
+        \item Find an example of a projective curve $Y$ with $\pi_1(Y(\C))=\Z$.
+        \item Observe that $H^1(X;\Q)\not\cong H^1(Y;\Q)$ as Hodge structures
+            (i.e. they have different weights).
+    \end{itemize}
+\end{exercise}
 
 \subsection*{References}
 
