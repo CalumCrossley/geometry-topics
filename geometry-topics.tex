@@ -1674,7 +1674,7 @@ result is an integral characteristic class.
 \paragraph{Tangent bundle to projective space.}
 Let $V=\C^{n+1}$ so that $\P(V)=\P^n$. Then
 \begin{equation*}
-    T_{\P^n} = \O(-1)^*\otimes\frac{\underline V}{\O(-1)}.
+    T_{\P^n} = \O(-1)^*\otimes\underline V/\O(-1).
 \end{equation*}
 \begin{proof}[Sketch]
     A point of $\P(V)$ is a complex line $L\le V$. Pick any complement to write
@@ -1729,10 +1729,60 @@ integrating gives $e(\P^n)=n+1$.)
     surface''.
 \end{exercise}
 
+\begin{proof}[Solution]
+    Let $i:X_d\hookrightarrow\P^n$ denote the inclusion. Note that
+    $i^*T_{\P^n}=T_{X_d}\oplus N_{X_d/\P^n}$, so by the Whitney sum
+    formula
+    \begin{equation*}
+        c(T_{X_d}) = c(i^*T_{\P^n})/c(N_{X_d/\P^n}).
+    \end{equation*}
+    But from naturality of the Chern class, and the above computation of
+    $c(T_{\P^n})$, we have
+    \begin{equation*}
+        c(i^*T_{\P^n}) = i^*(1+h)^{n+1} = (1+\omega)^{n+1},
+    \end{equation*}
+    where $\omega=i^*h$. Moreover the previous exercise gives
+    $N_{X_d/\P^n}\cong i^*\O(d)$, so by naturality and the Whitney sum formula
+    \begin{equation*}
+        c(N_{X_d/\P^n})
+            = c(i^*\O(d))
+            = i^*(1+c_1(\O(1)^{\otimes d}))
+            = (1+d\cdot\omega).
+    \end{equation*}
+    Hence
+    \begin{equation*}
+        c(T_{X_d}) = (1+\omega)^{n+1}/(1+d\cdot\omega).
+    \end{equation*}
+    When $n=3$ and $d=4$ we have $\omega^3=0$, and
+    \begin{align*}
+        c(T_S)
+            &= (1+\omega)^4/(1+4\omega) \\
+            &= (1+4\omega+6\omega^2)(1-4\omega+16\omega^2) \\
+            &= 1+6\omega^2.
+    \end{align*}
+    Hence $c_1(T_S)=0$ and $e(T_S)=6\omega^2$.
+\end{proof}
+
 \begin{exercise}
     Compute $c_i(\End(E))$ in terms of $c_i(E)$ for $E$ a rank 2 bundle. (Hint:
     Splitting principle.) Why did you find $c_1=0=c_3=c_4$?
 \end{exercise}
+
+\begin{proof}[Solution]
+    First assume $E=L_1\oplus L_2$ is a sum of line bundles. Then
+    $\End(E)=\bigoplus_{i,j}L_i^*\otimes L_j$, so by the Whitney sum formula
+    \begin{align*}
+        c(\End(E))
+            &= \prod_{i,j}c(L_i^*\otimes L_j) \\
+            &= \prod_{i,j}(1 + c_1(L_j) - c_1(L_i)) \\
+            &= 1 + 2c_1(L_1)c_1(L_2) - c_1(L_1)^2 - c_1(L_2)^2 \\
+            &= 1 + 4c_2(E) - c_1(E)^2.
+    \end{align*}
+    This then holds in general by the splitting principle and the naturality of
+    the Chern class. We get that the only non-vanishing Chern class of $\End(E)$
+    is $c_2(\End(E))=4c_2(E)-c_1(E)^2$.
+\end{proof}
+
 \begin{exercise}
     ~
     \begin{enumerate}[label=(\arabic*)]
@@ -1749,6 +1799,33 @@ integrating gives $e(\P^n)=n+1$.)
             sections of $\U^*$ and see where they're linearly dependent.)
     \end{enumerate}
 \end{exercise}
+
+\begin{proof}[Solution]
+    \begin{enumerate}[label=(\arabic*)]
+        \item By the splitting principle and naturality we may assume
+            $E=L_1\oplus L_2$ is a sum of line bundles. Then
+            \begin{equation*}
+                \Sym^3(E) = \bigoplus_{k=0}^3
+                    \bigl(L_1^{\otimes k}\otimes L_2^{\otimes(3-k)}\bigr),
+            \end{equation*}
+            so by the Whitney sum formula
+            \begin{equation*}
+                c(\Sym^3(E))
+                    = \prod_{k=0}^3\bigl(1 + kc_1(L_1) + (3-k)c_1(L_2)\bigr).
+            \end{equation*}
+            Writing $\gamma_i=c_1(L_i)$, we then have
+            \begin{align*}
+                c_4(\Sym^3(E))
+                    &= 9\gamma_1\gamma_2
+                        (\gamma_1+2\gamma_2)(2\gamma_1+\gamma_2) \\
+                    &= 9\gamma_1\gamma_2
+                        \bigl(2(\gamma_1+\gamma_2)^2 + \gamma_1\gamma_2\bigr) \\
+                    &= 18c_2(E)c_1(E)^2 + 9c_2(E)^2.
+            \end{align*}
+
+        \item
+    \end{enumerate}
+\end{proof}
 
 \begin{exercise}
     Using (1,2,3) above, show that $\int_{\Gr(2,\C^4)}c_4(\Sym^3\U^*)=27$.
