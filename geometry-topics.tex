@@ -1823,7 +1823,20 @@ integrating gives $e(\P^n)=n+1$.)
                     &= 18c_2(E)c_1(E)^2 + 9c_2(E)^2.
             \end{align*}
 
-        \item
+        \item The class $c_2(\U^*)$ is Poincar\'e dual to the vanishing locus of
+            a generic section of $\U^*$. Using the inner product on $\C^4$ we
+            have a decomposition $\C^4=\U\oplus\U^*$, and then a generic section
+            of $\U^*$ is the image $\langle v,-\rangle$ of a generic section $v$
+            of $\underline\C^4$. The vanishing locus of this section is the set
+            of planes perpendicular to a continuously varying vector, which if
+            we take a constant vector gives $\Gr(2,\C^3)\subseteq\Gr(2,\C^4)$.
+
+        \item Taking two sections $\langle v_1,-\rangle$ and
+            $\langle v_2,-\rangle$ of $\U^*$, they are linearly dependent at the
+            planes whose orthogonal complements intersect the span
+            $\langle v_1,v_2\rangle$. Swapping with orthogonal complements we
+            then see that $c_1(\U^*)$ is Poincar\'e dual to the cycle given by
+            those planes intersecting $\C^2\subseteq\C^4$ in $\Gr(2,\C^4)$.
     \end{enumerate}
 \end{proof}
 
@@ -1831,12 +1844,38 @@ integrating gives $e(\P^n)=n+1$.)
     Using (1,2,3) above, show that $\int_{\Gr(2,\C^4)}c_4(\Sym^3\U^*)=27$.
 \end{exercise}
 
+\begin{proof}[Solution]
+    Note that the self-intersection of the cycle Poincar\'e dual to $c_2(\U^*)$
+    from (2) is the intersection $\Gr(2,V)\cap\Gr(2,W)=\Gr(2,V\cap W)$ for
+    generic 3-dimensional subspaces $V,W\subseteq\C^4$. Now generically
+    $\dim(V\cap W)=2$, so this is a single point. Hence $c_2(\U^*)^2$ is
+    Poincar\'e dual to the cycle represented by a point, i.e. it is the standard
+    generator $\omega\in H^4(\Gr(2,\C^4))$. Also, the self-intersection of the
+    cycle Poincar\'e dual to $c_1(\U^*)$ from (3) is represented by the planes
+    intersecting two generic copies of $\C^2$ in $\C^4$, which are the sums of
+    lines in $\C^2$ with lines in a chosen complement of $\C^2$. Intersecting
+    this with the cycle Poincar\'e dual to $c_2(\U^*)$ from (2) gives a point,
+    since a generic copy of $\C^3$ intersects both copies of $\C^2$ in a line.
+    Hence $c_2(\U^*)c_1(\U^*)^2$ is also $\omega$, and we get
+    \begin{equation*}
+        \int_{\Gr(2,\C^4)}c_4(\Sym^3\U^*)
+            = \int_{\Gr(2,\C^4)}(18\omega+9\omega)
+            = 27\int_{\Gr(2,\C^4)}\omega
+            = 27
+    \end{equation*}
+    sicne the integral of $\omega$ is the intersection number of $\Gr(2,\C^4)$
+    with a point, which is 1.
+\end{proof}
+
 \begin{exercise}
     Identify $\Gr(2,\C^4)$ with $\{\text{lines $\P^1\subseteq\P^3$}\}$. Let
     $s\in\Gamma(\O_{\P^3}(3))$ cut out a cubic surface $S\subseteq\P^3$. Show
-    $s$ defines a section of $\Sym^3\U^*\to\Gr(2,\C^4)$ cutting out the (27)
-    lines in $\P^3$ which lie in $S$.
+    that $s$ defines a section of $\Sym^3\U^*\to\Gr(2,\C^4)$ cutting out the
+    lines in $\P^3$ which lie in $S$, of which there are hence 27.
 \end{exercise}
+
+\begin{proof}[Solution]
+\end{proof}
 
 \paragraph{Segre classes.}
 We defined $c_i(E)$ as (Poincar\'e dual to) the locus where $r-i+1$ generic
