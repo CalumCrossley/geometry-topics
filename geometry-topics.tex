@@ -2171,7 +2171,7 @@ codimension $c$ subvarieties in $X$''.)
 \begin{exercise}
     One case that is known is the case $c=1$. This is done by relating the
     problem to the first Chern class, using the Lefschetz $(1,1)$ theorem.
-    Explore this for yourself.
+    Explore this for yourself. (See Voisin's book for details.)
 \end{exercise}
 
 \begin{theorem}[Mattuck]
@@ -2283,6 +2283,36 @@ they can be expressed in terms of subvarieties or not.
             (i.e. they have different weights).
     \end{itemize}
 \end{exercise}
+
+\begin{proof}[Solution]
+    \begin{itemize}
+        \item Take $X=\A^1\setminus\{0\}$, which has
+            $\pi_1(X(\C))=\pi_1(\C^\times)=\Z$.
+
+        \item Take the curve $Y:y^2=x^3+x^2$ in $\P^2$. It has a map from $\P^1$
+            given by $t\mapsto(t^2-1,t^3-t)$, which is injective except for the
+            two points $t=\pm1$ being glued together. Hence $Y(\C)$ is the
+            Riemann sphere with two points identified, which is homotopic to
+            $S^2\vee S^1$, so $\pi_1(Y(\C))=\Z$.
+
+        \item Consider the Mayer--Vietoris sequence for $\P^1=\A^1_x\cup\A^1_y$,
+            where $\A^1_x\cap\A^1_y=X$. We have
+            \begin{equation*}
+                H^1(\A^1)\oplus H^1(\A^1) \to
+                H^1(X) \to
+                H^2(\P^1) \to
+                H^2(\A^1)\oplus H^2(\A^1),
+            \end{equation*}
+            and $H^1(\A^1)=0=H^2(\A^1)$, so $H^1(X)=H^2(\P^1)=\Q(-1)$. Now
+            consider the Mayer--Vietoris sequence for
+            $\A^1=X\cup X'$, where $X\cap X'=\A^1\setminus\{0,1\}$. We get
+            \begin{equation*}
+                0 \to \Q(-1)\oplus\Q(-1) \to H^1(\A^1\setminus\{0,1\}) \to 0
+            \end{equation*}
+            since $H^1(\A^1)=0=H^2(\A^1)$, so
+            $H^1(\A^1\setminus\{0,1\})=\Q(-1)^{\oplus 2}$. % TODO
+    \end{itemize}
+\end{proof}
 
 \subsection*{References}
 
