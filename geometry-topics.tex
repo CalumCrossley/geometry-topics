@@ -2289,11 +2289,13 @@ they can be expressed in terms of subvarieties or not.
         \item Take $X=\A^1\setminus\{0\}$, which has
             $\pi_1(X(\C))=\pi_1(\C^\times)=\Z$.
 
-        \item Take the curve $Y:y^2=x^3+x^2$ in $\P^2$. It has a map from $\P^1$
-            given by $t\mapsto(t^2-1,t^3-t)$, which is injective except for the
-            two points $t=\pm1$ being glued together. Hence $Y(\C)$ is the
-            Riemann sphere with two points identified, which is homotopic to
-            $S^2\vee S^1$, so $\pi_1(Y(\C))=\Z$.
+        % irreducible example? y^2 = x^2(1+y^2)?
+
+        \item Take the curve $Y:x(y-x^2)=0$ in $\P^2$. This is the union of two
+            copies of $\P^1$; the component $x=0$ and the component $y=x^2$,
+            which intersect at the origin and at the point at infinity. Hence
+            $Y(\C)$ is homotopy equivalent to $S^1\vee S^2\vee S^2$, and
+            $\pi_1(Y(\C))=\Z$.
 
         \item Consider the Mayer--Vietoris sequence for $\P^1=\A^1_x\cup\A^1_y$,
             where $\A^1_x\cap\A^1_y=X$. We have
@@ -2303,14 +2305,32 @@ they can be expressed in terms of subvarieties or not.
                 H^2(\P^1) \to
                 H^2(\A^1)\oplus H^2(\A^1),
             \end{equation*}
-            and $H^1(\A^1)=0=H^2(\A^1)$, so $H^1(X)=H^2(\P^1)=\Q(-1)$. Now
-            consider the Mayer--Vietoris sequence for
-            $\A^1=X\cup X'$, where $X\cap X'=\A^1\setminus\{0,1\}$. We get
+            and $H^1(\A^1)=0=H^2(\A^1)$, so $H^1(X)=H^2(\P^1)=\Q(-1)$. For $Y$
+            consider the open subsets $U=Y\setminus\{0\}$ and
+            $V=Y\setminus\{\infty\}$. Then $U$ and $V$ are contractible, and
+            $U\cap V$ is a disjoint union of two copies of $X$. Taking the
+            Mayer--Vietoris sequence we get
             \begin{equation*}
-                0 \to \Q(-1)\oplus\Q(-1) \to H^1(\A^1\setminus\{0,1\}) \to 0
+                \begin{tikzcd}
+                    &0 \ar[r] &H^0(Y) \ar[r]
+                    &H^0(U)\oplus H^0(V) \ar[r]
+                    &H^0(U\cap V)
+                        \ar[sloped,rounded corners,dll,"\partial",to path={
+                            -| ([yshift=-.6cm,xshift=.6cm]\tikztostart.east)
+                            -- ([yshift=.6cm,xshift=-.6cm]\tikztotarget.west)
+                            \tikztonodes
+                            |- (\tikztotarget)
+                        }] \\
+                    & &H^1(Y) \ar[r]
+                    &H^1(U)\oplus H^1(V)=0,
+                \end{tikzcd}
             \end{equation*}
-            since $H^1(\A^1)=0=H^2(\A^1)$, so
-            $H^1(\A^1\setminus\{0,1\})=\Q(-1)^{\oplus 2}$. % TODO
+            which in degree 0 is given by
+            \begin{equation*}
+                0\to\Q(0)\xrightarrow\Delta\Q(0)\oplus\Q(0)\to\Q(0)\oplus\Q(0).
+            \end{equation*}
+            The cokernel must have weight 0, so $H^1(Y)=\Q(0)$. Hence
+            $H^1(X)\not\cong H^1(Y)$ as Hodge structures.
     \end{itemize}
 \end{proof}
 
