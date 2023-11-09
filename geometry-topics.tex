@@ -2427,6 +2427,25 @@ case of a point $Z=0\hookrightarrow Y\subseteq\A^n$ in an affine variety.
     tautological line bundle on $W$.
 \end{exercise}
 
+\begin{proof}[Solution]
+    We have
+    \begin{equation*}
+        \pi^{-1}(Y\setminus\{0\})
+        = \left\{\bigl((x,y,z),[X:Y:Z]\bigr)
+            :xY=yX,xZ=zX,yZ=zY,x^2+y^2=z^2,(x,y,z)\ne(0,0,0)\right\},
+    \end{equation*}
+    and since $(x,y,z)\ne(0,0,0)$ these equations imply $[X:Y:Z]=[x:y:z]$ and
+    hence $X^2+Y^2=Z^2$. On the other hand
+    \begin{equation*}
+        \O_W(-1) = \left\{\bigl([X:Y:Z],(x,y,z)\bigr)
+            :X^2+Y^2+Z^2=0,xY=yX,xZ=zX,yZ=zY\right\},
+    \end{equation*}
+    so we see that
+    $\pi^{-1}(Y\setminus\{0\})=\O_W(-1)\setminus\{\text{zero section}\}$. Hence
+    $\Bl_0Y=\closure{\O_W(-1)\setminus\{\text{zero section}\}}=\O_W(-1)$, since
+    the complement of the zero section is dense.
+\end{proof}
+
 \subsection*{Representation theoretic example}
 
 Consider the ``nilpotent cone''
@@ -2444,7 +2463,7 @@ we get from $(l,\varphi)$ to an element of $\calN_{\SL_2}$ by the following
 square:
 \begin{equation*}
     \begin{tikzcd}
-        &V \ar[d,two heads] \ar[r,dash,"\in\calN_{\SL_2}"] &V \\
+        &V \ar[d,two heads] \ar[r,dashed,"\in\calN_{\SL_2}"] &V \\
         &V/l \ar[r,"\varphi"] &l. \ar[u,hook]
     \end{tikzcd}
 \end{equation*}
@@ -2470,6 +2489,26 @@ variety becomes non-singular after finitely many blow-ups:
     $(0,0)$. Blow up the singular point $(0,0)$ until you get a smooth curve.
     Now do the same for $f(x,y)=x^{24}-y^{17}$.
 \end{exercise}
+
+\begin{proof}[Solution]
+    Taking coordinates $(x,y,[X:Y])\in\A^2\times\P^1$ we have
+    \begin{align*}
+        \Bl_{(0,0)}V(f) \cap \{X\ne0\}
+            &= \closure{\left\{(x,y,[1:t]):y^2=x^3,y=xt,(x,y)\ne(0,0)\right\}} \\
+            &= \closure{\left\{(x,y,[1:t]):x=t^2,y=xt,t\ne0\right\}} \\
+            &= \left\{(x,y,[1:t]):x=t^2,y=xt\right\} \cong \A^1_t,
+    \end{align*}
+    while
+    \begin{align*}
+        \Bl_{(0,0)}V(f) \cap \{Y\ne0\}
+            &= \closure{\left\{(x,y,[s:1]):y^2=x^3,x=ys,(x,y)\ne(0,0)\right\}} \\
+            &= \closure{\left\{(x,y,[s:1]):ys^3=1,x=ys\right\}} \\
+            &= \left\{(x,y,[s:1]):ys^3=1,x=ys\right\}
+    \end{align*}
+    has no points with $s=0$, so this is the whole blow up;
+    $\Bl_{(0,0)}V(f)\cong\A^1_t$ via $t\mapsto(t^2,t^3)$. Now $\A^1$ is smooth,
+    so we are done. % TODO: x^{24} - y^{17}
+\end{proof}
 
 \paragraph{2. Birational geometry} Two varieties $Y_1,Y_2$ are
 \emph{birational}, which we write $Y_1\sim Y_2$, if there are
@@ -2514,6 +2553,8 @@ $Y\sim\A^N\sim\P^N$ for some $N$.
     dimension $n$. The special case $n=2$ gives a roof from $\P^1\times\P^1$ to
     $\P^2$.
 \end{exercise}
+
+% TODO
 
 \begin{corollary}
     Birational invariants are the same thing as blow-up invariants.
