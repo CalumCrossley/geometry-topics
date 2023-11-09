@@ -31,6 +31,8 @@
 \newtheorem*{remark}{Remark}
 \newtheorem*{exercise}{Exercise}
 
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Proj}{Proj}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Hol}{Hol}
 \DeclareMathOperator{\End}{End}
@@ -47,10 +49,13 @@
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Vect}{Vect}
+\DeclareMathOperator{\Bl}{Bl}
 
 \newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\closure}[1]{\overline{#1}}
 
 \newcommand{\id}{\mathrm{id}}
+\newcommand{\inc}{\mathrm{inc}}
 \newcommand{\cl}{\mathrm{cl}}
 \newcommand{\an}{\mathrm{an}}
 \newcommand{\sing}{\mathrm{sing}}
@@ -60,6 +65,8 @@
 \newcommand{\Hdg}{\mathrm{Hdg}}
 \newcommand{\FS}{\mathrm{FS}}
 
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\calN}{\mathcal{N}}
 \renewcommand{\L}{\mathcal{L}}
 \renewcommand{\O}{\mathcal{O}}
 \newcommand{\E}{\mathcal{E}}
@@ -2340,5 +2347,271 @@ they can be expressed in terms of subvarieties or not.
     \item C. Voisin ``Hodge Theory and Complex Algebraic Geometry''
     \item Ch. Berkenhake, H. Lange ``Complex Abelian Varieties''
 \end{itemize}
+
+\section{Blowing Up - Dario Beraldo}
+
+We will be looking at blowing up in algebraic geometry, considering
+varieties over $\C$ and the Zariski topology.
+
+\subsection*{Setup}
+
+Take $Z\hookrightarrow Y$ a closed embedding of algebraic varieties over $\C$.
+The ``blowup of $Y$ along $Z$'' is a variety $\Bl_ZY$ with a map to $Y$. (For
+now we will assume $Y$ and $Z$ are non-singular.)
+
+It is obtained by replacing $Z$ with the projectivization of the normal bundle
+$\P(N_{Z/Y})$. (The normal bundle $N_{Z/Y}$ associated to $Z\hookrightarrow Y$
+is the quotient of tangent bundles $T_Y|_Z/T_Z$.)
+\begin{equation*}
+    \P(N_{Z/Y})
+        = \{(z,l):\text{$z\in SZ$, and $l$ is a line through $z$ normal to $Z$
+            in $Y$}\}.
+\end{equation*}
+The blow up is an isomorphism over $Y\setminus Z$, and a curve crossing $Z$ at a
+point lifts to a curve going through a point of the fibre $\P(N_{Z/Y})$ which
+corresponds to the tangent line of the curve as it crosses $Z$. The bit
+$\P(N_{Z/Y})$ lying over $Z$ is known as the ``exceptional divisor''.
+\begin{equation*}
+    \begin{tikzcd}
+        &\P(N_{Z/Y}) \ar[r,hook] \ar[d,"{(z,l)\mapsto z}"]
+        &\Bl_ZY \ar[d]
+        &\Bl_ZY\setminus\P(N_{Z/Y}) \ar[l,hook] \ar[d,"\cong"] \\
+        &Z \ar[r,hook] &Y &Y\setminus Z \ar[l,hook].
+    \end{tikzcd}
+\end{equation*}
+
+\begin{example}
+    The blow up of $0\in V$ for a vector space $V\cong\A^n$: we take
+    $Z=\{0\}$, $Y=V$. Then $N_{0/V}=T_0V/0\cong V$, and we have
+    \begin{equation*}
+        \begin{tikzcd}
+            &\P(V) \ar[d] \ar[r,hook]
+            &\Bl_0V \ar[d]
+            &\Bl_0V\setminus\P(V) \ar[l,hook] \ar[d,"\cong"] \\
+            &0 \ar[r,hook] &V &V\setminus\{0\}. \ar[l,hook]
+        \end{tikzcd}
+    \end{equation*}
+    Hence $\Bl_0V=(V\times\P(V))^\inc
+        \coloneq \{(v,l)\in V\times\P(V):\text{$v$ lies on the line $l$}\}$.
+\end{example}
+We have two projections: the structure map of the blow up $\Bl_0V\to V$, and the
+map $\Bl_0V\to\P(V)$ which is the tautological line bundle $\O_{\P(V)}(-1)$.
+
+For singular subvarieties, we make the following temporary definition for the
+case of a point $Z=0\hookrightarrow Y\subseteq\A^n$ in an affine variety.
+\begin{definition}
+    Taking the maps
+    \begin{equation*}
+        \begin{tikzcd}
+            &\Bl_0\A^N \ar[r,"\pi"] &\A^N \\
+            &\pi^{-1}(Y\setminus\{0\}) \ar[u,hook] \ar[r]
+            &Y\setminus\{0\}, \ar[u,hook]
+        \end{tikzcd}
+    \end{equation*}
+    we define
+    \begin{equation*}
+        \Bl_0(Y) \coloneq \closure{\pi^{-1}(Y\setminus\{0\})};
+    \end{equation*}
+    the closure in the Zariski topology of the preimage of
+    $\pi^{-1}(Y\setminus\{0\})$.
+\end{definition}
+
+\begin{center}
+    \includegraphics[scale=0.5]{blowup_nodal}
+\end{center}
+
+\begin{exercise}
+    Consider the cone $Y=V(x^2+y^2-z^2)\subseteq\A^3$, and the point
+    $0\hookrightarrow Y$. This is a singular point of $Y$, so we blow it up.
+    Show that if $W=V(X^2+Y^2+Z^2)\subseteq\P^2$ then $\Bl_0Y=\O_W(-1)$ is the
+    tautological line bundle on $W$.
+\end{exercise}
+
+\subsection*{Representation theoretic example}
+
+Consider the ``nilpotent cone''
+\begin{equation*}
+    \calN_{\SL_2} = \left\{\begin{pmatrix}
+            a & b \\ c & -a
+    \end{pmatrix}:a^2+bc=0\right\} \subseteq\A^3.
+\end{equation*}
+The blowup $\Bl_0(\calN_{\SL_2})\xrightarrow\pi\calN_{\SL_2}$ is given by the
+cotangent bundle
+\begin{equation*}
+    T^*(\P^1) = \{(l,\varphi):\text{$l\in\P^1$, $\varphi\in\Hom(\C^2/l,l)$}\};
+\end{equation*}
+we get from $(l,\varphi)$ to an element of $\calN_{\SL_2}$ by the following
+square:
+\begin{equation*}
+    \begin{tikzcd}
+        &V \ar[d,two heads] \ar[r,dash,"\in\calN_{\SL_2}"] &V \\
+        &V/l \ar[r,"\varphi"] &l. \ar[u,hook]
+    \end{tikzcd}
+\end{equation*}
+This is the first instance of the ``Springer resolution''. For a group
+$G=\GL_n,\SO_n,\Sp_{2n},\ldots$ we get for the Lie algebra $\g$ a ``nilpotent
+cone'' $\calN_{\g}$ and a map
+\begin{equation*}
+    \calN_\g \leftarrow T^*(G/B)
+\end{equation*}
+where $B$ is a Borel subgroup, and then $G/B$ is some flag variety like $\P^1$.
+
+\subsection*{What are blow-ups good for?}
+
+\paragraph{1. Resolution of singularities (Hironaka)} Principle: any singular
+variety becomes non-singular after finitely many blow-ups:
+\begin{equation*}
+    \text{non-singular: $\Bl_{Z_n}Y_n$} \to \cdots
+        \to \Bl_{Z_1}Y_1 \to Y_1 = \Bl_{Z_0}Y_0 \to Y_0 = Y.
+\end{equation*}
+
+\begin{exercise}[Must do]
+    Take $V(f)\subseteq\A^2$, where $f(x,y)=x^3-y^2$ with a singularity at
+    $(0,0)$. Blow up the singular point $(0,0)$ until you get a smooth curve.
+    Now do the same for $f(x,y)=x^{24}-y^{17}$.
+\end{exercise}
+
+\paragraph{2. Birational geometry} Two varieties $Y_1,Y_2$ are
+\emph{birational}, which we write $Y_1\sim Y_2$, if there are
+non-empty open sets $U_1\subseteq Y_1$, $U_2\subseteq Y_2$ which are isomorphic,
+i.e. $U_1\cong U_2$. We say $Y$ is \emph{rational} if
+$Y\sim\A^N\sim\P^N$ for some $N$.
+
+\begin{example}
+    \begin{itemize}
+        \item Take the quadric
+            \begin{equation*}
+                Q = \{[x_0:\cdots:x_4]:x_0x_4+x_1x_3+x_2^2=0\} \subseteq \P^4,
+            \end{equation*}
+            which has dimension 3. This is rational:
+            \begin{equation*}
+                Q \supseteq \{x_0\ne0\}
+                = \{[1:x_1:x_2:x_3:-x_2^2-x_1x_3]\} \cong \A^3.
+            \end{equation*}
+
+        \item A smooth curve $\Sigma_g$ of genus $g$ is rational iff $g=0$.
+
+        \item $\Bl_ZY\sim Y$ via the open set $Y\setminus Z$.
+    \end{itemize}
+\end{example}
+
+\begin{theorem}[Weak Factorization,Abramovich--Karu--Matsuki--Wlodariczyk]
+    Two smooth projecdtive varieties $X,Y$ are birational iff there exists a
+    chain of roofs
+    \begin{equation*}
+        \begin{tikzcd}
+            & &W_{01} \ar[dl] \ar[dr] & &W_{12} \ar[dl] \ar[dr] &
+                &\cdots \ar[dl] \ar[dr] & \\
+            &X=X_0 & &X_1 & &X_2 & &X_n=Y
+        \end{tikzcd}
+    \end{equation*}
+    with each map a blow-up along a smooth subvariety.
+\end{theorem}
+
+\begin{exercise}
+    Find such a chain (one roof) from the quadric $Q$ above to $\P^3$. (Hint:
+    blow up a point in $Q$.) Now replace the dimension 3 with an arbitrary
+    dimension $n$. The special case $n=2$ gives a roof from $\P^1\times\P^1$ to
+    $\P^2$.
+\end{exercise}
+
+\begin{corollary}
+    Birational invariants are the same thing as blow-up invariants.
+\end{corollary}
+
+\begin{example}
+    For example, the Hodge numbers $h^{p,0}(X)$ are blow-up invariants and hence
+    birational invariants.
+\end{example}
+
+\subsection*{Algebraic definition}
+
+We will know look at two perspectives on a proper definition of the blow-up:
+\begin{itemize}
+    \item Algebra: ``What else can it be?''
+    \item Equations in affine charts: ``How can I compute in practice?''
+\end{itemize}
+
+For the first, suppose the embedding $Z\hookrightarrow Y$ is locally given by
+$\Spec A/I\to\Spec A$. We want a map $\Bl_ZY\to Y$, which should be projective,
+so given by
+\begin{equation*}
+    \Proj(R) = \Bl_ZY \to Y = \Spec A
+\end{equation*}
+for some graded $A$-algebra $R$ constructed ``naturally'' from $I$. We have a
+summand of $A$ in $R$, and we add a summand of $I$, which forces by products a
+summand of $I^2$, and so on, giving the \emph{Rees algebra}:
+\begin{equation*}
+    R = A\oplus I\oplus I^2\oplus I^3\oplus\cdots = \Sym^\bullet(I);
+\end{equation*}
+the product is defined via $I^p\cdot I^q\hookrightarrow I^{p+q}$. We may then
+define
+\begin{equation*}
+    \Bl_ZY = \Proj(R) = \Proj(\bigoplus_{m\ge0}I^m) = \Proj(\Sym^\bullet(I)),
+\end{equation*}
+and check that $\Bl_ZY|_Z=\P(N_{Z/Y})$.
+
+To get equations in affine charts, choose finitely many generators
+$I=(f_1,\ldots,f_k)$. These give a surjection
+\begin{equation*}
+    A^{\oplus k}\twoheadrightarrow I,
+\end{equation*}
+and applying the functors $\Sym^\bullet$ and $\Proj$ we get a closed embedding
+\begin{equation*}
+    \Proj(\Sym^\bullet(I)) \hookrightarrow \Proj(\Sym^\bullet(A^{\oplus k}))
+        = \P^{k-1}_A = Y\times\P^{k-1}.
+\end{equation*}
+This restricts to an embedding
+\begin{equation*}
+    \Bl_ZY
+        \hookrightarrow (Y\times\P^{k-1})^\inc
+        = \left\{\bigl(y,[T_1:\cdots:T_k]\bigr)\in Y\times\P^{k-1}
+                :\rank\begin{pmatrix}
+                    T_1 & \cdots & T_k \\ f_1(y) & \cdots & f_k(y)
+                \end{pmatrix}<2\right\}.
+\end{equation*}
+What is this in affine charts? We have
+\begin{equation*}
+    \Bl_ZY \cap \{T_1\ne0\}
+        = \Spec\biggl(A[t_2,\ldots,t_k]
+            /(f_2-f_1t_2,\ldots,f_k-f_1t_k)
+            /(\text{$f_1$-torsion})\biggr),
+\end{equation*}
+where $f_i=f_1t_i$ is the incidence relation, and $f_1$-torsion refers to the
+values annhilated by powers of $f_1$, which give the extra equations cutting out
+$\Bl_ZY$. (Note that the ideal $I=(f_1,\ldots,f_k)$ is made to be principal,
+generated by $f_1$, in this chart.)
+
+\begin{example}
+    If $Y=\{(x,y):y^2=x\}$ and $I=(x,y)$, we get
+    $\Bl_0Y\subseteq(Y\times\P^1)^\inc$ with coordinates
+    $\bigl((x,y),[U:V]\bigr)$ satisfying $y^2=x^3$, and the incidence relation
+    $xV=yU$. In the chart $U\ne0$ we have variables $x,y,t=V/U$ with relations
+    $y-tx$, $t^2x^2-x^3=x^2(t^2-x)$, and the $x^2$ factor is dropped when we mod
+    out by $x$-torsion, giving
+    \begin{equation*}
+        \Bl_0Y\cap\{U\ne0\} = \{(x,y,t):y=tx,x=t^2\} \cong \A^1_t.
+    \end{equation*}
+    In fact this is the whole blow-up; the point where $U=0$ is not in $\Bl_0Y$.
+    (This can be checked in the other chart, or by observing that the curve has
+    no vertical tangent.) This blow-up hence gives us the normalization map
+    $\A^1_t\to Y$, $t\mapsto(t^2,t^3)$.
+\end{example}
+
+\begin{example}
+    Blowing up $\P^2$ at 9 (generic) points: Consider generic homogeneous cubics
+    $F,G$ in $x,y,z$, with vanishing locus $V(F,G)=\{\text{9 points}\}$. We
+    claim the following description of the blow-up:
+    \begin{equation*}
+        \begin{tikzcd}
+            &\bigl([x:y:z],[a:b]\bigr)\ni\P^2\times\P^1 \ar[d]
+            &V(aF+bG)=\Bl_{V(F,G)}\P^9 \ar[l,hook] \\
+            &\P^2.
+        \end{tikzcd}
+    \end{equation*}
+    Over points with $F=G=0$ the fibre is the whole copy of $\P^1$, and away
+    from them $(F,G)\ne(0,0)$ implies $[a:b]$ is uniquely determined by
+    $aF+bG=0$.
+\end{example}
 
 \end{document}
