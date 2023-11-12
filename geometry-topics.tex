@@ -44,6 +44,7 @@
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\lk}{lk}
 \DeclareMathOperator{\gr}{gr}
 \DeclareMathOperator{\rad}{rad}
 \DeclareMathOperator{\sgn}{sgn}
@@ -2776,7 +2777,7 @@ This gives the 3-manifolds whose universal cover is $S^3$.
     homology sphere, which was discovered by Poincar\'e. If we add a cone on
     $\partial X_\Gamma$ to $X_\Gamma$ we get a simply connected 4-dimensional
     space $Z$ which is not a manifold but is a ``homology manifold''. The
-    intersection form of $Z$ is the $E_8$ quadratic form. Now Rohin's Theorem,
+    intersection form of $Z$ is the $E_8$ quadratic form. Now Rohlin's Theorem,
     from the 1950's, asserts that a simply-connected smooth closed 4-manifold
     with ``even'' intersection form has signature divisible by 16. The $E_8$
     is even with signature -8, so there is no simply-connected smooth closed
@@ -2812,6 +2813,343 @@ $H^4(Y)=\Z/d\Z$.
 
 \subsection{Cobordism, Surgery and the Whitney Trick}
 
+\subsubsection*{Cobordism}
+
+\begin{definition}
+    \emph{Oriented cobordism} is an equivalence relation on closed oriented
+    $n$-manifolds. Manifolds $M_0^n,M_1^n$ are \emph{cobordant}, written
+    $M_0\sim M_1$, if there is an oriented $(n+1)$-manifold $W$ with
+    \begin{equation*}
+        \partial W = \overline{M_0}\sqcup M_1, % TODO: diagram
+    \end{equation*}
+    where $\overline{M_0}$ denotes $M_0$ with reversed orientation. The
+    cobordism equivalence classes form an abelian group with the operation of
+    disjoint union, written $\Omega_n$.
+\end{definition}
+
+In dimension $4k$ (other dimensions only have finite cobordism groups), we have
+the following cobordism invariants:
+\begin{itemize}
+    \item The signature $\sigma$.
+    \item The \emph{Pontryagin numbers}, which are defined by evaluating certain
+        polynomials in the Pontryagin classes on the fundamental class
+        $[M]\in H_{4k}(M)$. When $k=1$ we just have the Pontryagin number
+        $p_1=\langle p_1,[M]\rangle$. For $k=2$ we have
+        \begin{equation*}
+            p_1^2 = \langle p_1(M)^2,[M]\rangle \quad \text{and} \quad
+            p_2 = \langle p_2(M),[M]\rangle,
+        \end{equation*}
+        for $k=3$ we have $p_1^3,p_1p_2,p_3$, and so on.
+\end{itemize}
+
+\begin{theorem}[The Hirzebruch Signature Theorem]
+    The signature $\sigma(M)$ can be expressed as a rational polynomial in the
+    Pontryagin numbers.
+\end{theorem}
+
+\begin{remark}
+    The fact that the coefficients are rational while the signature is an
+    integer has important consequences, in a similar vein to Rohlin's Theorem.
+\end{remark}
+
+\begin{example}
+    In dimensions 4 and 8 we have $\sigma(M^4)=p_1/3$ and
+    $\sigma(M^8)=(7/45)p_2-(1/45)p_1^2$. In general the Bernoulli numbers are
+    involved in the coefficients.
+\end{example}
+
+\subsubsection*{Surgery}
+
+In fact any cobordism is a composite of particular elementary cobordisms called
+``surgeries''.
+
+\begin{definition}
+    If $\Sigma\subseteq M^n$ is an embedded $p$-sphere with given trivialization
+    of its normal bundle, we define the \emph{surgery along $\Sigma$} as
+    follows. The trivialization gives a tubular neighbourhood
+    $N\cong S^p\times B^{n-p}$, with
+    \begin{equation*}
+        \partial N
+            \cong S^p\times S^{n-p-1}
+            \cong \partial(B^{p+1}\times S^{n-p-1}).
+    \end{equation*}
+    We then remove $N$, and glue $N'=B^{p+1}\times S^{n-p-1}$ in its place along
+    $\partial N\cong\partial N'$, obtaining a new manifold $M'$ which is the
+    result of surgery.
+\end{definition}
+
+\begin{example}
+    When $p=0$ we get the self-connected sum. The connected sum is hence surgery
+    on the disjoint union.
+\end{example}
+
+\begin{remark}
+    There is a standard cobordism from $M$ to $M'$ given by attaching a
+    ``handle'' to $M\times[0,1]$. The handle $H=B^{p+1}\times B^{n-p}$ is an
+    $(n+1)$-dimensional $(p+1)$-handle, with
+    \begin{equation*}
+        \partial H
+            = (S^p\times B^{n-p})\cup(B^{p+1}\times S^{n-p-1})
+            = N\cup N',
+    \end{equation*}
+    with the intersection of $N$ and $N'$ in $\partial H$ given by
+    $\partial N\cong\partial N'$. Hence we can glue $H$ to $M\times\{1\}$ along
+    $N$, which results in applying the above surgery to $M\times\{1\}$ in the
+    boundary of $M\times[0,1]$. This is called an \emph{elementary cobordism}.
+    (Note that technically we need to smooth the corners in this gluing in order
+    to preserve the smooth structure. This can be done in a standard way.)
+    % TODO: diagram
+\end{remark}
+
+\subsubsection*{Morse Theory}
+
+A fundamental motivation for the notion of cobordism comes from considering
+families of equations. For example, suppose that $F:X\to T$ is a smooth map, and
+for $t\in T$ let $Z_t\subseteq X$ be the set of solutions to the equation
+$F(x)=t$. For generic $t$ the solution set $Z_t$ is a manifold of dimension
+$n=\dim(X)-\dim(T)$. For different generic values $t_0,t_1$ the manifolds
+$Z_{t_0}$, $Z_{t_1}$ may not be diffeomorphic, but are cobordant. To see this,
+join $t_0,t_1$ by a path $\gamma:[0,1]\to T$ and let $W\subseteq X\times[0,1]$
+be the set
+\begin{equation*}
+    W = \{(x,s):F(x)=\gamma(s)\}.
+\end{equation*}
+For a generic path $\gamma$ this will be a manifold of dimension $n+1$ giving a
+cobordism from $Z_{t_0}$ to $Z_{t_1}$. A similar discussion applies to other
+families of equations, such as zero sets of sections of vector bundles. The
+ideas can also be extended to certain infinite dimensional situations, for
+example moduli spaces of holomorphic curves.
+
+\begin{example}
+    Consider hypersurfaces $X\subseteq\RP^5$ defined by homogeneous polynomials
+    of degree 4. The polynomial $x_0^4-(x_1^4+x_2^4+x_3^4+x_4^4)$ gives a
+    4-sphere. For different polynomials we get many other 4-manifolds, but we
+    can never get $\CP^2$ since it is not cobordant to 0.
+\end{example}
+
+To generate cobordisms by elementary cobordisms, we look at the special values
+of $t\in T$ where $Z_t$ changes diffeomorphism type; where it fails to be a
+manifold.
+
+\begin{example}
+    Take $\R^{n+1}$ with coordinates $x_1,\ldots,x_q,y_1,\ldots,y_{p+1}$ where
+    $p+q=n$. Let $f:\R^{n+1}\to\R$ be the quadratic form $|x|^2-|y|^2$. Then
+    $f^{-1}(-1)$ contains a sphere $\Sigma=S^p$, and $f^{-1}(1)$ contains a
+    sphere $S^{q-1}$. The manifold $f^{-1}(1)$ is obtained from $f^{-1}(-1)$ by
+    surgery along $\Sigma$, and $f^{-1}[-1,1]$ is diffeomorphic to the standard
+    elementary cobordism realizing this surgery.
+    % TODO: diagram
+\end{example}
+
+In general, for a cobordism $W$ from $M_0$ to $M_1$ we consider a particularly
+nice type of function $F:W\to[0,1]$ known as a \emph{Morse function}, with
+$F^{-1}(1)=M_1$, $F^{-1}(0)=M_0$. There are finitely many critical values of $F$
+in $[0,1]$, and the manifolds $M_t=F^{-1}(t)$ change by a surgery as $t$ crosses
+each critical value, giving a factorization of $W$ into elementary cobordisms.
+The number $p+1$ in the surgery is the \emph{index} of the critical point, which
+can be read off from the Hessian of $F$. (In fact in a neighbourhood of a
+critical point, the Morse function can be written in the form $|x|^2-|y|^2$ as
+in the previous example using suitable coordinates.)
+% TODO: diagram
+
+\begin{example}
+    Let $K\subseteq S^3$ be an embedded circle, i.e. a knot. The boundary of a
+    tubular neighbourhood $N$ of $K$ is a torus $T$. There is a well-defined
+    meridian $\mu\in H_1(T)$ which bounds a disc in $N$. To specify surgery we
+    need a class $\gamma\in H_1(T)$ with $\gamma\cdot\mu=1$, which will then
+    bound a disc in the solid torus $N'$ which we attach. There is a unique
+    longitudinal class $\lambda\in H_1(T)$ with $\lambda\cdot\mu=1$ such that
+    $\lambda$ maps to 0 in $H_1(S^3\setminus N)$, so we can take
+    $\gamma=\lambda+c\mu$ for any integer \emph{surgery coefficient} $c$. Now
+    let $L\subseteq S^3$ be a link with components $K_i$. Perform surgery on
+    each component with coefficients $c_i$ to get a 3-manifold $Y$ which is the
+    boundary of a 4-manifold $X$. Then $H_2(X)$ has a basis $\{\sigma_i\}$ in 
+    which the intersection form has diagonal entries the $c_i$'s and
+    off-diagonal entries the linking numbers $\lk(K_i,K_j)$. The cobordism group
+    $\Omega_3$ vanishes, which implies that all closed 3-manifolds are obtained
+    by this construction. We get another description of the ADE manifolds
+    $X_\Gamma$ by taking a link with unknotted components whose linking matrix
+    corresponds to the graph $\Gamma$ with coefficients $-2$.
+\end{example}
+
+\subsubsection*{The Whitney Trick}
+
+Suppose $M^n$ is simply-connected, and $P^p$, $Q^q$ are transverse
+path-connected submanifolds of $M$, with $p+q=n$. They then have finitely many
+signed intersection points. Suppose $a,b\in P\cap Q$ have opposite sign. Can we
+``cancel'' them? The Whitney trick says: yes, if $p,q\ge3$. (In fact this can be
+made sharper, by following carefully the actual requirements of the proof.)
+Specifically, we can find $P'$ isotopic to $P$ with
+$P'\cap Q=(P\cap Q)\setminus\{a,b\}$. For example, if the algebraic intersection
+$P\cdot Q=0$ then we can isotope $P$ to be disjoint from $Q$.
+
+\begin{proof}[Sketch of proof]
+    By path-connectedness, we have paths from $a$ to $b$ in $P$ and $Q$, giving
+    a loop $\gamma$ in $P\cup Q$. As $M$ is simply-connected we have a
+    null-homotopy $D^2\hookrightarrow M$, $\partial D^2=\gamma$, and for
+    dimension reasons we can perturb this to an embedding disjoint from $P,Q$
+    away from $\gamma$. Since the signs of $a$ and $b$ are opposite, we can
+    trivialize the normal bundle of $\gamma$ suitably to get a neighbourhood of
+    $D$ in $M$ diffeomorphic to a standard model of the situation in Euclidean
+    space:
+    % TODO: diagram
+    In this model we then write down an explicit isotopy removing the
+    intersections as follows, which can be transported along the diffeomorphism
+    back to $M$.
+    % TODO: diagram
+\end{proof}
+
+\begin{remark}
+    This result is the basic fact that distinguishes high- and low-dimensional
+    manifold topology. In dimension 4 with $p=q=2$ the argument fails since the
+    disc is no longer generically disjoint from $P$ and $Q$, and no longer
+    generically embedded (it may have self-intersection points). The details
+    that need checking about frames along $\gamma$ for the trivialization also
+    fail. In fact the conclusion is false.
+\end{remark}
+
+\begin{remark}
+    In dimension 3 there are famous results such as Dehn's Lemma and The Loop
+    Theorem in a similar spirit, which are proved in an entirely different way.
+\end{remark}
+
+\subsubsection*{The $h$-Cobordism Theorem}
+
+Using the Whitney trick, we obtain the following fundamental result:
+
+\begin{theorem}[The $h$-Cobordism Theorem]
+    Suppose $M_0^n,M_1^n$ are simply-connected manifolds of dimension $n\ge5$
+    cobordant via a simply-connected cobordism $W^{n+1}$. Suppose that the
+    inclusions $M_i\hookrightarrow W$ induce isomorphisms on homology. Then
+    $M_0,M_1$ are diffeomorphic and $W\cong M_0\times[0,1]$.
+\end{theorem}
+
+\begin{proof}[Sketch of proof]
+    Choose a Morse function $f_0$ on $W$ to represent it as a composition of
+    surgeries. If $f_0$ has no critical points then we clearly have
+    $W\cong M_0\times[0,1]$, so our strategy is to attempt to remove critical
+    points from $f_0$. To give the main idea, assume $n=6$ and $f_0$ has two
+    critical points $u,v\in W$. The hypothesis on homology implies that $u,v$
+    have index difference 1. Assume $u$ has index 3 and $v$ has index 4, with
+    levels $f_0(u)=1/4$ and $f_0(v)=3/4$. Write $M=f^{-1}(1/2)$. Crossing these
+    critical points exhibit $M_0$ and $M_1$ as the results of surgeries on $M$
+    along spheres $P_u,P_v\subseteq M$. The hypothesis on homology implies that
+    the intersection number of $P_u$ and $P_v$ is $\pm1$. Using the Whitney
+    trick we can then suppose $P_u$ and $P_v$ have a single (transverse)
+    intersection point. Then a neighbourhood of $P_u\cup P_v$ in $M$ has a
+    standard model and we can write down a deformation of $f_0$ which cancels
+    the critical points.
+\end{proof}
+
+\begin{remark}
+    One important application of the $h$-cobordism theorem is the generalized
+    Poincar\'e conjecture for higher dimensions: If $n\ge5$ and $M^n$ is
+    homotopy equivalent to $S^n$, then $M^n$ is homeomorphic to $S^n$. It also
+    leads to classification results for higher-dimensional manifolds with
+    topological restrictions, e.g. any 2-connected 6-manifold is diffeomorphic
+    to a connected sum of copies of $S^3\times S^2$.
+\end{remark}
+
 \subsection*{Exercises}
+
+\begin{enumerate}
+    \item Let $F_r$ be the free group on $r$ generators and $\gamma\in F_r$. For
+        $n\ge4$ use surgery on a connected sum of $r$ copies of
+        $S^1\times S^{n-1}$ to construct an $n$-dimensional manifold with
+        fundamental group $F_r/\langle\gamma\rangle$. Why does this not work if
+        $n=3$?
+
+    \item Show that $\RP^2\#\RP^2\#\RP^2$ and $T^2\#\RP^2$ are homeomorphic.
+
+        Let $\overline{\CP^2}$ denote $\CP^2$ with reversed orientation. Show
+        that no two of
+        \begin{equation*}
+            S^2\times S^2,\,\CP^2\#\CP^2,\,\CP^2\#\overline{\CP^2}
+        \end{equation*}
+        are homeomorphic, but $(S^2\times S^2)\#\CP^2$ is homeomorphic to
+        $\CP^2\#\overline{\CP^2}\#\overline{\CP^2}$.
+
+        (Complex geometry may be helpful here. Blowing up a point on a complex
+        surface corresponds to connected sum with $\overline{\CP^2}$.)
+
+    \item Let $X$ be the 4-manifold corresponding to the $A_2$ graph
+        \dynkin{A}{2}. Show that $\pi_1(X)=\Z/3$.
+
+    \item Let $W$ be an oriented $(2n+1)$-manifold with boundary $M$. There is a
+        boundary map
+        \begin{equation*}
+            \partial:H_{n+1}(W,M)\to H_n(M).
+        \end{equation*}
+        Use duality and the long exact sequence in cohomology to show that the
+        image of $\partial$ is an isotropic subspace in $H_n(M)$ with respect to
+        the intersection form (i.e. $\partial a\cdot\partial b=0$ for all $a,b$)
+        of dimension $\frac{1}{2}\dim H_n(M)$. In the case when $n$ is even,
+        deduce that the signature of $M$ is zero.
+
+        For an oriented surface $\Sigma$ of genus $g$ denote
+        $\lambda^i(\Sigma)=\Lambda^{g+i}(H^1(\Sigma))$. Let $\Sigma_0,\Sigma_1$
+        be oriented surfaces of genus $g_0,g_1$ respectively and let $W$ be a
+        cobordism from $\Sigma_0$ to $\Sigma_1$. Show that $W$ defines, up to an
+        overall factor, linear maps
+        \begin{equation*}
+            \lambda^i_W:\lambda^i(\Sigma_0)\to\lambda^i(\Sigma_1).
+        \end{equation*}
+        Investigate how your construction behaves with respect to composition of
+        cobordisms.
+
+        (Hint: A $p$-dimensional subspace of a vector space $V$ defines an
+        element in $\Lambda^p(V)$, up to a factor.)
+
+    \item Show that $\CP^n$ is not a boundary when $n$ is even. Construct
+        manifolds $W_m$ with $\partial W_m=\CP^{2m+1}$.
+
+        (Hint: Consider a map from $\CP^{2m+1}$ to quaternionic projective space
+        $\HP^m$.)
+
+    \item The Hopf invariant of a smooth map $f:S^{4k-1}\to S^{2k}$ can be
+        defined as follows. Choose a $2k$-form $\omega$ on $S^{2k}$ of integral
+        1. Then choose a $(2k-1)$-form $\alpha$ on $S^{4k-1}$ such that
+        $f^*(\omega)=d\alpha$. The Hopf invariant is
+        \begin{equation*}
+            H(f) = \int_{S^{4k-1}}\alpha\wedge f^*(\omega).
+        \end{equation*}
+        Show that this is well-defined, independent of the choices of
+        $\omega,\alpha$.
+
+        Let $X$ be a closed manifold of dimension $4k$ which has a decomposition
+        $X=B^{4k}\cup N$ where $N$ is a tubular neighbourhood of a $2k$-sphere
+        $\Sigma\subseteq X$ with $\Sigma\cdot\Sigma=1$, so $\partial N$ is a
+        $(4k-1)$-sphere. If $\Omega$ is a closed $2k$-form on $X$ with integral
+        1 over $\Sigma$ show that
+        \begin{equation*}
+            \int_X\Omega^2=1.
+        \end{equation*}
+        By constructing a suitable form $\Omega$, show that the Hopf invariant
+        of the map $S^{4k-1}=\partial N\to S^{2k}$ is 1.
+
+    \item Let $M$ be the 8-manifold constructed in the first section from a
+        vector bundle $V\to S^4$, with $d=n_+-n_-=1$ and $Y=\partial M$. Let $Z$
+        be the space obtained by adding a cone over $Y$ to $M$. Suppose that $Y$
+        is diffeomorphic to $S^7$ so that $Z$ is a smooth 8-manifold. Use the
+        signature theorem to show that $p_2=(1/7)(45+q^2)$ where $q=2(n_++n_-)$.
+        Hence derive a contradiction to the assumption that $Y$ is diffeomorphic
+        to $S^7$ for certain values of $n_+,n_-$.
+
+    \item Use Alexander duality to show that a knot $K\subseteq S^3$ bounds an
+        oriented surface $\Sigma$ embedded in $S^3\setminus K$ (a \emph{Seifert
+        surface}). The surface $\Sigma$ is homeomorphic to a closed surface of
+        some genus $g$, minus a disc. Now perform surgery on $K$ with
+        coefficient $c>0$ to construct a 3-manifold $Y$ which is the boundary of
+        a 4-manifold $X$. Show that
+        \begin{itemize}
+            \item $H^2(X)=\Z$ and a generator is represented by an embedded
+                surface in $X$ of genus $g$ and self-intersection $c$.
+            \item $H^1(Y)=\Z/c$.
+        \end{itemize}
+        (For the first part, recall that $H^1(S^3\setminus K)$ can be identified
+        with homotopy classes of maps from $S^3\setminus K$ to $S^1$.)
+\end{enumerate}
+
+% wrap-up: mention Y^3,X^4 convention, say some stuff about surgery and handle attachment
 
 \end{document}
