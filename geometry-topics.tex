@@ -13,6 +13,7 @@
 \usepackage{tikz-cd}
 \usepackage{amsthm}
 \usepackage{dynkin-diagrams}
+\usepackage{cancel}
 
 \setlength{\parindent}{0pt}
 
@@ -348,7 +349,7 @@ $r=c\epsilon$ converge to the circles around the origin of the $y$-plane.
 Meanwhile the circle $r=\sqrt{|\epsilon|}$ contracts to the origin, so the
 cylinder is pinched into two planes / discs connected at the origin.
 
-\item % TODO
+\item % TODO: Solution
 
 \end{enumerate}
 
@@ -1024,7 +1025,7 @@ coordinates. Which almost-complex structures arise in this way?
 
 \subsection*{Exercises}
 
-% TODO
+% TODO: Include question statements and solutions for these
 
 \paragraph{Exercise 1 {\normalfont(More linear algebra)}.}
 
@@ -1670,8 +1671,10 @@ result is an integral characteristic class.
 
 \begin{exercise}
     Show that $p(F_A)$ is closed, and changes by an exact form under
-    $A\mapsto A+a$. % TODO
+    $A\mapsto A+a$.
 \end{exercise}
+
+ % TODO: Solution
 
 \begin{theorem}
     We have $c(E)=\det(\id+\frac{F_A}{2\pi i})$ in $H^*(X)/\text{torsion}$, i.e.
@@ -2513,7 +2516,7 @@ variety becomes non-singular after finitely many blow-ups:
     \end{align*}
     has no points with $s=0$, so this is the whole blow up;
     $\Bl_{(0,0)}V(f)\cong\A^1_t$ via $t\mapsto(t^2,t^3)$. Now $\A^1$ is smooth,
-    so we are done. % TODO: x^{24} - y^{17}
+    so we are done. % TODO: Include the x^{24} - y^{17} part
 \end{proof}
 
 \paragraph{2. Birational geometry} Two varieties $Y_1,Y_2$ are
@@ -2560,7 +2563,7 @@ $Y\sim\A^N\sim\P^N$ for some $N$.
     $\P^2$.
 \end{exercise}
 
-% TODO
+% TODO: Solution
 
 \begin{corollary}
     Birational invariants are the same thing as blow-up invariants.
@@ -3058,6 +3061,35 @@ Using the Whitney trick, we obtain the following fundamental result:
         $S^1\times S^{n-1}$ to construct an $n$-dimensional manifold with
         fundamental group $F_r/\langle\gamma\rangle$. Why does this not work if
         $n=3$?
+        \begin{proof}[Solution]
+            If $M_0$ is the connected sum of $r$ copies of $S^1\times S^{n-1}$,
+            then $\pi_1(M_0)=\overbrace{\Z*\cdots*\Z}^{\text{$r$ times}}=F_r$ by
+            the Seifert-Van Kampen theorem; the intersections contract onto
+            $S^{n-1}$, which is simply-connected. (This requires $n\ge3$.)
+            Representing $\gamma$ by a loop in $M_0$, we perform surgery along
+            $\gamma$ to get a manifold $M$. Writing $N(\gamma)$ for a tubular
+            neighbourhood of $\gamma$, the Seifert-Van Kampen theorem gives
+            \begin{align*}
+                \pi_1(M)
+                    = \pi_1(M_0\setminus N(\gamma))
+                        *_{\pi_1(\partial N(\gamma))}\pi_1(B^2\times S^{n-2})
+                    = \pi_1(M_0\setminus N(\gamma))*_{\langle\gamma\rangle}1,
+            \end{align*}
+            noting that $\pi_1(S^{n-2})=1$ since $n\ge4$. We also have
+            \begin{align*}
+                \pi_1(M_0)
+                    = \pi_1(M_0\setminus N(\gamma))
+                        *_{\pi_1(\partial N(\gamma))}\pi_1(N(\gamma)),
+            \end{align*}
+            and the map $\pi_1(\partial N(\gamma))\to\pi_1(N(\gamma))$ is an
+            isomorphism as $S^{n-2}\to B^{n-2}$ induces the trivial map on
+            trivial groups, so $\pi_1(M_0\setminus N(\gamma))=\pi_1(M_0)$. Hence
+            \begin{equation*}
+                \pi_1(M)
+                    = \pi_1(M_0)/\langle\gamma\rangle
+                    = F_r/\langle\gamma\rangle.
+            \end{equation*}
+        \end{proof}
 
     \item Show that $\RP^2\#\RP^2\#\RP^2$ and $T^2\#\RP^2$ are homeomorphic.
 
@@ -3072,8 +3104,71 @@ Using the Whitney trick, we obtain the following fundamental result:
         (Complex geometry may be helpful here. Blowing up a point on a complex
         surface corresponds to connected sum with $\overline{\CP^2}$.)
 
+        \begin{proof}[Solution]
+            The fact $\RP^2\#\RP^2\#\RP^2\cong T^2\#\RP^2$ is a classic part of
+            the classification of surfaces, which I won't reproduce here. For
+            the 4-manifolds
+            $S^2\times S^2,\CP^2\#\CP^2,\CP^2\#\overline{\CP^2}$, note that they
+            all have Betti numbers $1,0,2,0,1$. So homology groups aren't enough
+            to distinguish them, so we look at the ring structure on cohomology
+            instead, i.e. the intersection form.
+            \begin{itemize}
+                \item For $S^2\times S^2$, generators for $H^2$ are given by
+                    $S^2\times\{*\}$ and $\{*\}\times S^2$, which intersect
+                    transversely and with positive orientation at the single
+                    point $(*,*)$. The self-intersections are zero, since
+                    $S^2\times\{*\}$ is disjoint from $S^2\times\{*'\}$, so the
+                    intersection form is given by
+                    \begin{equation*}
+                        Q_{S^2\times S^2} = \begin{pmatrix}
+                            0 & 1 \\ 1 & 0
+                        \end{pmatrix}.
+                    \end{equation*}
+
+                \item For $\CP^2\#\CP^2$, the generators for $H^2$ are given by
+                    lines $\CP^1$ in each copy of $\CP^2$. The self-intersection
+                    of a line in $\CP^2$ is 1, and we can take a line in one
+                    copy not meeting the other copy, so the intersection form is
+                    given by
+                    \begin{equation*}
+                        Q_{\CP^2\#\CP^2} = \begin{pmatrix}
+                            1 & 0 \\ 0 & 1
+                        \end{pmatrix}.
+                    \end{equation*}
+
+                \item For $\CP^2\#\overline{\CP^2}$, we have almost exactly the
+                    same story as for $\CP^2\#\CP^2$, except the
+                    self-intersection of a line in $\overline{\CP^2}$ is $-1$,
+                    so the intersection form is given by
+                    \begin{equation*}
+                        Q_{\CP^2\#\overline{\CP^2}} = \begin{pmatrix}
+                            1 & 0 \\ 0 & -1
+                        \end{pmatrix}.
+                    \end{equation*}
+            \end{itemize}
+            Now these matrices are not congruent; $Q_{\CP^2\#\CP^2}$ is
+            positive-definite, while the others are indefinite, and
+            $Q_{S^2\times S^2}$ is even, while $Q_{\CP^2\#\overline{\CP^2}}$ is
+            odd. Hence we see that the manifolds are not homeomorphic.
+
+            However, note that $(S^2\times S^2)\#\overline{\CP^2}
+            =(\CP^1\times\CP^1)\#\overline{\CP^2}$ is the blow-up of
+            $\CP^1\times\CP^1$ at a point, while
+            $\CP^2\#\overline{\CP^2}\#\overline{\CP^2}$ is the blow-up of
+            $\CP^2$ at two points. From what we saw in the section on blowing
+            up these are isomorphic complex varieties, and therefore
+            homeomorphic manifolds.
+        \end{proof}
+
     \item Let $X$ be the 4-manifold corresponding to the $A_2$ graph
-        \dynkin{A}{2}. Show that $\pi_1(X)=\Z/3$.
+        \dynkin{A}{2}. Show that $\pi_1(\partial X)=\Z/3$.
+
+        \begin{proof}[Solution]
+            Recall that $\partial X$ was the quotient of $\SU(2)\cong S^3$ by
+            the finite subgroup corresponding to the Dynkin diagram in question.
+            For $A_2$ this is the cyclic rotation group of the $(2+1)$-gon, i.e.
+            $C_3$. Hence $\pi_1(\partial X)=\pi_1(S^3/C_3)=\Z/3$.
+        \end{proof}
 
     \item Let $W$ be an oriented $(2n+1)$-manifold with boundary $M$. There is a
         boundary map
@@ -3100,11 +3195,109 @@ Using the Whitney trick, we obtain the following fundamental result:
         (Hint: A $p$-dimensional subspace of a vector space $V$ defines an
         element in $\Lambda^p(V)$, up to a factor.)
 
+        \begin{proof}[Solution]
+            Looking at Poincar\'e duality on the long exact sequence of the
+            pair, we have
+            \begin{equation*}
+                \begin{tikzcd}
+                    &H_{n+1}(W,M;\R) \ar[r,"\partial"]
+                    &H_n(M;\R) \ar[r,"i_*"]
+                    &H_n(W;\R) \\
+                    &H^n(W;\R) \ar[r,"i^*"] \ar[u,"\PD"]
+                    &H^n(M;\R) \ar[r,"\delta"] \ar[u,"\PD"]
+                    &H^{n+1}(W,M;\R). \ar[u,"\PD"]
+                \end{tikzcd}
+            \end{equation*}
+            Now the universal coefficients theorem implies that $i^*$ is dual to
+            $i_*$, so
+            \begin{align*}
+                \dim H_n(M;\R) - \dim\im\partial
+                    &= \dim H_n(M;\R) - \dim\im i^* \quad \text{by vertical PD} \\
+                    &= \dim H_n(M;\R) - \dim\im i_* \quad \text{by duality} \\
+                    &= \dim\ker i_* \quad \text{by rank-nullity} \\
+                    &= \dim\im\partial \quad \text{by exactness.}
+            \end{align*}
+            Hence $L=\im\partial$ has dimension $\frac{1}{2}\dim H_n(M;\R)$. For
+            $\alpha\in H^n(M;\R)$, $\beta\in H^n(W;\R)$, we have
+            \begin{equation*}
+                \langle\alpha\cup i^*\beta,[M]\rangle
+                    = \langle i^*\beta,[M]\cap\alpha\rangle
+                    = \langle\beta,i_*([M]\cap\alpha)\rangle.
+            \end{equation*}
+            Then for any $\gamma\in H^n(W;\R)$ we get
+            \begin{equation*}
+                \langle i^*\gamma\cup i^*\beta,[M]\rangle
+                    = \langle\beta,i_*([M]\cap i^*\gamma)\rangle
+                    = \langle\beta,
+                        \cancelto{0}{i_*\partial}([W]\cap\gamma)\rangle
+                    = 0,
+            \end{equation*}
+            so $i^*\gamma\cup i^*\beta=0$. Therefore $\im\partial\cong\im i^*$
+            are isotropic for the intersection / cup products. Taking a basis
+            $v_1,\ldots,v_r$ for $L$, we can find $w_j$ with
+            $v_i\cdot w_j=\delta_{ij}$, and moreover $w_j\cdot w_j=0$ after
+            adding a suitable multiple of $v_j$. This gives a basis for
+            $H_n(M;\R)$ with respect to which the intersection form is a direct
+            sum of factors of the form
+            \begin{equation*}
+                \begin{pmatrix}
+                    0 & 1 \\ (-1)^n & 0
+                \end{pmatrix}.
+            \end{equation*}
+            If $n$ is even these factors have signature zero, and hence the
+            signature of $M$ is zero.
+
+            For $W$ a cobordism from $\Sigma_0$ to $\Sigma_1$, we then have that
+            the kernel $L$ of
+            \begin{equation*}
+                \R^{2g_0}\oplus\R^{2g_1}
+                    = H_1(\Sigma_0;\R)\oplus H_1(\Sigma_1;\R)\to H_1(W;\R)
+            \end{equation*}
+            has dimension $g_0+g_1$, and is isotropic for the intersection form.
+            Now the maximal dimension of an isotropic subspace of
+            $H_1(\Sigma)=\R^{2g}$ is $g$, by writing down the intersection form
+            explicitly. Therefore $L=L_0\oplus L_1$ for $L_0$ a
+            $g_0$-dimensional isotropic subspace of $H_1(\Sigma_0;\R)$ and $L_1$
+            a $g_1$-dimensional isotropic subspace of $H_1(\Sigma_1;\R)$.
+            ??? % TODO
+        \end{proof}
+
     \item Show that $\CP^n$ is not a boundary when $n$ is even. Construct
         manifolds $W_m$ with $\partial W_m=\CP^{2m+1}$.
 
         (Hint: Consider a map from $\CP^{2m+1}$ to quaternionic projective space
         $\HP^m$.)
+
+        \begin{proof}[Solution]
+            From 4. we have that the middle Betti number of an even-dimensional
+            boundary is even, so since $H_{2m}(\CP^{2m})=\Z$ has rank 1 we see
+            that $\CP^{2m}$ cannot be a boundary. Now for $\CP^{2m+1}$ consider
+            the fiber bundle
+            \begin{equation*}
+                \CP^{2m+1}
+                    = (\C^{2m+2}\setminus\{0\})/\C^\times
+                    = (\H^{m+1}\setminus\{0\})/\C^\times
+                    \to (\H^{m+1}\setminus\{0\})/\H^\times
+                    = \HP^m.
+            \end{equation*}
+            The fibers are given by 
+            \begin{equation*}
+                \H^\times/\C^\times
+                = \frac{\left\{\begin{pmatrix}
+                    z & w \\ \conj w & \conj z
+                \end{pmatrix}:|z|^2+|w|^2\ne0\right\}}{\left\{\begin{pmatrix}
+                    z & 0 \\ 0 & \conj z
+                \end{pmatrix}:|z|\ne0\right\}}
+                = \left\{\begin{pmatrix}
+                    1 & z \\ \conj z & 1
+                \end{pmatrix}\right\}\cup\left\{\begin{pmatrix}
+                    0 & 1 \\ 1 & 0
+                \end{pmatrix}\right\} = \C\cup\{\infty\} = S^2,
+            \end{equation*}
+            and so we can glue 3-balls $B^3$ onto the fibers (using Alexander's
+            trick for compatibility) to get a $B^3$ bundle $W_m$ over $\HP^m$
+            with boundary the $S^2$ bundle $\CP^{2m+1}$ over $\HP^m$.
+        \end{proof}
 
     \item The Hopf invariant of a smooth map $f:S^{4k-1}\to S^{2k}$ can be
         defined as follows. Choose a $2k$-form $\omega$ on $S^{2k}$ of integral
@@ -3127,6 +3320,8 @@ Using the Whitney trick, we obtain the following fundamental result:
         By constructing a suitable form $\Omega$, show that the Hopf invariant
         of the map $S^{4k-1}=\partial N\to S^{2k}$ is 1.
 
+        % TODO: Solution
+
     \item Let $M$ be the 8-manifold constructed in the first section from a
         vector bundle $V\to S^4$, with $d=n_+-n_-=1$ and $Y=\partial M$. Let $Z$
         be the space obtained by adding a cone over $Y$ to $M$. Suppose that $Y$
@@ -3134,6 +3329,8 @@ Using the Whitney trick, we obtain the following fundamental result:
         signature theorem to show that $p_2=(1/7)(45+q^2)$ where $q=2(n_++n_-)$.
         Hence derive a contradiction to the assumption that $Y$ is diffeomorphic
         to $S^7$ for certain values of $n_+,n_-$.
+
+        % TODO: Solution
 
     \item Use Alexander duality to show that a knot $K\subseteq S^3$ bounds an
         oriented surface $\Sigma$ embedded in $S^3\setminus K$ (a \emph{Seifert
@@ -3148,6 +3345,8 @@ Using the Whitney trick, we obtain the following fundamental result:
         \end{itemize}
         (For the first part, recall that $H^1(S^3\setminus K)$ can be identified
         with homotopy classes of maps from $S^3\setminus K$ to $S^1$.)
+
+        % TODO: Solution
 \end{enumerate}
 
 \end{document}
