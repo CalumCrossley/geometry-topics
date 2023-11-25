@@ -3,7 +3,7 @@
 \usepackage[paper=a4paper,margin=0.9in]{geometry}
 
 \usepackage{mathtools}
-\usepackage{derivative}
+\usepackage[italic=true]{derivative}
 \usepackage{graphicx}
 \usepackage{enumitem} % enumeration label options
 \usepackage{amsfonts} % \mathbb, ...
@@ -43,6 +43,7 @@
 \DeclareMathOperator{\SU}{SU}
 \DeclareMathOperator{\SL}{SL}
 \DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\so}{\mathfrak{so}}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\lk}{lk}
@@ -53,6 +54,7 @@
 \DeclareMathOperator{\Sym}{Sym}
 \DeclareMathOperator{\Vect}{Vect}
 \DeclareMathOperator{\Bl}{Bl}
+\DeclareMathOperator{\Diff}{Diff}
 
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\closure}[1]{\overline{#1}}
@@ -69,6 +71,9 @@
 \newcommand{\FS}{\mathrm{FS}}
 \newcommand{\PD}{\mathrm{PD}}
 
+\newcommand{\calY}{\mathcal{Y}}
+\newcommand{\calH}{\mathcal{H}}
+\newcommand{\calJ}{\mathcal{J}}
 \newcommand{\g}{\mathfrak{g}}
 \newcommand{\calN}{\mathcal{N}}
 \renewcommand{\L}{\mathcal{L}}
@@ -80,6 +85,8 @@
 \newcommand{\RP}{\mathbb{RP}}
 \newcommand{\CP}{\mathbb{CP}}
 \newcommand{\HP}{\mathbb{HP}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\T}{\mathbb{T}}
 \newcommand{\F}{\mathbb{F}}
 \renewcommand{\H}{\mathbb{H}}
 \newcommand{\bbO}{\mathbb{O}}
@@ -995,8 +1002,8 @@ coordinates. Which almost-complex structures arise in this way?
 \begin{example}
     ~
     \begin{itemize}
-        \item $\CP^n$ with the standard Complex structure has the Fubini-Study
-            K\"ahler form $\omega_\FS$ (or the Fubini-Study metric $g_\FS$)
+        \item $\CP^n$ with the standard Complex structure has the Fubini--Study
+            K\"ahler form $\omega_\FS$ (or the Fubini--Study metric $g_\FS$)
             induced from the standard structure on $\C^n\setminus\{0\}$ by the
             quotient map.
 
@@ -1122,27 +1129,292 @@ coordinates. Which almost-complex structures arise in this way?
 
 \subsection*{Exercises}
 
-% TODO: Include question statements and solutions for these
+% TODO: Solutions
 
-\paragraph{Exercise 1 {\normalfont(More linear algebra)}.}
+\paragraph{Exercise 1 {\normalfont(More linear algebra)}.} Let $V$ be a
+finite-dimensional vector space endowed with a positive definite symmetric
+bilinear form $g_0$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $A\mapsto g_0(A,\cdot)$ defines an isomorphism between the
+        vector space $\so(V,g_0)$ of skew-symmetric endomorphisms of $(V,g_0)$
+        (\emph{i.e.} endomorphisms $A:V\to V$ such that $g_0(Au,v)=-g_0(u,Av)$
+        for all $u,v\in V$) and $\Lambda^2V$.
 
-\paragraph{Exercise 2 {\normalfont(The Nijenhuis tensor)}.} 
+    \item Show that $\omega_0$ is the image of $J_0$ under the isomorphism
+        defined above.
 
-\paragraph{Exercise 3 {\normalfont(The Newlander--Nirenberg Theorem)}.} 
+    \item Deduce that any two of $g_0,J_0,\omega_0$ determine the third one and
+        that $U(n)=SO(2n)\cap\GL(n,\C)=SO(2n)\cap\Sp(2n,\R)$.
+\end{enumerate}
 
-\paragraph{Exercise 4 {\normalfont(Almost-complex structures on spheres)}.} 
+\paragraph{Exercise 2 {\normalfont(The Nijenhuis tensor)}.} Let $J$ be an almost
+complex structure on $M$.
+\begin{enumerate}[label=(\roman*)]
+    \item Verify that $d^{2,-1}$ is tensorial, \emph{i.e.}
+        $d^{2,-1}(f\alpha)=fd^{2,-1}\alpha$ for any function $f$ and
+        $(0,1)$-form $\alpha$. Deduce the existence of the Nijenhuis tensor
+        $N_J$, \emph{i.e.} the existence of a section $N_J$ of
+        $\Hom(\Lambda^{0,1}T^*M,\Lambda^{2,0}T^*M)$ such that
+        $d^{2,-1}\alpha=-N_J(\alpha)$ for every $(0,1)$-form $\alpha$.
 
-\paragraph{Exercise 5 {\normalfont(Moser's trick)}.} 
+    \item Under the isomorphism
+        \begin{equation*}
+            \Hom(\Lambda^{0,1}T^*M,\Lambda^{2,0}T^*M)
+                \simeq \bigl(\Lambda^{0,1}T^*M\bigr)^*\otimes\Lambda^{2,0}T^*M
+                \simeq T^{0,1}M\otimes\Lambda^{2,0}T^*M
+        \end{equation*}
+        identify $N_J$ with the skew-symmetric map
+        $N_J:T^{1,0}M\times T^{1,0}M\to T^{1,0}M$ defined by
+        $N_J(X,Y)=[X,Y]^{1,0}$.
 
-\paragraph{Exercise 6 {\normalfont(Projective manifolds)}.} 
+        \textit{(Hint: use the fact that
+        $d\alpha(X,Y)=X\cdot\alpha(Y)-Y\cdot\alpha(X)-\alpha\bigl([X,Y]\bigr)$
+        for every 1-form $\alpha$ and vector fields $X,Y$.)}
+\end{enumerate}
 
-\paragraph{Exercise 7 {\normalfont(Hopf surface)}.} 
+\paragraph{Exercise 3 {\normalfont(The Newlander--Nirenberg Theorem)}.} In this
+exercise you discuss some easy aspects of the proof of the Newlander--Nirenberg
+theorem.
+\begin{enumerate}[label=(\roman*)]
+    \item Show the easy implication of the Newlander--Nirenberg theorem: if $J$
+        is induced by a holomorphic atlas then $J$ must be integrable.
 
-\paragraph{Exercise 8 {\normalfont(Kodaira--Thurston manifold)}.} 
+    \item Show that the converse ``hard'' implication amounts to showing that,
+        assuming $J$ is integrable, for every point $p\in M$ there exists an
+        open set $\U\subset M$ containing $p$ and $J$-holomorphic functions
+        $z_1,\ldots,z_n:\U\to\C$ such that $(z_1,\ldots,z_n):\U\to\C^n$ is a
+        diffeomorphism onto its image.
+\end{enumerate}
 
-\paragraph{Exercise 9 {\normalfont(Hyperk\"ahler 4-manifolds)}.} 
+\paragraph{Exercise 4 {\normalfont(Almost-complex structures on spheres)}.} In
+this exercise you construct almost complex structures on $\S^2$ and $\S^6$. The
+latter is non-integrable and deciding whether $\S^6$ carries an integrable
+almost complex structure is a famous open problem. It can be shown
+(Borel--Serre, 1953) that spheres of dimensions $\ne2,6$ cannot carry almost
+complex structures.
+\begin{enumerate}[label=(\roman*)]
+    \item Let $\S^2$ denote the unit sphere $\S^2=\{x\in\R^3:\|x\|=1\}$ in
+        $\R^3$. Given $x\in\S^2$ identify $T_x\S^2$ with the plane
+        $x^\perp\subset\R^3$. Show that the formula
+        \begin{equation*}
+            J_x(u) = x\times u,
+        \end{equation*}
+        where $\times$ denotes the cross product in $\R^3$, defines an almost
+        complex structure on $\S^2$. Show that this almost complex structure is
+        integrable.
 
-\paragraph{Exercise 10 {\normalfont(Bundles and connections)}.} 
+        \textit{(Hint: you can answer the last question without doing any
+        computation.)}
+
+    \item The existence of the octonions $\bbO$ implies the existence of a cross
+        product on $\R^7=\Im\O$, a bilinear alternating map
+        $\times:\R^7\times\R^7\to\R^7$ with the properties that $u\times v$ is
+        orthogonal to $u$ and $v$ and has norm
+        $|u\times v|^2=|u|^2|v|^2-(u\cdot v)^2$. One simply sets
+        $u\times v=\Im(uv)$, where $uv$ is octonionic multiplication. Show that
+        the formula of part (i) defines an almost complex structure $J$ on the
+        6-sphere $\S^6$ and that the non-associativity of the 7-dimensional
+        cross product makes $J$ non-integrable.
+\end{enumerate}
+
+\paragraph{Exercise 5 {\normalfont(Moser's trick)}.} In this exercise you prove
+the Moser stability theorem.
+\begin{enumerate}[label=(\roman*)]
+    \item We begin with some observations about time-dependent vector fields.
+        Let $\psi:[0,1]\times M\to M$ be a smooth map such that
+        $\psi_t=\psi(t,\cdot):M\to M$ is a diffeomorphism for every $t$. Define
+        a 1-parameter family of vector fields $\{X_t\}_{t\in[0,1]}$ on $M$ by
+        $X_t=d_{(t,\cdot)}\psi\bigl(\odv{}{t}\bigr)$. Conversely, if $M$ is
+        closed (or if the vector fields are compactly supported) a family of
+        vector fields $\{X_t\}_{t\in[0,1]}$ generates a family
+        $\{\psi_t\}_{t\in[0,1]}$ of diffeomorphisms with
+        $\odv{}{t}\psi_t=X_t\circ\psi_t$ and $\psi_0=\id$. Let
+        $\{\alpha_t\}_{t\in[0,1]}$ be a smooth 1-parameter family of $k$-forms
+        on $M$. Show that
+        \begin{equation*}
+            \odv{}{t}\psi_t^*\alpha_t
+                = \psi_t^*\biggl(\odv{}{t}\alpha_t+\L_{X_t}\alpha_t\biggr).
+        \end{equation*}
+
+    \item Let $\{\omega_t\}_{t\in[0,1]}$ be a smooth family of symplectic forms
+        and suppose that $\odv{}{t}\omega_t=d\mu_t$ for a smooth family
+        $\{\mu_t\}_{t\in[0,1]}$ of 1-forms. Construct a family
+        $\{X_t\}_{t\in[0,1]}$ of vector fields such that
+        $\L_{X_t}\omega_t+\odv{}{t}\omega_t=0$.
+
+        \textit{(Hint: recall Cartan's magic formula
+        $\L_X\alpha=d(X\lrcorner\alpha)+X\lrcorner d\alpha$.)}
+
+    \item Deduce Moser's stability theorem from parts (i) and (ii).
+
+    \item Let $(M,J)$ be an almost complex manifold and suppose that $\omega_0$
+        and $\omega_1$ are two symplectic forms on $M$ compatible with $J$. Show
+        that $\omega_t=(1-t)\omega_0+t\omega_1$ is a family of symplectic forms
+        compatible with $J$.
+
+        \textit{(Hint: consider the corresponding family of Riemannian metrics
+        using the fact that the set of positive definite bilinear forms on
+        $\R^n$ is convex.)}
+
+    \item Let $(M,g_0,J_0,\omega_0)$ be an almost Hermitian manifold with
+        $\omega_0$ symplectic (such manifolds are sometimes called almost
+        K\"ahler). Consider the sets
+        \begin{align*}
+            \calJ(\omega_0)
+                &= \{\text{$\omega_0$-compatible almost complex structures
+                    $J$}\}, \\
+            \calH(J_0,[\omega_0])
+                &= \{\text{$J_0$-compatible symplectic forms $\omega$ with
+                    $[\omega]=[\omega_0]\in H^2_\dR(M)$}\}
+        \end{align*}
+        and the subset
+        $\calY(J_0,\omega_0)\subset\Diff_0(M)\times\calH(J_0,[\omega_0])$
+        consisting of pairs $(f,\omega)$ where $f$ is a diffeomorphism isotopic
+        to the identity such that $f^*\omega=\omega_0$. Use parts (iii) and (iv)
+        to construct a map $\Phi:\calY(J_0,\omega_0)\to\calJ(\omega_0)$.
+\end{enumerate}
+
+\paragraph{Exercise 6 {\normalfont(Projective manifolds)}.} In this exercise you
+show that complex projective space $\CP^n$ and its holomorphic submanifolds are
+K\"ahler.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $\omega_\FS=i\partial\bar\partial\log(1+|z|^2)$ is a
+        K\"ahler form on $\C^n$. Here $|z|^2=|z_1|^2+\cdots+|z_n|^2$.
+
+    \item Show that if $\varphi(z_1,\ldots,z_n)=z_1^{-1}(z_1,z_2,\ldots,z_n)$
+        then $\varphi^*\omega_\FS=\omega_\FS$.
+
+    \item Show that the charts $(\U_i,\varphi_i)$ defined by
+        \begin{equation*}
+            \varphi_i:\U_i=\bigl\{[z_0:\cdots:z_n] : z_i\ne0\bigr\}\to\C^n,
+            \quad
+            \varphi_i([z_0:\cdots:z_n])
+                = z_i^{-1}(z_0,\ldots,\check z_i,\ldots,z_n),
+        \end{equation*}
+        where $\check z_i$ means that we drop the $i$th coordinate, form a
+        holomorphic atlas on $\CP^n$.
+
+    \item Show that the formula $\omega=\varphi_i^*\omega_\FS$ over $\U_i$
+        defines a K\"ahler form on $\CP^n$, called the Fubini--Study K\"ahler
+        form.
+
+    \item Let $M$ be a complex submanifold of $\CP^n$. Show that $M$ is
+        K\"ahler.
+\end{enumerate}
+
+\paragraph{Exercise 7 {\normalfont(Hopf surface)}.} In this exercise you show
+that there are complex manifolds that cannot be K\"ahler.
+\begin{enumerate}[label=(\roman*)]
+    \item Let $(M,\omega)$ be a closed symplectic manifold. Show that the de
+        Rham cohomology class $[\omega]\in H^2_\dR(M)$ cannot vanish.
+
+    \item Fix a real number $s\ne0$ and let $\Z$ act on $\C^2\setminus\{0\}$ by
+        $n\cdot(z_1,z_2)=(e^{ns}z_1,e^{ns}z_2)$. Define
+        $M^4=\C^2\setminus\{0\}/\Z$. Show that $M$ is a complex manifold.
+
+    \item Show that $M$ is diffeomorphic to $S^1\times S^3$ and conclude that
+        $M$ cannot be K\"ahler.
+
+        \textit{(Hint: work in spherical coordinates in
+        $\C^2\setminus\{0\}\simeq\R^+\times\S^3$.)}
+\end{enumerate}
+
+\paragraph{Exercise 8 {\normalfont(Kodaira--Thurston manifold)}.} In this
+exercise you show that there are symplectic manifolds that cannot be K\"ahler.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that if $(M,g,J,\omega)$ is a closed K\"ahler manifold then
+        $H^1(M;\R)$ is even dimensional.
+    \item Let $(n,m)\in\Z^2$ act on $\R^2$ by translation
+        $(x,y)\mapsto(x+n,y+m)$ and on $\T^2$ via the matrix
+        $\begin{pmatrix}1&n\\0&1\end{pmatrix}\in\SL(2,\Z)$. Let $M$ be the
+        4-manifold $M=(\R^2\times\T^2)/\Z^2$. Show that the standard symplectic
+        form on $\R^2\times\T^2$ descends to $M$ and defines a symplectic form
+        on $M$.
+
+    \item Calculate the first de Rham cohomology group of $M$ and conclude that
+        $M$ cannot carry any K\"ahler structure.
+
+        \textit{(Hint: you can either study $\Z^2$-invariant closed 1-forms on
+        $\R^2\times\T^2$ or calculate the fundamental group of $M$, thus its
+        first homology, and then use the fact that de Rham cohomology is dual
+        to homology with real coefficients.)}
+\end{enumerate}
+
+\paragraph{Exercise 9 {\normalfont(Hyperk\"ahler 4-manifolds)}.} A hyperk\"ahler
+triple on a 4-manifold is a triple $(\omega_1,\omega_2,\omega_3)$ of symplectic
+forms satisfying
+\begin{equation*}
+    \omega_i\wedge\omega_j
+        = \delta_{ij}\frac{1}{3}(\omega_1^2+\omega_2^2+\omega_3^2).
+\end{equation*}
+\begin{enumerate}
+    \item Work on $\R^4$ with coordinates $(x_0,x_1,x_2,x_3)$. Show that the
+        forms
+        \begin{equation*}
+            \omega_i=dx_0\wedge dx_i+dx_j\wedge dx_k,
+        \end{equation*}
+        where $(ijk)$ is a cyclic permutation of $(123)$, define a
+        hyperk\"ahler triple. Show also that you can identify $\R^4$ with the
+        quaternions $\H$ so that the almost complex structures corresponding to 
+        $\omega_1$, $\omega_2$ and $\omega_3$ using the standard inner product
+        on $\R^4$ as in Exercise 1 are, respectively, left multiplications by
+        $i$, $j$ and $k$.
+
+    \item Let $(M^4,\omega_1,\omega_2,\omega_3)$ be a manifold endowed with a
+        hyperk\"ahler triple.  Write $\omega=\omega_1$ and
+        $\omega_c=\omega_2+i\omega_3$. Show that $\omega_c\wedge\omega_c=0$ and
+        deduce the existence of an almost complex structure $J$ for which a
+        1-form $\alpha$ is of type $(1,0)$ if and only if
+        $\alpha\wedge\omega_c=0$.
+
+        \textit{(Hint: you can use the fact that $\omega_c\wedge\omega_c=0$ if
+        and only if $\omega_c$ is decomposable, \emph{i.e.} it can locally be
+        written as $\omega_c=\theta_1\wedge\theta_2$ for linearly independent
+        complex 1-forms $\theta_1,\theta_2$.)}
+
+    \item Show that $J$ is integrable.
+
+        \textit{(Hint: observe that $d\overline\omega_c=0$ and differentiate
+        the relation $\alpha\wedge\overline\omega_c=0$ valid for any
+        $(0,1)$-form $\alpha$ to deduce that $d^{2,-1}\alpha=0$.)}
+
+    \item Show that $(\omega,J)$ are compatible and that, denoting by $g$ the
+        resulting metric, $(M,g,J,\omega)$ is K\"ahler.
+
+        \textit{(Hint: show that $\omega\wedge\omega_c=0$ and deduce that
+        $\omega$ is of type $(1,1)$ with respect to $J$. Positivity of the
+        resulting metric can be shown by arguing that on each tangent space
+        $\omega_1,\omega_2,\omega_3$ must be linearly equivalent to the
+        hyperk\"ahler triple of part (i).)}
+\end{enumerate}
+
+\paragraph{Exercise 10 {\normalfont(Bundles and connections)}.} This problem is
+a collection of three separate questions about holomorphic bundles and
+connections.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that any choice of Cauchy--Riemann operator on a complex vector
+        bundle $E$ over a Riemann surface defines a holomorphic structure on
+        $E$.
+
+    \item Let $(E,h)$ be a Hermitian vector bundle over a complex manifold and
+        let $\nabla$ be a unitary connection on $E$. Decompose the bundle-valued
+        2-form $F_\nabla$ into $(p,q)$-types:
+        $F_\nabla=F^{2,0}_\nabla+F^{1,1}_\nabla+F^{0,2}_\nabla$. Show that
+        $\bar\partial_\E=\nabla^{0,1}$ satisfies
+        $\bar\partial_\E\circ\bar\partial_\E=0$ if and only if
+        $F_\nabla=F^{1,1}_\nabla$.
+
+    \item Set $\O_{\CP^n}(-1)=\{([z],v)\in\CP^n\times\C^{n+1}:v\in\C z\}$.
+        \begin{enumerate}[label=(\alph*)]
+            \item Show that the projection onto the first factor induces on
+                $\O_{\CP^n}(-1)$ the structure of a holomorphic line bundle over
+                $\CP^n$.
+
+            \item Endow $\C^{n+1}$ with its standard Hermitian metric and denote
+                by $h$ the induced Hermitian metric on $\O_{\CP^n}(-1)$.
+                Calculate the curvature of its Chern connection.
+        \end{enumerate}
+\end{enumerate}
 
 \newpage
 
@@ -2778,7 +3050,9 @@ We will look at:
 \subsubsection*{The Classification of Surfaces}
 
 Given $n$-dimensional manifolds $M_1,M_2$, we have the connected sum $M_1\#M_2$.
-% TODO: diagram
+\begin{center}
+    \includegraphics[scale=0.3]{manifolds_connectedsum}
+\end{center}
 Using this we have the classification of closed surfaces:
 \begin{itemize}
     \item Orientable case (no M\"obius bands): $S^2,T^2,T^2\#T^2,\ldots$
@@ -2807,7 +3081,9 @@ If $n=2m$, we get an intersection form $H_m(M)\times H_m(M)\to\Z$ which is
 symmetric if $m$ is even and skew-symmetric if $m$ is odd. When $m$ is even this
 symmetric form has a signature $\sigma(M)$. For closed manifolds it is
 non-degenerate.
-% TODO: diagram
+\begin{center}
+    \includegraphics[scale=0.3]{manifolds_intersection}
+\end{center}
 The classification of such forms over $\Z$ in the skew-symmetric case is simple:
 they are sums of blocks of the form
 \begin{equation*}
@@ -2840,8 +3116,10 @@ construct from this a 4-manifold $X_{\Gamma,\vec c}$ with boundary:
         zero section in $L_i$, which is a 4-manifold with boundary.
 
     \item For an edge between $v_i$ and $v_j$, we glue $N_i$ and $N_j$ as
-        follows:
-        % TODO: diagram
+        follows, with $\Sigma_i$, $\Sigma_j$ transverse:
+        \begin{center}
+            \includegraphics[scale=0.4]{manifolds_plumbing}
+        \end{center}
 \end{itemize}
 Then the intersection form has $c_i$'s for the diagonal entries
 (self-intersections) and the adjacency matrix of $\Gamma$ off the diagonal.
@@ -2920,11 +3198,14 @@ $H^4(Y)=\Z/d\Z$.
     $n$-manifolds. Manifolds $M_0^n,M_1^n$ are \emph{cobordant}, written
     $M_0\sim M_1$, if there is an oriented $(n+1)$-manifold $W$ with
     \begin{equation*}
-        \partial W = \overline{M_0}\sqcup M_1, % TODO: diagram
+        \partial W = \overline{M_0}\sqcup M_1,
     \end{equation*}
     where $\overline{M_0}$ denotes $M_0$ with reversed orientation. The
     cobordism equivalence classes form an abelian group with the operation of
     disjoint union, written $\Omega_n$.
+    \begin{center}
+        \includegraphics[scale=0.4]{manifolds_cobordism}
+    \end{center}
 \end{definition}
 
 In dimension $4k$ (other dimensions only have finite cobordism groups), we have
@@ -2998,7 +3279,9 @@ In fact any cobordism is a composite of particular elementary cobordisms called
     boundary of $M\times[0,1]$. This is called an \emph{elementary cobordism}.
     (Note that technically we need to smooth the corners in this gluing in order
     to preserve the smooth structure. This can be done in a standard way.)
-    % TODO: diagram
+    \begin{center}
+        \includegraphics[scale=0.5]{manifolds_surgery}
+    \end{center}
 \end{remark}
 
 \subsubsection*{Morse Theory}
@@ -3038,19 +3321,23 @@ manifold.
     sphere $S^{q-1}$. The manifold $f^{-1}(1)$ is obtained from $f^{-1}(-1)$ by
     surgery along $\Sigma$, and $f^{-1}[-1,1]$ is diffeomorphic to the standard
     elementary cobordism realizing this surgery.
-    % TODO: diagram
+    \begin{center}
+        \includegraphics[scale=0.5]{manifolds_morse1}
+    \end{center}
 \end{example}
 
 In general, for a cobordism $W$ from $M_0$ to $M_1$ we consider a particularly
-nice type of function $F:W\to[0,1]$ known as a \emph{Morse function}, with
-$F^{-1}(1)=M_1$, $F^{-1}(0)=M_0$. There are finitely many critical values of $F$
-in $[0,1]$, and the manifolds $M_t=F^{-1}(t)$ change by a surgery as $t$ crosses
+nice type of function $f:W\to[0,1]$ known as a \emph{Morse function}, with
+$f^{-1}(1)=M_1$, $f^{-1}(0)=M_0$. There are finitely many critical values of $f$
+in $[0,1]$, and the manifolds $M_t=f^{-1}(t)$ change by a surgery as $t$ crosses
 each critical value, giving a factorization of $W$ into elementary cobordisms.
 The number $p+1$ in the surgery is the \emph{index} of the critical point, which
-can be read off from the Hessian of $F$. (In fact in a neighbourhood of a
+can be read off from the Hessian of $f$. (In fact in a neighbourhood of a
 critical point, the Morse function can be written in the form $|x|^2-|y|^2$ as
 in the previous example using suitable coordinates.)
-% TODO: diagram
+\begin{center}
+    \includegraphics[scale=0.4]{manifolds_morse2}
+\end{center}
 
 \begin{example}
     Let $K\subseteq S^3$ be an embedded circle, i.e. a knot. The boundary of a
@@ -3092,11 +3379,12 @@ $P\cdot Q=0$ then we can isotope $P$ to be disjoint from $Q$.
     trivialize the normal bundle of $\gamma$ suitably to get a neighbourhood of
     $D$ in $M$ diffeomorphic to a standard model of the situation in Euclidean
     space:
-    % TODO: diagram
+    \begin{center}
+        \includegraphics[scale=0.3]{manifolds_whitney}
+    \end{center}
     In this model we then write down an explicit isotopy removing the
     intersections as follows, which can be transported along the diffeomorphism
     back to $M$.
-    % TODO: diagram
 \end{proof}
 
 \begin{remark}
