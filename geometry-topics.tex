@@ -14,8 +14,8 @@
 \usepackage{amsthm}
 \usepackage{dynkin-diagrams}
 \usepackage{cancel}
-
-\setlength{\parindent}{0pt}
+\usepackage{parskip}
+\usepackage{hyperref}
 
 \newtheorem*{conjecture}{Conjecture}
 \newtheorem*{theorem}{Theorem}
@@ -37,11 +37,13 @@
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Hol}{Hol}
 \DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Gr}{Gr}
 \DeclareMathOperator{\Sp}{Sp}
 \DeclareMathOperator{\SO}{SO}
 \DeclareMathOperator{\SU}{SU}
 \DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PSL}{PSL}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\so}{\mathfrak{so}}
 \DeclareMathOperator{\im}{im}
@@ -55,21 +57,27 @@
 \DeclareMathOperator{\Vect}{Vect}
 \DeclareMathOperator{\Bl}{Bl}
 \DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Crit}{Crit}
+\DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\Stab}{Stab}
 
 \newcommand{\conj}[1]{\overline{#1}}
 \newcommand{\closure}[1]{\overline{#1}}
 
 \newcommand{\id}{\mathrm{id}}
+\newcommand{\ev}{\mathrm{ev}}
 \newcommand{\inc}{\mathrm{inc}}
 \newcommand{\cl}{\mathrm{cl}}
 \newcommand{\an}{\mathrm{an}}
 \newcommand{\sing}{\mathrm{sing}}
-\newcommand{\ev}{\mathrm{ev}}
 \newcommand{\dR}{\mathrm{dR}}
 \newcommand{\CH}{\mathrm{CH}}
 \newcommand{\Hdg}{\mathrm{Hdg}}
 \newcommand{\FS}{\mathrm{FS}}
 \newcommand{\PD}{\mathrm{PD}}
+\newcommand{\homeo}{\mathrm{homeo}}
+\newcommand{\diffeo}{\mathrm{diffeo}}
 
 \newcommand{\calY}{\mathcal{Y}}
 \newcommand{\calH}{\mathcal{H}}
@@ -98,13 +106,17 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 
-\title{Topics in Geometry (LSGNT) - Notes and Exercises}
-\author{Calum Crossley}
-\date{2023-2024}
+\title{LSGNT 2023-2024: Topics in Geometry}
+\author{}
+\date{}
 
 \begin{document}
 
 \maketitle
+
+\tableofcontents
+
+\newpage
 
 \section{Spec and Proj - Ed Segal}
 
@@ -1129,8 +1141,6 @@ coordinates. Which almost-complex structures arise in this way?
 
 \subsection*{Exercises}
 
-% TODO: Solutions
-
 \paragraph{Exercise 1 {\normalfont(More linear algebra)}.} Let $V$ be a
 finite-dimensional vector space endowed with a positive definite symmetric
 bilinear form $g_0$.
@@ -2043,8 +2053,6 @@ result is an integral characteristic class.
     $A\mapsto A+a$.
 \end{exercise}
 
- % TODO: Solution
-
 \begin{theorem}
     We have $c(E)=\det(\id+\frac{F_A}{2\pi i})$ in $H^*(X)/\text{torsion}$, i.e.
     \begin{equation*}
@@ -2885,7 +2893,7 @@ variety becomes non-singular after finitely many blow-ups:
     \end{align*}
     has no points with $s=0$, so this is the whole blow up;
     $\Bl_{(0,0)}V(f)\cong\A^1_t$ via $t\mapsto(t^2,t^3)$. Now $\A^1$ is smooth,
-    so we are done. % TODO: Include the x^{24} - y^{17} part
+    so we are done.
 \end{proof}
 
 \paragraph{2. Birational geometry} Two varieties $Y_1,Y_2$ are
@@ -2931,8 +2939,6 @@ $Y\sim\A^N\sim\P^N$ for some $N$.
     dimension $n$. The special case $n=2$ gives a roof from $\P^1\times\P^1$ to
     $\P^2$.
 \end{exercise}
-
-% TODO: Solution
 
 \begin{corollary}
     Birational invariants are the same thing as blow-up invariants.
@@ -3045,7 +3051,7 @@ We will look at:
         appears when classifying manifold topology.
 \end{itemize}
 
-\subsection{Examples and Ideas}
+\subsection*{Examples and Ideas}
 
 \subsubsection*{The Classification of Surfaces}
 
@@ -3189,7 +3195,7 @@ $H^4(Y)=\Z/d\Z$.
         structure.
 \end{itemize}
 
-\subsection{Cobordism, Surgery and the Whitney Trick}
+\subsection*{Cobordism, Surgery and the Whitney Trick}
 
 \subsubsection*{Cobordism}
 
@@ -3644,7 +3650,8 @@ Using the Whitney trick, we obtain the following fundamental result:
             explicitly. Therefore $L=L_0\oplus L_1$ for $L_0$ a
             $g_0$-dimensional isotropic subspace of $H_1(\Sigma_0;\R)$ and $L_1$
             a $g_1$-dimensional isotropic subspace of $H_1(\Sigma_1;\R)$.
-            ??? % TODO
+
+            ???
         \end{proof}
 
     \item Show that $\CP^n$ is not a boundary when $n$ is even. Construct
@@ -3657,7 +3664,7 @@ Using the Whitney trick, we obtain the following fundamental result:
             From 4. we have that the middle Betti number of an even-dimensional
             boundary is even, so since $H_{2m}(\CP^{2m})=\Z$ has rank 1 we see
             that $\CP^{2m}$ cannot be a boundary. Now for $\CP^{2m+1}$ consider
-            the fiber bundle
+            the fibre bundle
             \begin{equation*}
                 \CP^{2m+1}
                     = (\C^{2m+2}\setminus\{0\})/\C^\times
@@ -3665,7 +3672,7 @@ Using the Whitney trick, we obtain the following fundamental result:
                     \to (\H^{m+1}\setminus\{0\})/\H^\times
                     = \HP^m.
             \end{equation*}
-            The fibers are given by 
+            The fibres are given by 
             \begin{equation*}
                 \H^\times/\C^\times
                 = \frac{\left\{\begin{pmatrix}
@@ -3679,7 +3686,7 @@ Using the Whitney trick, we obtain the following fundamental result:
                     0 & 1 \\ 1 & 0
                 \end{pmatrix}\right\} = \C\cup\{\infty\} = S^2,
             \end{equation*}
-            and so we can glue 3-balls $B^3$ onto the fibers (using Alexander's
+            and so we can glue 3-balls $B^3$ onto the fibres (using Alexander's
             trick for compatibility) to get a $B^3$ bundle $W_m$ over $\HP^m$
             with boundary the $S^2$ bundle $\CP^{2m+1}$ over $\HP^m$.
         \end{proof}
@@ -3705,8 +3712,6 @@ Using the Whitney trick, we obtain the following fundamental result:
         By constructing a suitable form $\Omega$, show that the Hopf invariant
         of the map $S^{4k-1}=\partial N\to S^{2k}$ is 1.
 
-        % TODO: Solution
-
     \item Let $M$ be the 8-manifold constructed in the first section from a
         vector bundle $V\to S^4$, with $d=n_+-n_-=1$ and $Y=\partial M$. Let $Z$
         be the space obtained by adding a cone over $Y$ to $M$. Suppose that $Y$
@@ -3714,8 +3719,6 @@ Using the Whitney trick, we obtain the following fundamental result:
         signature theorem to show that $p_2=(1/7)(45+q^2)$ where $q=2(n_++n_-)$.
         Hence derive a contradiction to the assumption that $Y$ is diffeomorphic
         to $S^7$ for certain values of $n_+,n_-$.
-
-        % TODO: Solution
 
     \item Use Alexander duality to show that a knot $K\subseteq S^3$ bounds an
         oriented surface $\Sigma$ embedded in $S^3\setminus K$ (a \emph{Seifert
@@ -3730,8 +3733,725 @@ Using the Whitney trick, we obtain the following fundamental result:
         \end{itemize}
         (For the first part, recall that $H^1(S^3\setminus K)$ can be identified
         with homotopy classes of maps from $S^3\setminus K$ to $S^1$.)
+\end{enumerate}
 
-        % TODO: Solution
+\section{Geometric Invariant Theory - Tom Coates}
+
+GIT is a way of taking quotients in algebraic geometry.
+
+\paragraph{Why?} Examples: $\P^n=(\C^{n+1}\setminus\{0\})/\C^*$, $\Gr(k,N)$,
+toric varieties, projective hypersurfaces / complete intersections. Moduli
+problems: want to make a choice of coordinates and then remove that choice. For
+$\Gr(k,N)$, a $k$-dimensional subspace of $\C^N$ is determined by a matrix of
+spanning vectors:
+\begin{equation*}
+    \overbrace{\begin{pmatrix}
+        * & \cdots & * \\
+        \vdots & \ddots & \vdots \\
+        * & \cdots & *
+    \end{pmatrix}}^{k\times N},
+\end{equation*}
+up to change of basis, which is an action of $\GL(k)$. We want to quotient by
+$\GL(k)$ to get $\Gr(k,N)$.
+
+\paragraph{Context.} Symplectic reduction (a way of taking quotients in
+symplectic geometry) is often equivalent to the GIT quotient (Kirwan,
+Kemp--Ness). Things to look at from here: infinite-dimensional analogues of
+symplectic reduction (Atiyah and Bott, moduli of vector bundles; Donaldson,
+K\"ahler--Einstein metrics and K-stability), birational geometry via variation
+of GIT quotient or VGIT (Thaddeus, Dolgachev--Hu, \ldots), derived categories
+and wall crossings (Ed Segal, \ldots).
+
+\paragraph{References.}
+\begin{itemize}
+    \item Main source: ``Notes on GIT and symplectic reduction'',
+        Richard Thomas.
+    \item ``Mirror symmetry for toric complete intersections'',
+        Alexander Givental.
+    \item ``Topology of torus actions on symplectic manifolds'',
+        Mich\'ele Audin.
+    \item Francis Kirwan's thesis.
+\end{itemize}
+
+\subsection*{Varieties}
+
+We recap some of the basic setup for algebraic geometry, working over $\C$.
+
+\paragraph{Affine varieties.} Affine space $\C^n$ is associated to the ring of
+polynomial functions on it: $\C[x_1,\ldots,x_n]$. An affine variety is
+a locus $X=\{p_1=\cdots=p_k=0\}\subseteq\C^n$ for some
+$p_1,\ldots,p_k\in\C[x_1,\ldots,x_n]$. It is associated with the ring of
+restricted polynomials $\O_X=\C[x_1,\ldots,x_n]/(p_1,\ldots,p_k)$.
+We can reverse the correspondence: given a suitable ring $\O_X$, picking
+generators $g_1,\ldots,g_n\in\O_X$ gives
+$\C[x_1,\ldots,x_n]\twoheadrightarrow\O_X$, $x_i\mapsto g_i$, corresponding to
+$X\hookrightarrow\C^n$ via $(g_1,\ldots,g_n)$.
+
+\paragraph{Projective varieties.} The motto is ``just work
+$\C^*$-equivariantly''. A $\C^*$ action on a ring is a grading, so we work with
+\emph{graded} polynomial rings (for simplicity we will assume everything is
+generated in degree 1). Projective space $\P^n$ corresponds to the graded ring
+$\C[x_0,\ldots,x_n]$. A projective variety is a locus $X=\{p_1=\cdots=p_k=0\}$
+for some homogeneous (i.e. $\C^*$-equivariant) polynomials
+$p_1,\ldots,p_k\in\C[x_0,\ldots,x_n]$. It is associated with the graded ring of
+restricted polynomials $\C[x_0,\ldots,x_n]/(p_1,\ldots,p_k)$. By compactness,
+the only global functions we get are constants ($\C^*$-invariant = degree 0 =
+constant), so $\C[x_0,\ldots,x_n]$ is \emph{not} the ring of functions. What is
+it?
+
+We have an associated affine variety
+\begin{equation*}
+    \tilde X = \{p_1=\cdots=p_k=0\} \subseteq \C^{n+1},
+\end{equation*}
+which is $\C^*$-equivariant, i.e. it is a cone through the origin.
+\begin{center}
+    \includegraphics[scale=0.1]{git_cone}
+\end{center}
+
+The projective variety $X$ is the parameter space of the lines through the
+origin making up $\tilde X$. So we get a tautological line bundle $\O_X(-1)$,
+where $\O_X(-1)|_x=\{\text{the line in $\tilde X$ defined by $x$}\}$ for
+$x\in X$. The total space of $\O_X(-1)$ naturally maps to $\tilde X$:
+\begin{center}
+    \includegraphics[scale=0.1]{git_blowup}
+\end{center}
+
+This is the blowup of the cone vertex!
+
+Each $x_i\in\C[x_0,\ldots,x_n]$ is a linear function on $\C^{n+1}$, so by
+pullback we get a function on the total space of $\O_X(-1)$ which is linear on
+the fibres. Similarly, a degree $r$ homogeneous polynomial gives a function on
+$\O_X(-1)$ which scales with degree $r$ along the fibres. In other words, degree
+1 elements of $\C[x_0,\ldots,x_n]$ are sections of $\O_X(-1)^\vee=\O_X(1)$, and
+degree $r$ elements are sections of $\Sym^r\O_X(-1)^\vee=\O_X(r)$. Hence
+\begin{equation*}
+    \C[x_0,\ldots,x_n]/(p_1,\ldots,p_k) = \bigoplus_{k=0}^\infty H^0(\O_X(k)),
+\end{equation*}
+so we recover the graded ring from the line bundle $\O_X(1)$. (To reverse the
+correspondence, choosing generators for $H^0(X,L)$ for a suitable line bundle
+$L$ gives an embedding $X\to\P^n$ where $n=\dim H^0(X,L)$.)
+
+\subsection*{Quotients}
+
+Suppose we have a connected reductive complex algebraic group $G$. This means we
+have a compact real Lie group $K<G$ such that $G$ is the complexification of
+$K$. Examples: $K=S^1$, $G=\C^*$; $K=(S^1)^m$, $G=(\C^*)^m$; $K=\SU(m)$,
+$G=\SL(m,\C)$.
+
+Consider an (algebraic) action of $G$ on a projective variety $X$, where we want
+to take the quotient ``$X/G$''. Suppose the action can be factored through
+$\SL(n+1,\C)$ acting on $\P^n$:
+\begin{equation*}
+    \begin{tikzcd}
+        G \ar[d,hook] & X \ar[loop left, distance=60] \ar[d,hook] \\
+        \SL(n+1,\C) & \P^n \ar[loop left, distance=30]
+    \end{tikzcd}
+\end{equation*}
+The choice of this lifting $G\to\SL(n+1,\C)$ is called \emph{linearization}.
+(You might ask, why $\SL(n+1,\C)$ rather than just $\Aut(\P^n)=\PSL(n+1,\C)$? It
+is because the action of $\PSL(n+1,\C)$ doesn't lift to $\O(-1)$.)
+
+\paragraph{Issues.} The topological quotient is not Hausdorff (essentially
+because $X$ is compact but $G$ is non-compact). There are low-dimensional orbits
+in the closure of high-dimensional orbits. For example, take the action of
+$\C^*$ on $\C^{n+1}$ from the definition of $\P^n$.
+\begin{center}
+    \includegraphics[scale=0.03]{git_node}
+\end{center}
+
+The origin is in the closure of every other orbit.
+
+Removing the low-dimensional orbits does not fix the problem. Consider
+$\C^*\curvearrowright\C^2$ by $\lambda\cdot(x,y)=(\lambda x,\lambda^{-1}y)$:
+\begin{center}
+    \includegraphics[scale=0.03]{git_saddle}
+\end{center}
+
+The typical orbit is $xy=\alpha\in\C^*$, but we also have the $x$-axis with the
+origin removed, the $y$-axis with the origin removed, and the origin. Removing
+the lower dimensional orbit (the origin) doesn't solve the issue, as the
+$x$-axis and $y$-axis cannot be separated from each other. Hence we need some
+subtler invariant than dimension.
+
+\paragraph{Affine quotients.} There is a natural construction of ``naive''
+algebraic quotients for group actions on affine varieties: the ring of functions
+on the quotient should consist of the functions which are invariant under the
+action. Hence $X/G=\Spec\,(\O_X)^G$. In the second example above we have
+$\C[x,y]^{\C^*}=\C[xy]$, so this gives $\A^1$; the bad orbits are coalesced into
+a single point corresponding to $\{xy=0\}$. However, in the first example we
+have $\C[x,y]^{\C^*}=\C[x,y]\cap\C(y/x)=\C$, so the quotient is a single point
+which is no good.
+
+\paragraph{GIT.} The point of GIT is to provide some subset (the ``unstable
+locus'') in a canonical way, so that the GIT quotient
+\begin{equation*}
+    X\sslash G = (X\setminus\{\text{unstable points}\})/G
+\end{equation*}
+is well-behaved.
+
+Before defining the unstable locus, we describe a direct construction of the
+resulting quotient. From the linearization $G\hookrightarrow\SL(n+1,\C)$ we have
+an action $G\curvearrowright H^0(\O_X(r))$ for each $r$. Then
+\begin{equation*}
+X\sslash G = \Proj\biggl(\bigoplus_{r=0}^\infty H^0(X,\O_X(r))^G\biggr).
+\end{equation*}
+(The fact that this is a finitely-generated graded ring, so we do get a sensible
+projective variety, is a lemma that needs proving.)
+
+To apply this definition in our affine examples, we need to come up with a
+``linearization'', i.e. a lift of the $\C^*$ action to some line bundle $L$ over
+$\C^n$. Of course, $L$ must be trivial, so we just need to choose a weight for
+$\C^*$ to act on one extra coordinate.
+
+\begin{example}
+    Consider $\C^*$ acting on $\C^{n+1}$ with weights $(1,\ldots,1)$ as in the
+    definition of $\P^n$. Our linearization is a choice of $p\in\Z$ so that
+    $\C^*$ acts on the trivial line bundle $L$, total space $\C^{n+1}\times\C$,
+    with weights $(1,\ldots,1,p)$. Then $L^{\otimes r}$ has weights
+    $(1,\ldots,1,pr)$, and
+    \begin{equation*}
+        H^0(\C^{n+1},L^{\otimes r})
+            = \{\text{degree $pr$ homogeneous polynomials}\}
+            = \C[x_0,\ldots,x_n]_{pr},
+    \end{equation*}
+    so the GIT quotient is
+    \begin{equation*}
+        \Proj\biggl(\bigoplus_{r=0}^\infty\C[x_0,\ldots,x_n]_{pr}\biggr)
+            = \begin{cases*}
+                \emptyset & $p<0$, \\
+                \text{point} & $p=0$, \\
+                \P^n & $p\ge1$.
+            \end{cases*}
+    \end{equation*}
+    Moreover, the line bundle induced by $L$ on the quotient is $\O(p)$.
+\end{example}
+
+\subsection*{Stability}
+
+As usual with Proj, we can relate our general construction to concrete
+projective embeddings. For each $r\ge0$, the invariant sections
+$H^0(X,\O_X(r))^G$ can be evaluated at points of $X$ giving a complex number
+defined up to scale, since $\O_X(r)$ is a potentially non-trivial line bundle.
+In this way we have a rational map $X\dashrightarrow\P(H^0(X,\O_X(r))^G)^\vee$
+given by $x\mapsto[\ev_x]$. (In other language, this is just the map given by
+the complete linear system $|\O_X(r)|$.) It is defined only on the locus where
+$\ev_x\ne0$, i.e. where there is some invariant section $s\in H^0(X,\O_X(r))^G$
+with $s(x)\ne0$.
+
+\begin{claim}
+    The GIT quotient $X\sslash G$ is the image of this rational map for $r\gg0$.
+\end{claim}
+
+\begin{definition}
+    We say $x\in X$ is \emph{semi-stable} if $\exists s\in H^0(X,\O_X(r))^G$
+    with $s(x)\ne0$ for $r\gg0$. Otherwise, we say $x$ is \emph{unstable}.
+\end{definition}
+
+\begin{claim}
+The morphism $X^{ss}=\{\text{semi-stable points}\}\twoheadrightarrow X\sslash G$
+is then the usual quotient, so $X\sslash G=X^{ss}/G$.
+\end{claim}
+
+\begin{definition}
+    We say $x\in X$ is \emph{stable} if $x$ is semi-stable,
+    $\bigoplus_{r=0}^\infty H^0(X,\O_X(r))^G$ \emph{separates orbits} near $x$,
+    and the stabilizer $\Stab_x$ is finite. (Technically also with an
+    infinitesimal version of this condition. We are not intending to thoroughly
+    cover technicalities here.)
+\end{definition}
+
+What does separating orbits mean? By semi-stability we have
+$s\in H^0(X,\O_X(r))^G$ with $s(x)\ne0$, which gives a trivialization of
+$\O_X(r)$ on $U=\{s\ne0\}\ni x$; $\O_X(r)|_U\xrightarrow\sim \O_U$. ``Separating
+orbits near $x$'' means if $x,y\in U$ are in distinct orbits then some function
+on $U$ vanishes at $x$ but not $y$.
+
+We then have $X^s\subseteq X^{ss}\twoheadrightarrow X\sslash G$, and the
+restriction $X^s\to X\sslash G$ is ``good'' in the sense that only 1 orbit is
+collapsed for each point in the image.
+
+\begin{example}
+    Consider $\C^*$ acting on $\C^2$ by
+    $\lambda\cdot(x,y)=(\lambda x,\lambda^{-1}y)$. The single orbits $xy=\alpha$
+    for $\alpha\ne0$ give the stable locus, while $xy=0$ which contains 3 orbits
+    only consists of semistable points.
+\end{example}
+
+\subsection*{Hilbert--Mumford stability criterion}
+
+Working in upstairs in the line bundle $\O_X(-1)$, we have a clean
+characterization of stability. Take $\tilde x$ to be a lift of $x\in X$ to the
+total space of $\O_X(-1)$. Then:
+\begin{itemize}
+    \item $x$ is semi-stable iff $\closure{G\cdot\tilde x}$ does not contain the
+        origin of any fibre.
+    \item $x$ is stable iff $G\cdot\tilde x$ is closed with finite stabilizer.
+\end{itemize}
+
+We can optimize this criterion further. Consider an arbitrary 1-parameter
+subgroup $\C^*\le G$. For $x\in X$, the orbit under this subgroup has a limit
+$x_0=\lim_{\lambda\to0,\lambda\in\C^*}\lambda\cdot x$, which is a
+fixed point of $\C^*$. This then gives us a weight $\rho\in\Z$ for the action of
+$\C^*$ on the fiber $\O_X(-1)|_{x_0}$.
+
+\begin{theorem}[Hilbert--Mumford]
+    \begin{itemize}
+        \item  If $\rho\le0$ for all 1-parameter subgroups then $x$ is
+            semi-stable.
+        \item If $\rho<0$ for all 1-parameter subgroups then $x$ is stable.
+        \item Otherwise, $x$ is unstable.
+    \end{itemize}
+\end{theorem}
+
+\subsection*{Exercises}
+
+\begin{enumerate}
+    \item Consider $\P^n=\C^{n+1}\sslash\C^*$ again. Use the criterion to check
+        that $\{0\}$ is the unstable locus.
+
+    \item Consider $(\C^*)^2$ acting on $\C^4$ with weights $\begin{pmatrix}
+            1 & 1 & 0 & -1 \\ 0 & 0 & 1 & 1
+    \end{pmatrix}$. Take the linearization which gives weights $(-a,-b)$ to the
+    trivial line bundle.
+        \begin{enumerate}
+            \item Set $a=b=1$. Show that the unstable locus is
+                $\{x=y=0\}\cup\{z=w=0\}$. Write $X_+=X^{ss}/(\C^*)^2$, and show
+                that it is a $\P^1$-bundle over $\P^1$, $\P(\O\oplus\O(-1))$,
+                the blowup of $\P^2$ at a point.
+
+            \item Set $a=-1$, $b=2$. Show that the unstable locus is
+                $\{x=y=z=0\}\cup\{w=0\}$. Write $X_-=X^{ss}/(\C^*)^2$, and show
+                that $X_-\cong\P^2$.
+
+            \item Say VGIT: $X_\pm$ are both $\C^4\setminus\{\cdots\}/(\C^*)^2$,
+                giving a birational map between them. (Blow-up!)
+        \end{enumerate}
+
+    \item Construct the Grassmannian $\Gr(k,N)$ as a GIT quotient.
+\end{enumerate}
+
+\section{Morse Theory - Mikhail Karpukhin}
+
+The basic setup: we have a compact\footnote{For many things we say here
+compactness isn't crucial} $n$-manifold, and a smooth function $f:M\to\R$. The
+idea is to study the topology of $M$ using $f$; using the critical points
+\begin{equation*}
+    \Crit(f) = \{p\in M:\text{$p$ critical point of $f$}\},
+\end{equation*}
+and the sub-level sets
+\begin{equation*}
+    M^c = f^{-1}(-\infty,c) = \{x\in M:f(x)<c\}.
+\end{equation*}
+
+The following are some important examples of this setup, which we will keep
+revisiting. For a manifold drawn in Euclidean space we take the height function
+as our $f$.
+
+\begin{center}
+    \includegraphics[scale=0.13]{morse_examples}
+\end{center}
+
+\subsection*{Plan / Overview}
+
+\begin{itemize}
+    \item Describe computation of the homology $H_k(M)$ using $f$ (Morse
+        homology).
+
+    \item Mention contemporary research in Morse theory; applying inspired ideas
+        to infinite-dimensional manifolds. (For example solutions to PDE's are
+        often characterized as critical points of certain functionals on
+        infinite-dimensional function spaces.)
+\end{itemize}
+
+\subsection*{References}
+
+\begin{itemize}
+    \item ``Morse Theory'', Milnor
+    \item ``Morse Theory and Floer Homology'', Audin and Damian
+\end{itemize}
+For a complete treatment of the basic theory, and applications to Riemannian
+geometry (e.g. length functional on geodesics) see Milnor, but for the
+homological treatment and connections to symplectic geometry see Audin and
+Damian.
+
+\subsection*{Critical points}
+
+\begin{definition}
+    A \emph{critical point} $p\in M$ of $f$ is a point where $df_p=0$ in $T_pM$.
+\end{definition}
+
+Take a metric $g$ on $M$. We define the gradient vector field $\nabla f$ by
+$\langle\nabla f,X\rangle=df(X)$. Then $p$ is a critical point iff
+$\nabla f(p)=0$. The flow lines of $-\nabla f$ give trajectories along which a
+drop of water placed on the manifold would run down.
+\begin{center}
+    \includegraphics[scale=0.1]{morse_flow}
+\end{center}
+Why do we care about $\Crit(f)$? Because of the following:
+
+\begin{proposition}
+    If $f^{-1}[a,b]$ contains no critical points, then $M^a\cong_\diffeo M^b$.
+\end{proposition}
+
+\begin{proof}
+    Define via bump functions
+    \begin{equation*}
+        \rho(x) = \begin{dcases*}
+            \frac{1}{|\nabla f|^2} & on $f^{-1}[a,b]$ \\
+            0 & outside some neighbourhood of $f^{-1}[a,b]$,
+        \end{dcases*}
+    \end{equation*}
+    and consider the vector field $X=-\rho\cdot\nabla f$ with flow $\varphi_t$
+    globally defined by compactness. If $\varphi_t(q)\in f^{-1}[a,b]$ for small
+    $t$, then
+    \begin{equation*}
+        \odv{}{t}\biggr\vert_{t=0}f(\varphi_t(q))
+            = \langle\nabla f,X(q)\rangle
+            = -\rho(q)|\nabla f(q)|^2
+            = -1.
+    \end{equation*}
+    Then by integrating, $\varphi_{b-a}$ maps $M^b\to M^a$ and is a
+    diffeomorphism by construction.
+\end{proof}
+
+So if we want to build up the topology on $M$ from the sub-level sets $M^t$, we
+need to understand how the topology of $M^t$ changes as $t$ passes through
+critical values of $f$. (Think about how this applies in the main examples.)
+
+\begin{center}
+    \includegraphics[scale=0.1]{morse_steps}
+\end{center}
+
+\subsection*{Morse functions}
+
+To this end, fix a critical point $p\in\Crit(f)$, with $f(p)=c$. Suppose for
+simplicity that $f^{-1}(c)\cap\Crit(f)=\{p\}$. (This is true in our main
+examples, and is not a serious restriction.)
+
+Our idea is that the interesting behaviour occurs in a neighbourhood of $p$,
+where the gradient flow breaks down, and so we want $f$ to be easy to analyse
+(e.g. via Taylor expansion) near $p$.
+
+\begin{definition}
+    For $p\in\Crit(f)$, the \emph{Hessian} $\Hess_p(f)$ is a bilinear form on
+    $T_pM$ given by
+    \begin{equation*}
+        (X,Y) \mapsto X(\widetilde Y(f)),
+    \end{equation*}
+    where $\widetilde Y$ is any extension of $Y$ to a vector field in a
+    neighbourhood of $p$. It is well-defined and symmetric, given in local
+    coordinates by
+    \begin{equation*}
+        \begin{pmatrix}
+            \pdv{f}{x_1,x_1} & \cdots & \\
+            \cdots & \pdv{f}{x_i,x_j} & \cdots \\
+                   & \cdots & \pdv{f}{x_n,x_n}
+        \end{pmatrix}.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    A critical point $p\in\Crit(f)$ is \emph{non-degenerate} if
+    $\Hess_p(f)$ is a non-degenerate bilinear form.
+\end{definition}
+
+\begin{definition}
+    The function $f$ is \emph{Morse} if all its critical points are
+    non-degenerate.
+\end{definition}
+
+\begin{lemma}[Morse Lemma]
+    Let $p\in\Crit(f)$ be non-degenerate. Then there exists some coordinate
+    system in a neighbourhood of $p$ such that
+    \begin{equation*}
+        f(x) = f(p)
+            + x_1^2 + \cdots + x_{n-i}^2 - (x_{n-i+1}^2 + \cdots + x_n^2).
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}[Sketch proof]
+    We have $f(x)-f(p)=\int_0^1\odv{}{t}f(tx)dt
+    =\sum_ix_i\int_0^1\pdv{f}{x_i}(tx)dt=\sum_ix_ig_i(x)$, with $g_i(p)=0$.
+    Applying this to each $g_i$ gives $f(x)=f(p)+\sum_{i,j}x_ix_jh_{ij}(x)$ with
+    $\Hess_p(f)=(h_{ij}(p))$. We then bring this to the desired form using a
+    change of variables akin to diagonalization of the bilinear form
+    $\Hess_p(f)$.
+\end{proof}
+
+(See Milnor's book for a proper proof.)
+
+\begin{definition}
+    The \emph{index} of $p$ is $\ind_p(f)=i$, which is uniquely determined as
+    the number of negative eigenvalues of the Hessian.
+\end{definition}
+
+Using this, we can understand how the topology of $M^c$ changes as we pass
+through a non-degenerate critical point:
+
+\begin{center}
+    \includegraphics[scale=0.13]{morse_model}
+\end{center}
+
+By a similar argument to the gradient flow from before, we see that
+$M^{c+\varepsilon}$ is obtained from $M^{c-\varepsilon}$ by attaching a
+thickening of the $i$-cell where $x_+=0$.
+
+\begin{theorem}
+    Suppose that $f^{-1}[a,b]$ contains a single non-degenerate critical point.
+    Then
+    \begin{equation*}
+        M^b \approx_\homeo M^a \cup_{S^i\times D^{n-i}}D^i\times D^{n-i}.
+    \end{equation*}
+    Up to homotopy equivalence $M^b$ is given by attaching an $i$-cell to $M^a$.
+\end{theorem}
+
+\begin{remark}
+    The only reason we have a homeomorphism rather than a diffeomorphism is that
+    the naive attachment of a thickened $i$-cell has corners and hence is not
+    smooth. It is possible to choose a canonical way to smooth these corners up
+    to diffeomorphism, leading to the notion of handle attachment for smooth
+    manifolds, and then the theorem carries over.
+\end{remark}
+
+We can check how this works out in our main examples:
+
+\begin{center}
+    \includegraphics[scale=0.14]{morse_cells}
+\end{center}
+
+\begin{theorem}
+    A generic (in the sense of Baire category) smooth function on a compact
+    manifold is Morse.
+\end{theorem}
+
+\begin{remark}
+    The assumption $f^{-1}(c)\cap\Crit(f)=\{p\}$ is also true generically.
+\end{remark}
+
+\begin{corollary}
+    Every compact manifold is homotopy equivalent to a cell complex.
+\end{corollary}
+
+\subsection*{Morse homology}
+
+From now on we assume $f$ is a Morse function (with distinct critical values).
+
+To extract quantitative information about the topology from a given Morse
+function, we want to understand how this cell decomposition works in more
+detail. To construct the chain complex computing cellular homology we want to
+know what the boundaries of the attached $i$-cells are in terms of $f$, and to
+this end we want an intrinsic characterization of the cell decomposition.
+
+\begin{definition}
+    For $p\in\Crit(f)$, let $\varphi_t$ be the flow of $-\nabla f$. The
+    \emph{unstable manifold} at $p$ is
+    \begin{equation*}
+        W^u(p) = \{x\in M:\lim_{t\to\infty}\varphi_t(x)=p\},
+    \end{equation*}
+    and the \emph{stable manifold} is
+    \begin{equation*}
+        W^s(p) = \{x\in M:\lim_{t\to-\infty}\varphi_t(x)=p\}.
+    \end{equation*}
+\end{definition}
+
+For example:
+
+\begin{center}
+    \includegraphics[scale=0.1]{morse_unstable}
+\end{center}
+
+\begin{proposition}
+    For $p\in\Crit(f)$, $W^u(p)\cong\mathring D^{\ind(p)}$ is an open disc of
+    dimension $\ind(p)$.
+\end{proposition}
+
+\begin{proof}[Sketch proof]
+    The flow eventually brings $W^u(p)$ into a neighbourhood of $p$, and we can
+    use the Morse lemma to see that in suitable coordinates it is then the
+    interior of the attached $i$-cell seen previously.
+\end{proof}
+
+Similarly, the stable manifold $W^s(p)$ is a disc of dimension $n-\ind(p)$.
+(There is a duality using the two Morse functions $f$ and $-f$.)
+
+The unstable manifolds hence give a natural cell complex structure. What are the
+boundary maps? Consider our example, take a flow line from $p$ to $s$ and
+``deform'' it towards the boundary. It can be freely deformed until it
+encounters another critical point, at which point it becomes a ``broken
+trajectory''.
+\begin{center}
+    \includegraphics[scale=0.1]{morse_broken}
+\end{center}
+
+\begin{theorem}
+    $\overbrace{\text{Under some condition on $f$}}
+    ^{\text{If $f$ is Morse--Smale}}$, the boundary is given by
+    \begin{equation*}
+        \partial W^u(p) = \sum_{\ind(q)=\ind(p)-1}n_{pq}\cdot\overline W^u(q),
+    \end{equation*}
+    where $n_{pq}$ is the number of flow lines from $p$ to $q$, counted with
+    appropriate signs.
+\end{theorem}
+
+Note that $W^u(p)$ has dimension $\ind(p)$, and $W^s(q)$ has dimension
+$n-\ind(p)+1$, so if they are transverse $W^u(p)\cap W^s(q)$ has dimension 1 and
+there are only finitely many flow lines from $p$ to $q$.
+
+\begin{definition}
+    The function $f$ is called \emph{Morse--Smale} if for all $p,q\in\Crit(f)$
+    we have $W^s(p)\pitchfork W^u(q)$, i.e. the stable and unstable manifolds
+    intersect transversely.
+\end{definition}
+
+With these $n_{pq}$'s we then get a chain complex for a Morse--Smale function
+$f$, computing the cellular homology of $M$:
+\begin{equation*}
+    C_k = \bigoplus_{\ind(p)=k}\Z\cdot p, \qquad
+    \partial p=\sum_{\substack{\ind(q)=\ind(p)-1}}n_{pq}\cdot q.
+\end{equation*}
+
+\subsection*{Morse inequalities}
+
+\begin{theorem}
+    Let $N_k=\rank C_k$. We have
+    \begin{equation*}
+        \sum_{i=0}^k(-1)^{k-i}N_i\ge\sum_{i=0}^k(-1)^{k-i}b_i(M),
+    \end{equation*}
+    with equality when $n=k$. Moreover $N_i\ge b_i(M)$.
+\end{theorem}
+
+\begin{proof}
+    This is a general statement about chain complexes.
+\end{proof}
+
+\begin{remark}
+    The case $n=k$ computes the Euler characteristic. From $N_i\ge b_i(M)$ we
+    can deduce the existence of critical points for Morse functions from the
+    topology of $M$.
+\end{remark}
+
+We can restrict more than just homology with Morse theory:
+
+\begin{theorem}
+    Suppose that $f$ is Morse with no critical points of index 1. Then $M$ is
+    simply-connected.
+\end{theorem}
+
+\begin{proof}
+    Note that $H_1(M)=0$ by the Morse inequalities, but this is not enough. By
+    Sard's theorem, we can homotope any loop in $M$ to be transverse to all
+    stable manifolds. Then it can only intersect the index 0 ones, so the loop
+    is contained in a single cell, a disc of dimension at least 2, and hence
+    contracts.
+\end{proof}
+
+\subsection*{Exercises}
+
+\begin{exercise}
+    Check that the following untilted torus example is not Morse--Smale:
+    \begin{center}
+        \includegraphics[scale=0.1]{morse_smale}
+    \end{center}
+    Tilt it slightly to fix this, and compute the Morse complex.
+\end{exercise}
+
+\begin{exercise}
+    Show that the Betti numbers satisfy Poincar\'e duality
+    $b_k(M)=b_{n-k}(M)$ using the Morse complex. (Recall that
+    $b_k(M)=\rank H_k(M;\Z)$.)
+\end{exercise}
+
+\begin{exercise}
+    Suppose $f$ is a Morse function with exactly two critical points. Show
+    that $M\approx_\homeo S^n$.
+\end{exercise}
+
+\begin{exercise}
+    Is it true that for any $M$ there exists a Morse function $f$ with
+    $N_k=b_k(M)$?
+\end{exercise}
+
+\begin{exercise}
+    Suppose $f$ is Morse, and $X=\nabla f$. Show that the index of $X$
+    (i.e. the signed count of the zeros of $X$) is the Euler characteristic
+    $\chi(M)$. This is the starting point for one of the proofs of the
+    Poincar\'e--Hopf theorem.
+\end{exercise}
+
+\begin{exercise}
+    Take $M=\CP^n$, with
+    \begin{equation*}
+        f([z_0:\cdots:z_n]) = \frac{\sum_jj|z_j|^2}{\sum_j|z_j|^2}.
+    \end{equation*}
+    Show that $f$ is Morse, and use it to compute the homology.
+\end{exercise}
+
+\subsection*{Notable applications}
+
+\begin{enumerate}[label=\textbf{\Roman* -}]
+    \item Generalized Poincar\'e conjecture: If $M$ is a manifold of dimension
+        $n$ homotopy equivalent to $S^n$, then $M$ is homeomorphic to $S^n$.
+
+        In dimensions $n\ge5$ this can be proved using Morse theory. (See
+        Milnor's ``Lectures on the $h$-cobordism theorem''.)
+
+    \item ``Morse theory'' on infinite-dimensional spaces:
+        \begin{enumerate}[label=(\alph*)]
+            \item Low-dimensional topology; instanton homology
+                (gauge theoretical functionals).
+
+            \item Symplectic geometry (counting closed orbits, Floer homology).
+
+            \item Riemannian geometry:
+                \begin{itemize}
+                    \item Length functional on path space; critical points are
+                        geodesics, index related to Jacobi fields.
+
+                    \item Bott periodicity:
+                        $\pi_i(U(\infty))=\pi_{i+2}(U(\infty))$.
+
+                    \item Finding closed geodesics:
+                        \begin{theorem}[Birkhoff]
+                            For all metrics $g$ on $S^2$ there exists a
+                            non-trivial closed geodesic.
+                        \end{theorem}
+
+                        \begin{proof}[``Proof'']
+                            Assume Morse theory works on the loop space
+                            $\Omega(S^2)$ for the length functional. Since
+                            $\pi_i(\Omega(S^2))=\pi_{i+1}(S^2)$ we have
+                            $\pi_1(\Omega(S^2))=\pi_2(S^2)=\Z$, so there must be
+                            a critical point of index 1 by the Morse
+                            inequalities.
+                        \end{proof}
+
+                    \item More generally, interactions between curvature and
+                        topology:
+                        \begin{itemize}
+                            \item Sphere theorem: $\frac{1}{4}<K\le 1$ implies
+                                $M\approx_\homeo S^n$.
+
+                            \item Minimal surface theory (critical points of
+                                area functional).
+                        \end{itemize}
+                \end{itemize}
+        \end{enumerate}
+\end{enumerate}
+
+\subsection*{Bonus exercises}
+
+\begin{enumerate}[label=(\arabic*)]
+    \item View the torus as the square $[0,2\pi]\times[0,2\pi]$ with side
+        identifications, and consider the function
+        $(x,y)\mapsto\sin(x)+\sin(y)$. Compute the Morse complex.
+
+    \item If $A$ be a self-adjoint operator on $\R^n$, then
+        \begin{equation*}
+            x \mapsto \frac{\langle Ax,x\rangle}{\langle x,x\rangle}
+        \end{equation*}
+        is invariant under $x\mapsto\lambda x$, and hence induces a function
+        $f_A:\RP^n\to\R$. When is it Morse? Describe critical points and their
+        indices when it is.
 \end{enumerate}
 
 \end{document}
